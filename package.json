@@ -8,13 +8,17 @@
     "dev": "remix dev --manual",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
     "start": "remix-serve ./build/index.js",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "q:script": "cd scripts/antd/extract.css && npm run q:extract-css && cd ../../../",
+    "q:build": "NODE_ENV=production npm run q:script && npm run build",
+    "q:dev": "NODE_ENV=development npm run q:script && npm run dev"
   },
   "dependencies": {
     "@remix-run/css-bundle": "^2.6.0",
     "@remix-run/node": "^2.6.0",
     "@remix-run/react": "^2.6.0",
     "@remix-run/serve": "^2.6.0",
+    "antd": "^5.14.1",
     "isbot": "^4.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
@@ -30,7 +34,7 @@
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "typescript": "^5.1.6"
+    "ts-node": "^10.9.2"
   },
   "engines": {
     "node": ">=18.0.0"

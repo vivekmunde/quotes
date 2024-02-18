@@ -1,0 +1,12 @@
+{
+  "type": "commonjs",
+  "scripts": {
+    "q:extract-css": "cross-env ts-node --project ./tsconfig.json ./script.tsx"
+  },
+  "devDependencies": {
+    "@ant-design/static-style-extract": "^1.0.2",
+    "cross-env": "^7.0.3",
+    "ts-node": "^10.9.2",
+    "tslib": "^2.6.2"
+  }
+}
