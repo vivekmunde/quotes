@@ -9,7 +9,7 @@
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
     "start": "remix-serve ./build/index.js",
     "typecheck": "tsc",
-    "q:script": "cd scripts/antd/extract.css && npm run q:extract-css && cd ../../../",
+    "q:script": "cd scripts/antd/extract-css && npm run q:extract-css && cd ../../../",
     "q:build": "NODE_ENV=production npm run q:script && npm run build",
     "q:dev": "NODE_ENV=development npm run q:script && npm run dev"
   },
