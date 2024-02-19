@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import { TVariables } from "../theme/types";
+import { TVariables } from "../../theme/types";
 
 const GlobalColorStyles = createGlobalStyle<{ variables: TVariables }>`
   .n-color-default { color: ${(props) => props.variables["font.color"]}; }

@@ -1,47 +1,7 @@
 import { createGlobalStyle } from "styled-components";
-import { TVariables } from "../theme/types";
+import { TVariables } from "../../theme/types";
 
-export const GlobalCommonBorderStyles = createGlobalStyle<{
-  variables: TVariables;
-}>`
-  .n-border-radius { border-radius: ${(props) =>
-    props.variables["border.radius"]}; }
-  .n-border-radius-tl { border-top-left-radius: ${(props) =>
-    props.variables["border.radius"]}; }
-  .n-border-radius-tr { border-top-right-radius: ${(props) =>
-    props.variables["border.radius"]}; }
-  .n-border-radius-bl { border-bottom-left-radius: ${(props) =>
-    props.variables["border.radius"]}; }
-  .n-border-radius-br { border-bottom-right-radius: ${(props) =>
-    props.variables["border.radius"]}; }
-  .n-border-radius-sm { border-radius: ${(props) =>
-    props.variables["border.radius.small"]}; }
-  .n-border-radius-tl-sm { border-top-left-radius: ${(props) =>
-    props.variables["border.radius.small"]}; }
-  .n-border-radius-tr-sm { border-top-right-radius: ${(props) =>
-    props.variables["border.radius.small"]}; }
-  .n-border-radius-bl-sm { border-bottom-left-radius: ${(props) =>
-    props.variables["border.radius.small"]}; }
-  .n-border-radius-br-sm { border-bottom-right-radius: ${(props) =>
-    props.variables["border.radius.small"]}; }
-  .n-border-radius-lg { border-radius: ${(props) =>
-    props.variables["border.radius.large"]}; }
-  .n-border-radius-tl-lg { border-top-left-radius: ${(props) =>
-    props.variables["border.radius.large"]}; }
-  .n-border-radius-tr-lg { border-top-right-radius: ${(props) =>
-    props.variables["border.radius.large"]}; }
-  .n-border-radius-bl-lg { border-bottom-left-radius: ${(props) =>
-    props.variables["border.radius.large"]}; }
-  .n-border-radius-br-lg { border-bottom-right-radius: ${(props) =>
-    props.variables["border.radius.large"]}; }
-  .n-border-0 { border: none; }
-  .n-border-l-0 { border-left: none; }
-  .n-border-r-0 { border-right: none; }
-  .n-border-t-0 { border-top: none; }
-  .n-border-b-0 { border-bottom: none; }
-`;
-
-export const GlobalColorBorderStyles = createGlobalStyle<{
+const GlobalBorderStyles = createGlobalStyle<{
   variables: TVariables;
 }>`
   .n-border { border: solid 1px ${(props) => props.variables["border.color"]}; }
@@ -345,3 +305,5 @@ export const GlobalColorBorderStyles = createGlobalStyle<{
   .n-border-danger,.n-border-error { border-color: ${(props) =>
     props.variables["color.error"]}; }
 `;
+
+export default GlobalBorderStyles;

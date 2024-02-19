@@ -1,13 +1,7 @@
 import { createGlobalStyle } from "styled-components";
-import { TVariables } from "../theme/types";
+import { TVariables } from "../../theme/types";
 
-export const GlobalCommonBackgroundStyles = createGlobalStyle<{
-  variables: TVariables;
-}>`
-  .n-bg-transparent { background-color: transparent; }
-`;
-
-export const GlobalColorBackgroundStyles = createGlobalStyle<{
+const GlobalBackgroundStyles = createGlobalStyle<{
   variables: TVariables;
 }>`
   .n-bg-transparent { background-color: transparent; }
@@ -309,3 +303,5 @@ export const GlobalColorBackgroundStyles = createGlobalStyle<{
   .n-bg-white { background-color: ${(props) =>
     props.variables["color.white"]}; }
 `;
+
+export default GlobalBackgroundStyles;

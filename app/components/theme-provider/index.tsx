@@ -1,7 +1,6 @@
 import { ConfigProvider } from "antd";
 import React, { useState } from "react";
-import GlobalColorStyles from "./global-styles/color-styles";
-import GlobalCommonStyles from "./global-styles/common-styles";
+import GlobalColorStyles from "./global-styles/color";
 import getAntDTheme from "./theme/get-antd-theme";
 import getVariables from "./theme/get-variables";
 import { TMode } from "./theme/types";
@@ -28,7 +27,6 @@ const ThemeProvider: React.FC<{
       value={{ mode: currentMode, onToggle: onToggleMode }}
     >
       <ConfigProvider theme={getAntDTheme(currentMode)}>
-        <GlobalCommonStyles variables={variables} />
         <GlobalColorStyles variables={variables} />
         {children}
       </ConfigProvider>

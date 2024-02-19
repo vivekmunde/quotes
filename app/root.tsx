@@ -11,10 +11,10 @@ import {
 
 // ------------------------------------------
 // Css by sequence
-// 1
-import "../public/global.css";
-// 2
-import "../public/antd.css";
+// ------------------------------------------
+import "../public/__.1.root.css";
+import "../public/__.2.antd.css";
+import "../public/__.3.utility.css";
 // ------------------------------------------
 
 export const links: LinksFunction = () => [
