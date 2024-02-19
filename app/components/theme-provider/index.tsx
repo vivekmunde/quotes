@@ -1,5 +1,6 @@
-import { ConfigProvider, theme } from "antd";
+import { ConfigProvider } from "antd";
 import React from "react";
+import getAntDTheme from "./get-antd-theme";
 import GlobalRootStyles from "./global-root-styles";
 import { dark, light } from "./themes";
 
@@ -10,19 +11,7 @@ const ThemeProvider: React.FC<{
   const themeVariables = mode === "dark" ? dark : light;
 
   return (
-    <ConfigProvider
-      theme={{
-        algorithm:
-          mode === "dark" ? theme.darkAlgorithm : theme.defaultAlgorithm,
-        token: {
-          colorBgBase: themeVariables["color.background.body"],
-          colorBgLayout: themeVariables["color.background.body"],
-          colorBgContainer: themeVariables["color.background.component"],
-          colorPrimary: themeVariables["color.primary"],
-          colorLink: themeVariables["color.link"],
-        },
-      }}
-    >
+    <ConfigProvider theme={getAntDTheme(mode ?? "light")}>
       <GlobalRootStyles variables={themeVariables} />
       {children}
     </ConfigProvider>
