@@ -1,5 +1,4 @@
 {
-  "type": "commonjs",
   "scripts": {
     "q:extract-css": "cross-env ts-node --project ./tsconfig.json ./script.tsx"
   },

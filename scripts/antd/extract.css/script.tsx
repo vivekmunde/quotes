@@ -1,21 +1,44 @@
-import fs from "fs";
 import { extractStyle } from "@ant-design/static-style-extract";
 import { ConfigProvider, theme } from "antd";
+import fs from "fs";
 import React from "react";
 
-const outputPath = "../../../public/antd.min.css";
+const colorPrimary = "#ec4899";
 
-const css = extractStyle((node) => (
-  <React.Fragment>
-    <ConfigProvider>{node}</ConfigProvider>
-    <ConfigProvider
-      theme={{
-        algorithm: theme.darkAlgorithm,
-      }}
-    >
-      {node}
-    </ConfigProvider>
-  </React.Fragment>
-));
+const outputPath = "../../../public/antd.css";
+
+const css = extractStyle((node) => {
+  return (
+    <React.Fragment>
+      <ConfigProvider
+        theme={{
+          token: {
+            colorBgBase: "#ffffff",
+            colorBgLayout: "#ffffff",
+            colorBgContainer: "#ffffff",
+            colorPrimary: colorPrimary,
+            colorLink: colorPrimary,
+          },
+        }}
+      >
+        {node}
+      </ConfigProvider>
+      <ConfigProvider
+        theme={{
+          algorithm: theme.darkAlgorithm,
+          token: {
+            colorBgBase: "#000000",
+            colorBgLayout: "#000000",
+            colorBgContainer: "#000000",
+            colorPrimary: colorPrimary,
+            colorLink: colorPrimary,
+          },
+        }}
+      >
+        {node}
+      </ConfigProvider>
+    </React.Fragment>
+  );
+});
 
 fs.writeFileSync(outputPath, css);

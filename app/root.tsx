@@ -8,7 +8,14 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import "../public/antd.min.css";
+
+// ------------------------------------------
+// Css by sequence
+// 1
+import "../public/global.css";
+// 2
+import "../public/antd.css";
+// ------------------------------------------
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),

@@ -1,6 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
-import { ConfigProvider, Typography, theme } from "antd";
-import React, { useEffect, useState } from "react";
+import { Typography } from "antd";
+import ThemeProvider from "~/components/theme-provider";
 
 export const meta: MetaFunction = () => {
   return [
@@ -11,8 +11,8 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   return (
-    <React.Fragment>
+    <ThemeProvider>
       <Typography.Title level={1}>Quotes</Typography.Title>
-    </React.Fragment>
+    </ThemeProvider>
   );
 }
