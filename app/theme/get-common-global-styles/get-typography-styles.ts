@@ -1,4 +1,4 @@
-import { TVariables } from "../../theme/types";
+import { TVariables } from "../types";
 
 const getTypographyStyles = (variables: Partial<TVariables>) => {
   return `

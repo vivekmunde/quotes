@@ -1,4 +1,4 @@
-import { TVariables } from "../../theme/types";
+import { TVariables } from "../types";
 
 const getRootStyles = (variables: Partial<TVariables>) => {
   return `

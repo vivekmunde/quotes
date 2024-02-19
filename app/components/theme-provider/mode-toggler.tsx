@@ -1,7 +1,7 @@
 import { MoonOutlined, SunOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import React from "react";
-import getClassNames from "./theme/get-class-names";
+import getClassNames from "../../theme/get-class-names";
 import useGetMode from "./use-get-mode";
 import useToggleMode from "./use-toggle-mode";
 

@@ -1,11 +1,11 @@
 import { ConfigProvider } from "antd";
 import React, { useState } from "react";
-import GlobalColorStyles from "./global-styles/color";
-import getAntDTheme from "./theme/get-antd-theme";
-import getVariables from "./theme/get-variables";
-import { TMode } from "./theme/types";
-import dark from "./theme/variables/dark";
-import light from "./theme/variables/light";
+import getAntDTheme from "../../theme/get-antd-theme";
+import getVariables from "../../theme/get-variables";
+import { TMode } from "../../theme/types";
+import dark from "../../theme/variables/dark";
+import light from "../../theme/variables/light";
+import GlobalColorStyles from "./global-styles";
 import ToggleModeContext from "./toggle-mode-context";
 
 const ThemeProvider: React.FC<{

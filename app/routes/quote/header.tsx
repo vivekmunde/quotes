@@ -1,7 +1,7 @@
 import { Flex, Typography } from "antd";
 import React from "react";
 import ModeToggler from "~/components/theme-provider/mode-toggler";
-import getClassNames from "~/components/theme-provider/theme/get-class-names";
+import getClassNames from "~/theme/get-class-names";
 
 const Header: React.FC = () => {
   return (

@@ -1,4 +1,4 @@
-import { TVariables } from "../../theme/types";
+import { TVariables } from "../types";
 import getBackgroundStyles from "./get-background-styles";
 import getBorderStyles from "./get-border-styles";
 import getFlexStyles from "./get-flex-styles";

@@ -1,4 +1,4 @@
-import { TMode } from "./theme/types";
+import { TMode } from "../../theme/types";
 
 export type TToggleModeContext = {
   mode: TMode;

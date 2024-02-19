@@ -1,13 +1,9 @@
 import { theme } from "antd";
-import {
-  TMode,
-  TThemeConfigurationVariables,
-  TVariables,
-} from "../theme/types";
 import { getToken } from "./get-antd-theme";
 import getColorShades from "./get-color-shades";
 import getGrayShades from "./get-gray-shades";
 import getSpacingVariants from "./get-spacing-variants";
+import { TMode, TThemeConfigurationVariables, TVariables } from "./types";
 
 const getVariables = (args: {
   mode?: TMode;
