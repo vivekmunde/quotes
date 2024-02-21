@@ -10,10 +10,10 @@ const Header: React.FC<Omit<RowProps, "children">> = (props) => {
       <Flex
         justify="space-between"
         align="center"
-        className={getClassNames(["n-p-t-2", "n-p-b-2"])}
+        className={getClassNames(["q-p-t-2", "q-p-b-2"])}
       >
         <Typography.Text
-          className={getClassNames(["n-font-size-lg"])}
+          className={getClassNames(["q-font-size-lg"])}
           type="secondary"
           strong
         >

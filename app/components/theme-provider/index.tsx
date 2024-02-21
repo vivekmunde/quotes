@@ -5,7 +5,7 @@ import getVariables from "../../theme/get-variables";
 import { TMode } from "../../theme/types";
 import dark from "../../theme/variables/dark";
 import light from "../../theme/variables/light";
-import GlobalColorStyles from "./global-styles";
+import GlobalColorStyles from "./global-color-styles";
 import ToggleModeContext from "./toggle-mode-context";
 
 const ThemeProvider: React.FC<{

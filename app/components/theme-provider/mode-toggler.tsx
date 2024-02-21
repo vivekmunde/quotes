@@ -17,7 +17,7 @@ const ModeToggler: React.FC = () => {
           onToggle();
         }}
         type="text"
-        className={getClassNames(["n-color-secondary"])}
+        className={getClassNames(["q-color-secondary"])}
         shape="circle"
       />
     </Tooltip>
