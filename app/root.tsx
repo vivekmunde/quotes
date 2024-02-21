@@ -12,6 +12,7 @@ import {
 // ------------------------------------------
 // Css by sequence
 // ------------------------------------------
+import ThemeProvider from "~/components/theme-provider";
 import "../public/__.1.root.css";
 import "../public/__.2.antd.css";
 import "../public/__.3.utility.css";
@@ -31,7 +32,9 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet />
+        <ThemeProvider>
+          <Outlet />
+        </ThemeProvider>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
