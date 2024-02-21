@@ -1,15 +1,17 @@
 import React from "react";
-import ThemeProvider from "~/components/theme-provider";
-import Container from "./container";
-import Header from "./header";
+import Content from "./content";
+import Body from "./layout/body";
+import Header from "./layout/header";
+import Layout from "./layout/layout";
 
 const QuoteLayout: React.FC = () => {
   return (
-    <ThemeProvider>
-      <Container>
-        <Header />
-      </Container>
-    </ThemeProvider>
+    <Layout>
+      <Header />
+      <Body>
+        <Content />
+      </Body>
+    </Layout>
   );
 };
 
