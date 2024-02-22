@@ -11,12 +11,8 @@ import {
 import styles from "./tailwind.css";
 
 export const links: LinksFunction = () => [
-  ...(cssBundleHref
-    ? [
-        { rel: "stylesheet", href: styles },
-        { rel: "stylesheet", href: cssBundleHref },
-      ]
-    : [{ rel: "stylesheet", href: styles }]),
+  { rel: "stylesheet", href: styles },
+  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
 ];
 
 export default function App() {
