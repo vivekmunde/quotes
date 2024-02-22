@@ -8,29 +8,21 @@
     "dev": "remix dev --manual",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
     "start": "remix-serve ./build/index.js",
-    "typecheck": "tsc",
-    "q:script": "cd scripts/extract-css && npm run q:extract-css && cd ../../",
-    "q:build": "NODE_ENV=production npm run q:script && npm run build",
-    "q:dev": "NODE_ENV=development npm run q:script && npm run dev"
+    "typecheck": "tsc"
   },
   "dependencies": {
-    "@ant-design/icons": "^5.3.0",
-    "@remix-run/css-bundle": "^2.6.0",
-    "@remix-run/node": "^2.6.0",
-    "@remix-run/react": "^2.6.0",
-    "@remix-run/serve": "^2.6.0",
-    "antd": "^5.14.1",
+    "@remix-run/css-bundle": "^2.7.2",
+    "@remix-run/node": "^2.7.2",
+    "@remix-run/react": "^2.7.2",
+    "@remix-run/serve": "^2.7.2",
     "isbot": "^4.1.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-helmet": "^6.1.0",
-    "styled-components": "^6.1.8"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@remix-run/dev": "^2.6.0",
+    "@remix-run/dev": "^2.7.2",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
-    "@types/react-helmet": "^6.1.11",
     "@typescript-eslint/eslint-plugin": "^6.7.4",
     "eslint": "^8.38.0",
     "eslint-import-resolver-typescript": "^3.6.1",
@@ -38,7 +30,7 @@
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "ts-node": "^10.9.2"
+    "typescript": "^5.1.6"
   },
   "engines": {
     "node": ">=18.0.0"

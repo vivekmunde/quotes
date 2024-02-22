@@ -1,13 +1,8 @@
 /** @type {import('@remix-run/dev').AppConfig} */
 export default {
-  ignoredRouteFiles: ["**/.*"],
+  ignoredRouteFiles: ["**/*.css"],
   // appDirectory: "app",
   // assetsBuildDirectory: "public/build",
   // publicPath: "/build/",
   // serverBuildPath: "build/index.js",
-  serverDependenciesToBundle: [
-    "@ant-design/icons",
-    /^@ant-design\/icons-svg.*/,
-    /^rc-util.*/,
-  ],
 };
