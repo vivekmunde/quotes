@@ -8,17 +8,10 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-
-// ------------------------------------------
-// Css by sequence
-// ------------------------------------------
-import ThemeProvider from "~/components/theme-provider";
-import "../public/__.1.root.css";
-import "../public/__.2.antd.css";
-import "../public/__.3.utility.css";
-// ------------------------------------------
+import styles from "./tailwind.css";
 
 export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: styles },
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
 ];
 
@@ -32,9 +25,7 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <ThemeProvider>
-          <Outlet />
-        </ThemeProvider>
+        <Outlet />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
