@@ -1,6 +1,6 @@
 import React from "react";
 
-const H1 = React.forwardRef<
+const H3 = React.forwardRef<
   HTMLHeadingElement,
   React.DetailedHTMLProps<
     React.HTMLAttributes<HTMLHeadingElement>,
@@ -8,17 +8,17 @@ const H1 = React.forwardRef<
   >
 >(({ children, className, ...props }, ref) => {
   return (
-    <h1
-      className={`pb-6 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl ${
+    <h3
+      className={`pb-3 scroll-m-20 text-2xl font-semibold tracking-tight ${
         className ?? ""
       }`}
       ref={ref}
       {...props}
     >
       {children}
-    </h1>
+    </h3>
   );
 });
-H1.displayName = "H1";
+H3.displayName = "H3";
 
-export default H1;
+export default H3;
