@@ -1,6 +1,8 @@
 import type { MetaFunction } from "@remix-run/node";
-import useToggleMode from "~/components/theme-provider/use-toggle-mode";
-import { Button } from "~/components/ui/button";
+import Body from "~/components/layout/body";
+import Footer from "~/components/layout/footer";
+import Header from "~/components/layout/header";
+import Page from "~/components/layout/page";
 import H1 from "~/components/ui/typography/h1";
 
 export const meta: MetaFunction = () => {
@@ -10,19 +12,21 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export default function Index() {
-  const onToggleMode = useToggleMode();
-
+export default function IndexRoute() {
   return (
-    <div className="p-6">
-      <H1>Quotes</H1>
-      <Button
-        onClick={() => {
-          onToggleMode();
-        }}
-      >
-        Click Me!
-      </Button>
-    </div>
+    <Page>
+      <Header />
+      <Body>
+        <section className="md:pt-[15vh] lg:pt-[20vh]">
+          <header>
+            <H1>The only think we have to fear is fear itself!</H1>
+            <div className="text-neutral-500">- Franklin D. Roosevelt's</div>
+          </header>
+        </section>
+      </Body>
+      <Footer>
+        <small className="text-neutral-500">Enjoy!</small>
+      </Footer>
+    </Page>
   );
 }
