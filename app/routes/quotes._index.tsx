@@ -1,12 +1,54 @@
-import H1 from "~/components/ui/typography/h1";
+import { json } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
+import Title from "~/components/layout/title";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "~/components/ui/table";
+import { db } from "~/utils/db.server";
+
+export const loader = async () => {
+  return json({
+    quotes: await db.quotes.findMany({
+      orderBy: { updatedAt: "desc" },
+      select: { id: true, title: true, author: true },
+      take: 10,
+    }),
+  });
+};
 
 export default function QuotesIndexRoute() {
+  const { quotes } = useLoaderData<typeof loader>();
+
   return (
-    <section className="md:pt-[15vh] lg:pt-[20vh]">
+    <section>
       <header>
-        <H1>The only think we have to fear is fear itself!</H1>
-        <div className="text-neutral-500">- Franklin D. Roosevelt's</div>
+        <Title>Quotes</Title>
       </header>
+      <div className="border rounded">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Title</TableHead>
+              <TableHead>Author</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {quotes.map((quote) => (
+              <TableRow key={quote.id}>
+                <TableCell className="align-top">{quote.title}</TableCell>
+                <TableCell className="align-top">
+                  {quote.author ?? ""}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
     </section>
   );
 }

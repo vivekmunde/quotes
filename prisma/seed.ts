@@ -4,7 +4,7 @@ const db = new PrismaClient();
 async function seed() {
   await Promise.all(
     getQuotes().map((quote) => {
-      return db.quote.create({ data: quote });
+      return db.quotes.create({ data: quote });
     })
   );
 }
@@ -12,11 +12,9 @@ async function seed() {
 seed();
 
 function getQuotes() {
-  // shout-out to https://icanhazdadjoke.com/
-
   return [
     {
-      title: "The only think we have to fear is fear itself.",
+      title: "The only thing we have to fear is fear itself.",
       author: "Franklin D. Roosevelt",
     },
     {

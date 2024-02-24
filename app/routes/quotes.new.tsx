@@ -1,3 +1,4 @@
+import Title from "~/components/layout/title";
 import { Button } from "~/components/ui/button";
 import {
   FormControl,
@@ -11,7 +12,10 @@ import { Textarea } from "~/components/ui/textarea";
 
 export default function QuotesNewRoute() {
   return (
-    <div className="md:pt-[10vh] lg:pt-[15vh]">
+    <section>
+      <header>
+        <Title>Create new quote</Title>
+      </header>
       <form className="space-y-6" method="post">
         <div>
           <FormItem>
@@ -35,6 +39,6 @@ export default function QuotesNewRoute() {
           <Button>Create</Button>
         </FormItem>
       </form>
-    </div>
+    </section>
   );
 }

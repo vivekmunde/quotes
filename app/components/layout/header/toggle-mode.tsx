@@ -30,10 +30,10 @@ const ToggleMode: React.FC = () => {
     >
       <If condition={mode === "dark"}>
         <If.True>
-          <MoonIcon className="h-4 w-4" />
+          <SunIcon className="h-4 w-4" />
         </If.True>
         <If.False>
-          <SunIcon className="h-4 w-4" />
+          <MoonIcon className="h-4 w-4" />
         </If.False>
       </If>
     </Button>

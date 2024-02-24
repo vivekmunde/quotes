@@ -10,12 +10,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Quote {
+model Quotes {
   id          String   @id @default(uuid())
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   title       String
-  author      String
+  author      String?
   description String?
   reference   String?
 }

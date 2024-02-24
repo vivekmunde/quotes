@@ -19,7 +19,7 @@ export default function IndexRoute() {
       <Body>
         <section className="md:pt-[15vh] lg:pt-[20vh]">
           <header>
-            <H1>The only think we have to fear is fear itself!</H1>
+            <H1>The only thing we have to fear is fear itself!</H1>
             <div className="text-neutral-500">- Franklin D. Roosevelt's</div>
           </header>
         </section>
