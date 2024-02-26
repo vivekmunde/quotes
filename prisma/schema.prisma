@@ -11,11 +11,10 @@ datasource db {
 }
 
 model Quotes {
-  id          String   @id @default(uuid())
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  title       String
-  author      String?
-  description String?
-  reference   String?
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  title     String
+  author    String?
+  reference String?
 }
