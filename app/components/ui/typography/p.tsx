@@ -8,13 +8,13 @@ const P = React.forwardRef<
   >
 >(({ children, className, ...props }, ref) => {
   return (
-    <h4
+    <p
       className={`leading-7 [&:not(:first-child)]:mt-6 ${className ?? ""}`}
       ref={ref}
       {...props}
     >
       {children}
-    </h4>
+    </p>
   );
 });
 P.displayName = "P";

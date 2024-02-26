@@ -16,15 +16,15 @@ const NewQuoteForm: React.FC = () => {
         <FormItem>
           <FormLabel>Quote</FormLabel>
           <FormControl>
-            <Input name="title" />
+            <Textarea name="title" />
           </FormControl>
           <FormDescription />
           <FormMessage />
         </FormItem>
         <FormItem>
-          <FormLabel>Reference</FormLabel>
+          <FormLabel>Author</FormLabel>
           <FormControl>
-            <Textarea name="reference" />
+            <Input name="author" />
           </FormControl>
           <FormDescription />
           <FormMessage />

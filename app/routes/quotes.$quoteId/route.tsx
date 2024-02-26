@@ -1,9 +1,15 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
-import Body from "~/components/layout/body";
+import { useLoaderData, useNavigation } from "@remix-run/react";
+import If from "~/components/if";
 import { db } from "~/utils/db.server";
-import Quote from "./quote";
+import RouteContent from "./route-content";
+import RouteError from "./route-error";
+import RouteLoading from "./route-loading";
+
+export function ErrorBoundary() {
+  return <RouteError />;
+}
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const quote = await db.quotes.findUnique({
@@ -17,13 +23,17 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 };
 
 export default function QuotesIndexRoute() {
+  const navigation = useNavigation();
   const { quote } = useLoaderData<typeof loader>();
 
   return (
-    <Body className="flex flex-col justify-center">
-      <div className="sm:pb-[5vh] md:pb-[15vh] lg:pb-[20vh]">
-        <Quote author={quote.author} title={quote.title} />
-      </div>
-    </Body>
+    <If condition={navigation.state === "loading"}>
+      <If.True>
+        <RouteLoading />
+      </If.True>
+      <If.False>
+        <RouteContent quote={quote} />
+      </If.False>
+    </If>
   );
 }
