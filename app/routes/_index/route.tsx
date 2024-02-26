@@ -2,8 +2,7 @@ import type { MetaFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { Outlet, useNavigation } from "@remix-run/react";
 import If from "~/components/if";
-import Header from "~/components/layout/header";
-import Page from "~/components/layout/page";
+import Page from "~/components/layout/quote";
 import RouteError from "~/components/route-error";
 import data from "./route-data";
 import RouteLoading from "./route-loading";
@@ -29,7 +28,7 @@ export default function IndexRoute() {
 
   return (
     <Page>
-      <Header />
+      <Page.Header />
       <If condition={navigation.state === "loading"}>
         <If.True>
           <RouteLoading />

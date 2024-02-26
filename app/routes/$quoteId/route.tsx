@@ -1,16 +1,15 @@
 import { Outlet } from "@remix-run/react";
-import Header from "~/components/layout/header";
-import Page from "~/components/layout/page";
+import Page from "~/components/layout/quote";
 import RouteError from "./route-error";
 
 export function ErrorBoundary() {
   return <RouteError />;
 }
 
-export default function QuoteIndexRoute() {
+export default function QuoteLayoutRoute() {
   return (
     <Page>
-      <Header />
+      <Page.Header />
       <Outlet />
     </Page>
   );

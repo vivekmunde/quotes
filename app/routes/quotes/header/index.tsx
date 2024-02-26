@@ -1,12 +1,12 @@
 import React from "react";
-import CHeader from "~/components/layout/header";
+import Page from "~/components/layout/page";
 import Menu from "./menu";
 
 const Header: React.FC = () => {
   return (
-    <CHeader>
+    <Page.Header>
       <Menu />
-    </CHeader>
+    </Page.Header>
   );
 };
 

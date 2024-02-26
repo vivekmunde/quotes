@@ -1,5 +1,5 @@
 import React from "react";
-import Body from "~/components/layout/body";
+import Page from "~/components/layout/page";
 import { Skeleton } from "~/components/ui/skeleton";
 import {
   Table,
@@ -12,7 +12,7 @@ import {
 
 const RouteLoading: React.FC = () => {
   return (
-    <Body>
+    <Page.Body>
       <section>
         <header>
           <Skeleton className="h-6 w-[250px] mb-6" />
@@ -42,7 +42,7 @@ const RouteLoading: React.FC = () => {
           </TableBody>
         </Table>
       </section>
-    </Body>
+    </Page.Body>
   );
 };
 

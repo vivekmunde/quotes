@@ -14,7 +14,7 @@ export const loader = async (args: LoaderFunctionArgs) => {
   return data(args);
 };
 
-export default function QuotesIndexRoute() {
+export default function QuoteRoute() {
   const navigation = useNavigation();
   const { quote } = useLoaderData<typeof loader>();
 

@@ -1,16 +1,15 @@
-import Body from "~/components/layout/body";
-import Title from "~/components/layout/title";
+import Page from "~/components/layout/page";
 import NewQuoteForm from "./new-quote-form";
 
-export default function QuotesNewRoute() {
+export default function NewQuotesRoute() {
   return (
-    <Body>
+    <Page.Body>
       <section>
         <header>
-          <Title>Create new quote</Title>
+          <Page.Title>Create new quote</Page.Title>
         </header>
         <NewQuoteForm />
       </section>
-    </Body>
+    </Page.Body>
   );
 }

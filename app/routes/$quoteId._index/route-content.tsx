@@ -1,8 +1,7 @@
 import { ThickArrowRightIcon } from "@radix-ui/react-icons";
 import { Await, Link } from "@remix-run/react";
 import React, { Suspense } from "react";
-import Body from "~/components/layout/body";
-import Footer from "~/components/layout/footer";
+import Page from "~/components/layout/quote";
 import { Button } from "~/components/ui/button";
 import Quote from "./quote";
 
@@ -14,15 +13,13 @@ const RouteContent: React.FC<{
 }> = ({ quote, nextQuotePromise }) => {
   return (
     <React.Fragment>
-      <Body className="flex flex-col justify-center">
-        <div className="sm:pb-[5vh] md:pb-[15vh] lg:pb-[20vh]">
-          <Quote author={quote.author} title={quote.title} />
-        </div>
-      </Body>
+      <Page.Body>
+        <Quote author={quote.author} title={quote.title} />
+      </Page.Body>
       <Suspense>
         <Await resolve={nextQuotePromise}>
           {(nextQuote) => (
-            <Footer>
+            <Page.Footer>
               <div className="flex flex-row justify-end">
                 <Link to={`/${nextQuote?.id}`}>
                   <Button variant="outline" size="icon">
@@ -30,7 +27,7 @@ const RouteContent: React.FC<{
                   </Button>
                 </Link>
               </div>
-            </Footer>
+            </Page.Footer>
           )}
         </Await>
       </Suspense>
