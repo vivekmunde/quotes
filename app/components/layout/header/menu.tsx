@@ -1,5 +1,4 @@
 import {
-  HomeIcon,
   MagnifyingGlassIcon,
   PlusIcon,
   QuoteIcon,
@@ -12,11 +11,6 @@ import ToggleMode from "./toggle-mode";
 const Menu: React.FC = () => {
   return (
     <div className="flex flex-row">
-      <Link to="/">
-        <Button size="sm" variant="ghost">
-          <HomeIcon className="h-4 w-4" />
-        </Button>
-      </Link>
       <Link to="/quotes/new">
         <Button size="sm" variant="ghost">
           <PlusIcon className="h-4 w-4" />
