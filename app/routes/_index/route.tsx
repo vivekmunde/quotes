@@ -1,6 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
-import { useNavigation } from "@remix-run/react";
+import { Outlet, useNavigation } from "@remix-run/react";
 import If from "~/components/if";
 import Header from "~/components/layout/header";
 import Page from "~/components/layout/page";
@@ -34,6 +34,9 @@ export default function IndexRoute() {
         <If.True>
           <RouteLoading />
         </If.True>
+        <If.False>
+          <Outlet />
+        </If.False>
       </If>
     </Page>
   );

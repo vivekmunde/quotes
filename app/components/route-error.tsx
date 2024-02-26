@@ -20,9 +20,12 @@ const RouteError: React.FC<{ title?: string; message?: string }> = ({
     message ?? isRouteErrorResponse(error) ? error?.data : error?.message;
 
   return (
-    <section className="px-4 py-8 flex flex-col gap-2 items-center text-center text-red-500">
-      <ExclamationTriangleIcon className="h-[48px] w-[48px]" fontSize={48} />
-      <H1 className="font-light mb-0 pb-0">{_title}</H1>
+    <section className="px-4 py-8 flex flex-col items-center text-center text-red-500">
+      <ExclamationTriangleIcon
+        className="h-[48px] w-[48px] mb-2"
+        fontSize={48}
+      />
+      <H1 className="font-light">{_title}</H1>
       <If condition={(_message ?? "").length > 0}>
         <If.True>
           <P>{_message}</P>

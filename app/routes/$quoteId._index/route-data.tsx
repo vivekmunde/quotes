@@ -1,12 +1,18 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
-import { defer, json } from "@remix-run/node";
+import { defer } from "@remix-run/node";
 import { db } from "~/utils/db.server";
 
 const getQuote = async (quoteId: string) => {
-  return await db.quotes.findUnique({
+  const quote = await db.quotes.findUnique({
     where: { id: quoteId },
     select: { author: true, title: true },
   });
+
+  if (!quote) {
+    throw new Error("Quote not found!");
+  }
+
+  return quote;
 };
 
 const getNextQuote = async (forQuoteId: string): Promise<{ id: string }> => {
@@ -31,9 +37,9 @@ const data = async ({ params }: LoaderFunctionArgs) => {
   }
 
   const quote = await getQuote(params.quoteId);
-  const nextQuote = await getNextQuote(params.quoteId);
+  const nextQuotePromise = getNextQuote(params.quoteId);
 
-  return json({ quote, nextQuote: defer(nextQuote) });
+  return defer({ quote, nextQuotePromise });
 };
 
 export default data;
