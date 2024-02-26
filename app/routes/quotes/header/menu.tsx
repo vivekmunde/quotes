@@ -20,7 +20,7 @@ const Menu: React.FC = () => {
           <QuoteIcon className="h-4 w-4" />
         </Button>
       </Link>
-      <Link to="/quotes">
+      <Link to="/quotes/search">
         <Button size="sm" variant="ghost">
           <MagnifyingGlassIcon className="h-4 w-4" />
         </Button>

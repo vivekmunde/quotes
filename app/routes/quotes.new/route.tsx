@@ -1,7 +1,7 @@
 import Page from "~/components/layout/page";
 import NewQuoteForm from "./new-quote-form";
 
-export default function NewQuotesRoute() {
+export default function NewQuoteRoute() {
   return (
     <Page.Body>
       <section>

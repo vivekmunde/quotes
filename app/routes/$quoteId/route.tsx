@@ -1,5 +1,6 @@
 import { Outlet } from "@remix-run/react";
 import Page from "~/components/layout/quote";
+import Header from "./header";
 import RouteError from "./route-error";
 
 export function ErrorBoundary() {
@@ -9,7 +10,7 @@ export function ErrorBoundary() {
 export default function QuoteLayoutRoute() {
   return (
     <Page>
-      <Page.Header />
+      <Header />
       <Outlet />
     </Page>
   );
