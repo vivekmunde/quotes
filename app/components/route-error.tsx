@@ -11,8 +11,6 @@ const RouteError: React.FC<{ title?: string; message?: string }> = ({
 }) => {
   const error: any = useRouteError();
 
-  console.log("error", error);
-
   const _title =
     title ?? isRouteErrorResponse(error)
       ? [error?.status, error?.statusText].join(" ")
