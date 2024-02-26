@@ -6,7 +6,6 @@ import {
 import { Link } from "@remix-run/react";
 import React from "react";
 import { Button } from "~/components/ui/button";
-import ToggleMode from "./toggle-mode";
 
 const Menu: React.FC = () => {
   return (
@@ -26,7 +25,6 @@ const Menu: React.FC = () => {
           <MagnifyingGlassIcon className="h-4 w-4" />
         </Button>
       </Link>
-      <ToggleMode />
     </div>
   );
 };

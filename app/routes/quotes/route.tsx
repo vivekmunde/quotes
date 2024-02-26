@@ -1,6 +1,6 @@
 import { Outlet } from "@remix-run/react";
-import Header from "~/components/layout/header";
 import Page from "~/components/layout/page";
+import Header from "./header";
 
 export default function QuotesRoute() {
   return (
