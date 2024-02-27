@@ -10,10 +10,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Users {
+  id           String   @id @default(uuid())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  loginId      String   @unique
+  passwordHash String
+}
+
 model Quotes {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  createdBy String?
+  updatedBy String?
   title     String
   author    String?
   reference String?
