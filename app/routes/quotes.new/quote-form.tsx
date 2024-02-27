@@ -10,14 +10,16 @@ import {
 import { Input } from "~/components/ui/input";
 import { Textarea } from "~/components/ui/textarea";
 
-const NewQuoteForm: React.FC<{
+const QuoteForm: React.FC<{
   fields?: {
-    title: string | undefined | null;
-    author?: string | undefined | null;
+    title: FormDataEntryValue | undefined | null;
+    author?: FormDataEntryValue | undefined | null;
   };
-  fieldErrors?: { title: string | undefined | null };
-  formError?: string | undefined | null;
-}> = ({ fields, fieldErrors, formError }) => {
+  errors?: {
+    fields?: { title?: string | undefined | null };
+    form?: string | undefined | null;
+  };
+}> = ({ fields, errors }) => {
   return (
     <form className="space-y-6" method="post">
       <div>
@@ -27,14 +29,16 @@ const NewQuoteForm: React.FC<{
             <Textarea
               defaultValue={fields?.title?.toString() ?? ""}
               name="title"
-              aria-invalid={Boolean(fieldErrors?.title)}
-              aria-errormessage={fieldErrors?.title ? "title-error" : undefined}
+              aria-invalid={Boolean(errors?.fields?.title)}
+              aria-errormessage={
+                errors?.fields?.title ? "title-error" : undefined
+              }
             />
           </FormControl>
           <FormDescription />
-          <If condition={!!fieldErrors?.title}>
+          <If condition={!!errors?.fields?.title}>
             <If.True>
-              <FormMessage>{fieldErrors?.title}</FormMessage>
+              <FormMessage>{errors?.fields?.title}</FormMessage>
             </If.True>
           </If>
         </FormItem>
@@ -53,10 +57,10 @@ const NewQuoteForm: React.FC<{
       <FormItem>
         <Button>Create</Button>
       </FormItem>
-      <If condition={!!formError}>
+      <If condition={!!errors?.form}>
         <If.True>
           <FormItem>
-            <FormMessage>{formError}</FormMessage>
+            <FormMessage>{errors?.form}</FormMessage>
           </FormItem>
         </If.True>
       </If>
@@ -64,4 +68,4 @@ const NewQuoteForm: React.FC<{
   );
 };
 
-export default NewQuoteForm;
+export default QuoteForm;

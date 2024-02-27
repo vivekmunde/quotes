@@ -1,14 +1,14 @@
 import { ActionFunctionArgs } from "@remix-run/node";
 import { useActionData } from "@remix-run/react";
 import Page from "~/components/layout/page";
-import QuoteForm from "./quote-form";
+import NewQuoteForm from "./quote-form";
 import createNewQuote from "./route-data";
 
 export const action = async (args: ActionFunctionArgs) => {
   return createNewQuote(args);
 };
 
-export default function NewQuoteRoute() {
+const RouteContent: React.FC = () => {
   const actionData = useActionData<typeof action>();
 
   return (
@@ -17,14 +17,17 @@ export default function NewQuoteRoute() {
         <header>
           <Page.Title>Create new quote</Page.Title>
         </header>
-        <QuoteForm
+        <NewQuoteForm
           fields={{
             title: actionData?.fields?.title?.toString(),
             author: actionData?.fields?.author?.toString(),
           }}
-          errors={actionData?.errors}
+          fieldErrors={{ title: actionData?.fieldErrors?.title }}
+          formError={actionData?.formError}
         />
       </section>
     </Page.Body>
   );
-}
+};
+
+export default RouteContent;

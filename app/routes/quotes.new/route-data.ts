@@ -18,10 +18,12 @@ export type TBadRequest = {
     title?: FormDataEntryValue | null;
     author?: FormDataEntryValue | null;
   };
-  fieldErrors?: {
-    title?: string;
+  errors?: {
+    fields?: {
+      title?: string;
+    };
+    form?: string;
   };
-  formError?: string;
 };
 
 const createNewQuote = async ({ request }: ActionFunctionArgs) => {
@@ -32,8 +34,7 @@ const createNewQuote = async ({ request }: ActionFunctionArgs) => {
   if (typeof title !== "string" || typeof author !== "string") {
     return badRequest<TBadRequest>({
       fields: { title, author },
-      fieldErrors: { title: undefined },
-      formError: "Invalid data!",
+      errors: { form: "Invalid data!" },
     });
   }
 
@@ -45,9 +46,8 @@ const createNewQuote = async ({ request }: ActionFunctionArgs) => {
 
   if (Object.values(fieldErrors).some(Boolean)) {
     return badRequest<TBadRequest>({
-      fieldErrors,
       fields,
-      formError: undefined,
+      errors: { fields: fieldErrors },
     });
   }
 
