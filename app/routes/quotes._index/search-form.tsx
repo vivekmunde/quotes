@@ -7,11 +7,7 @@ const SearchForm: React.FC = () => {
       <div>
         <FormItem>
           <FormControl>
-            <Input
-              className="border-2"
-              name="query"
-              placeholder="Search quotes ..."
-            />
+            <Input name="query" placeholder="Search quotes ..." />
           </FormControl>
         </FormItem>
       </div>
