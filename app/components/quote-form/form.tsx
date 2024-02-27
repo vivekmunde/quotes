@@ -3,7 +3,6 @@ import { Button } from "~/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormItem,
   FormLabel,
   FormMessage,
@@ -24,39 +23,34 @@ export type TFormProps = {
 
 const QuoteForm: React.FC<TFormProps> = ({ fields, errors }) => {
   return (
-    <Form className="space-y-6">
-      <div>
-        <FormItem>
-          <FormLabel>Quote</FormLabel>
-          <FormControl>
-            <Textarea
-              defaultValue={fields?.title?.toString() ?? ""}
-              name="title"
-              aria-invalid={Boolean(errors?.fields?.title)}
-              aria-errormessage={
-                errors?.fields?.title ? "title-error" : undefined
-              }
-            />
-          </FormControl>
-          <FormDescription />
-          <If condition={!!errors?.fields?.title}>
-            <If.True>
-              <FormMessage>{errors?.fields?.title}</FormMessage>
-            </If.True>
-          </If>
-        </FormItem>
-        <FormItem>
-          <FormLabel>Author</FormLabel>
-          <FormControl>
-            <Input
-              defaultValue={fields?.author?.toString() ?? ""}
-              name="author"
-            />
-          </FormControl>
-          <FormDescription />
-          <FormMessage />
-        </FormItem>
-      </div>
+    <Form>
+      <FormItem>
+        <FormLabel>Quote</FormLabel>
+        <FormControl>
+          <Textarea
+            defaultValue={fields?.title?.toString() ?? ""}
+            name="title"
+            aria-invalid={Boolean(errors?.fields?.title)}
+            aria-errormessage={
+              errors?.fields?.title ? "title-error" : undefined
+            }
+          />
+        </FormControl>
+        <If condition={!!errors?.fields?.title}>
+          <If.True>
+            <FormMessage>{errors?.fields?.title}</FormMessage>
+          </If.True>
+        </If>
+      </FormItem>
+      <FormItem>
+        <FormLabel>Author</FormLabel>
+        <FormControl>
+          <Input
+            defaultValue={fields?.author?.toString() ?? ""}
+            name="author"
+          />
+        </FormControl>
+      </FormItem>
       <FormItem>
         <Button>Create</Button>
       </FormItem>

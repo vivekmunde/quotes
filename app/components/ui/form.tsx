@@ -83,7 +83,7 @@ const FormItem = React.forwardRef<
 
   return (
     <FormItemContext.Provider value={{ id }}>
-      <div ref={ref} className={cn("space-y-2", className)} {...props} />
+      <div ref={ref} className={cn("space-y-2 pb-4", className)} {...props} />
     </FormItemContext.Provider>
   );
 });
@@ -92,7 +92,7 @@ FormItem.displayName = "FormItem";
 const FormLabel = React.forwardRef<
   React.ElementRef<typeof LabelPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> & {
-    error?: { message?: string };
+    error?: boolean;
   }
 >(({ className, error, ...props }, ref) => {
   // const { error, formItemId } = useFormField();
@@ -111,7 +111,7 @@ FormLabel.displayName = "FormLabel";
 
 const FormControl = React.forwardRef<
   React.ElementRef<typeof Slot>,
-  React.ComponentPropsWithoutRef<typeof Slot> & { error?: { message?: string } }
+  React.ComponentPropsWithoutRef<typeof Slot> & { error?: boolean }
 >(({ error, ...props }, ref) => {
   // const { error, formItemId, formDescriptionId, formMessageId } =
   //   useFormField();
