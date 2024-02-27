@@ -1,6 +1,7 @@
 import If from "~/components/if";
 import { Button } from "~/components/ui/button";
 import {
+  Form,
   FormControl,
   FormDescription,
   FormItem,
@@ -10,7 +11,7 @@ import {
 import { Input } from "~/components/ui/input";
 import { Textarea } from "~/components/ui/textarea";
 
-const QuoteForm: React.FC<{
+export type TFormProps = {
   fields?: {
     title: FormDataEntryValue | undefined | null;
     author?: FormDataEntryValue | undefined | null;
@@ -19,9 +20,11 @@ const QuoteForm: React.FC<{
     fields?: { title?: string | undefined | null };
     form?: string | undefined | null;
   };
-}> = ({ fields, errors }) => {
+};
+
+const QuoteForm: React.FC<TFormProps> = ({ fields, errors }) => {
   return (
-    <form className="space-y-6" method="post">
+    <Form className="space-y-6">
       <div>
         <FormItem>
           <FormLabel>Quote</FormLabel>
@@ -64,7 +67,7 @@ const QuoteForm: React.FC<{
           </FormItem>
         </If.True>
       </If>
-    </form>
+    </Form>
   );
 };
 

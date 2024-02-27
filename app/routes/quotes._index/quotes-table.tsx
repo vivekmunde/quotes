@@ -27,7 +27,9 @@ const QuotesTable: React.FC<{
               <TableCell className="align-top">
                 <Link to={`/quotes/${quote.id}`}>{quote.title}</Link>
               </TableCell>
-              <TableCell className="align-top">{quote.author ?? ""}</TableCell>
+              <TableCell className="align-top text-nowrap">
+                {quote.author ?? ""}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

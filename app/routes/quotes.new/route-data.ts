@@ -1,17 +1,8 @@
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
+import { validateTitle } from "~/components/quote-form";
 import { db } from "~/utils/db.server";
 import { badRequest } from "~/utils/request.server";
-
-const validateTitle = (val: string | undefined | null) => {
-  if ((val ?? "").length === 0) {
-    return "Please enter the quote!";
-  }
-
-  if ((val ?? "").length < 20) {
-    return "The quote is too small!";
-  }
-};
 
 export type TBadRequest = {
   fields?: {
@@ -26,7 +17,7 @@ export type TBadRequest = {
   };
 };
 
-const createNewQuote = async ({ request }: ActionFunctionArgs) => {
+export const createNewQuote = async ({ request }: ActionFunctionArgs) => {
   const form = await request.formData();
   const title = form.get("title");
   const author = form.get("author");
@@ -55,5 +46,3 @@ const createNewQuote = async ({ request }: ActionFunctionArgs) => {
 
   return redirect(`/quotes/${quote.id}`);
 };
-
-export default createNewQuote;
