@@ -1,4 +1,4 @@
-import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
+import { MoonStar, Sun } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import If from "~/components/if";
 import useGetMode from "~/components/theme-provider/use-get-mode";
@@ -30,10 +30,10 @@ const ToggleMode: React.FC = () => {
     >
       <If condition={mode === "dark"}>
         <If.True>
-          <SunIcon className="h-4 w-4" />
+          <Sun className="h-4 w-4" />
         </If.True>
         <If.False>
-          <MoonIcon className="h-4 w-4" />
+          <MoonStar className="h-4 w-4" />
         </If.False>
       </If>
     </Button>

@@ -1,5 +1,5 @@
-import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import { isRouteErrorResponse, useRouteError } from "@remix-run/react";
+import { AlertTriangle } from "lucide-react";
 import React from "react";
 import If from "~/components/if";
 import H1 from "~/components/ui/typography/h1";
@@ -21,10 +21,7 @@ const RouteError: React.FC<{ title?: string; message?: string }> = ({
 
   return (
     <section className="px-4 py-8 flex flex-col items-center text-center text-red-500">
-      <ExclamationTriangleIcon
-        className="h-[48px] w-[48px] mb-2"
-        fontSize={48}
-      />
+      <AlertTriangle className="h-[48px] w-[48px] mb-2" fontSize={48} />
       <H1 className="font-light">{_title}</H1>
       <If condition={(_message ?? "").length > 0}>
         <If.True>

@@ -1,5 +1,5 @@
-import { ThickArrowRightIcon } from "@radix-ui/react-icons";
 import { Await, Link } from "@remix-run/react";
+import { ChevronRight } from "lucide-react";
 import React, { Suspense } from "react";
 import Page from "~/components/layout/quote";
 import { Button } from "~/components/ui/button";
@@ -22,8 +22,8 @@ const RouteContent: React.FC<{
             <Page.Footer>
               <div className="flex flex-row justify-end">
                 <Link to={`/${nextQuote?.id}`}>
-                  <Button variant="outline" size="icon">
-                    <ThickArrowRightIcon />
+                  <Button size="icon">
+                    <ChevronRight />
                   </Button>
                 </Link>
               </div>
