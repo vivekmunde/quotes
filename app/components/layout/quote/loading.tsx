@@ -7,6 +7,7 @@ const Loading: React.FC = () => {
     <Page.Body>
       <div className="flex flex-col gap-4 mb-6">
         <Skeleton className="h-12" />
+        <Skeleton className="h-12 md:hidden" />
         <Skeleton className="h-12 w-[75%]" />
       </div>
       <Skeleton className="h-4 w-[25%] mb-6" />
