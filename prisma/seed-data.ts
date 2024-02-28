@@ -42,4 +42,14 @@ export const quotes: { title: string; author?: string }[] = [
       "It’s better to hang out with people better than you. Pick out associates whose behavior is better than yours, and you’ll drift in that direction.",
     author: "Warren Buffett",
   },
+  {
+    title:
+      "Your time is limited, so don't waste it living someone else's life. Don't be trapped by dogma – which is living with the results of other people's thinking.",
+    author: "Steve Jobs",
+  },
+  {
+    title:
+      "The future belongs to those who believe in the beauty of their dreams.",
+    author: "Eleanor Roosevelt",
+  },
 ];

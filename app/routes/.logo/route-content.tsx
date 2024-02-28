@@ -1,7 +1,7 @@
-import Page from "~/components/layout/quote";
+import Page from "~/components/layout/page";
 import Logo from "~/components/logo";
 
-const RouteLoading: React.FC = () => {
+const RouteContent: React.FC = () => {
   return (
     <Page>
       <Page.Body className="flex items-center justify-center">
@@ -11,4 +11,4 @@ const RouteLoading: React.FC = () => {
   );
 };
 
-export default RouteLoading;
+export default RouteContent;

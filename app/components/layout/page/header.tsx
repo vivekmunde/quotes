@@ -13,7 +13,7 @@ const Header: React.FC<
       {...props}
     >
       <Link to="/">
-        <img alt="quotes" src="/quotes-q-logo.png" className="h-4" />
+        <img alt="quotes" src="/quotes-q-logo.png" className="h-6" />
       </Link>
       <div className="flex flex-row items-center">
         {children}

@@ -28,8 +28,7 @@ export default function IndexRoute() {
 
   return (
     <Page>
-      <Page.Header />
-      <If condition={navigation.state === "loading"}>
+      <If condition={navigation.state !== "loading"}>
         <If.True>
           <RouteLoading />
         </If.True>
