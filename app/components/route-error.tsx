@@ -21,11 +21,13 @@ const RouteError: React.FC<{ title?: string; message?: string }> = ({
 
   return (
     <section className="px-4 py-8 flex flex-col items-center text-center text-red-500">
-      <AlertTriangle className="h-[48px] w-[48px] mb-2" fontSize={48} />
-      <H1 className="font-light">{_title}</H1>
+      <AlertTriangle className="h-[48px] w-[48px] mb-4" fontSize={48} />
+      <H1 className="font-light" style={{ margin: 0 }}>
+        {_title}
+      </H1>
       <If condition={(_message ?? "").length > 0}>
         <If.True>
-          <P>{_message}</P>
+          <P style={{ margin: 0 }}>{_message}</P>
         </If.True>
       </If>
     </section>
