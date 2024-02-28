@@ -3,7 +3,7 @@ import Page, { TBodyProps } from "../page";
 const Body: React.FC<TBodyProps> = ({ children, className, ...props }) => {
   return (
     <Page.Body
-      className={`flex flex-col justify-center sm:pb-[5vh] md:pb-[10vh] lg:pb-[10vh] ${
+      className={`flex flex-col justify-center sm:pb-[10vh] md:pb-[15vh] lg:pb-[15vh] ${
         className ?? ""
       }`}
       {...props}

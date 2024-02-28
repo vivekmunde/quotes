@@ -9,6 +9,10 @@ const Quote: React.FC<{ author: string | null; title: string }> = ({
   return (
     <section>
       <header>
+        <div className="flex flex-row gap-1 mb-1">
+          <img alt="quotes" src="/single-quote.png" className="h-4 w-2" />
+          <img alt="quotes" src="/single-quote.png" className="h-4 w-2" />
+        </div>
         <H1>{title}</H1>
         <If condition={(author ?? "").length > 0}>
           <If.True>

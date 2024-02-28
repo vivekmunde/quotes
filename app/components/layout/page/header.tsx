@@ -1,4 +1,3 @@
-import { QuoteIcon } from "@radix-ui/react-icons";
 import { Link } from "@remix-run/react";
 import React from "react";
 import ToggleMode from "~/components/toggle-mode";
@@ -13,8 +12,8 @@ const Header: React.FC<
       }`}
       {...props}
     >
-      <Link to="/" className="text-neutral-500 font-bold">
-        <QuoteIcon className="h-8 w-8 rotate-180" />
+      <Link to="/">
+        <img alt="quotes" src="/quotes-q-logo.png" className="h-4" />
       </Link>
       <div className="flex flex-row items-center">
         {children}
