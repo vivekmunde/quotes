@@ -10,12 +10,12 @@ const RouteContent: React.FC<{
     <Page>
       <Page.Header />
       <Page.Body className="flex flex-col justify-center md:pb-[15vh]">
-        <div className="my-6 flex flex-row border rounded">
+        <div className="mb-[10vh] md:mb-[5vh] flex flex-row border rounded">
           <div className="flex-1 flex flex-col justify-center px-6 py-12">
             <H2>Login</H2>
             <LoginForm />
           </div>
-          <div className="sm:hidden flex-1 lg:flex flex-col justify-center bg-muted text-muted-foreground p-6 rounded-tr rounded-br">
+          <div className="hidden md:block flex-1 lg:flex flex-col justify-center bg-muted text-muted-foreground p-6 rounded-tr rounded-br">
             <Quote quote={quote} />
           </div>
         </div>

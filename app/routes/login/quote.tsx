@@ -5,8 +5,12 @@ const Quote: React.FC<{
   quote: { title: string; author?: string | undefined | null };
 }> = ({ quote }) => {
   return (
-    <section>
+    <section className="pb-4">
       <header>
+        <div className="flex flex-row gap-1 mb-1">
+          <img alt="quotes" src="/single-quote.png" className="h-4 w-2" />
+          <img alt="quotes" src="/single-quote.png" className="h-4 w-2" />
+        </div>
         <H2>{quote.title}</H2>
         <If condition={(quote.author ?? "").length > 0}>
           <If.True>
