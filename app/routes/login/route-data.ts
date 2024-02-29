@@ -1,6 +1,6 @@
 import { ActionFunctionArgs, redirect } from "@remix-run/node";
-import getRandomQuote from "~/data/get-random-quote";
-import _login from "~/utils/login.server";
+import getRandomQuote from "~/data/get-random-quote.server";
+import _login from "~/data/login.server";
 import { badRequest } from "~/utils/request.server";
 import { createUserSession } from "~/utils/session.server";
 
