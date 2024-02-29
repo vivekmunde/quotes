@@ -12,12 +12,17 @@ const ToggleMode: React.FC = () => {
   const toggleMode = useToggleMode();
 
   const onToggleMode = () => {
-    setMode(mode === "dark" ? "light" : "dark");
+    setMode(getMode() === "dark" ? "light" : "dark");
     toggleMode();
   };
 
   useEffect(() => {
-    setMode(getMode());
+    const t = setTimeout(() => {
+      clearTimeout(t);
+      setMode(getMode());
+    }, 0);
+
+    return () => clearTimeout(t);
   }, []);
 
   return (
