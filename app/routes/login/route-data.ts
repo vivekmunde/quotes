@@ -22,7 +22,8 @@ export async function login({ request }: ActionFunctionArgs) {
   const form = await request.formData();
   const password = form.get("password");
   const loginId = form.get("loginId");
-  const redirectTo = form.get("redirectTo");
+  const { searchParams } = new URL(request.url);
+  const redirectTo = form.get("redirectTo") ?? searchParams.get("redirectTo");
 
   if (typeof loginId !== "string" || typeof password !== "string") {
     return badRequest<TBadRequest>({
@@ -37,7 +38,7 @@ export async function login({ request }: ActionFunctionArgs) {
 
   if (loginResponse.error) {
     return badRequest<TBadRequest>({
-      fields: { loginId, password },
+      fields,
       errors: { form: loginResponse.error },
     });
   }
@@ -51,7 +52,7 @@ export async function login({ request }: ActionFunctionArgs) {
   }
 
   return badRequest<TBadRequest>({
-    fields: { loginId, password },
+    fields,
     errors: { form: "Invalid login credentials!" },
   });
 }
