@@ -1,6 +1,6 @@
 export const admin: { loginId: string; passwordHash: string } = {
   loginId: "admin",
-  passwordHash: "$2b$10$K7L1OJ45/4Y2nIvhRVpCe.FSmhDdWoXehVzJptJ/op0lSsvqNu/1u",
+  passwordHash: "$2a$12$DH6Nnl0d7izI4KUlyWL/MOhiIiYKcG0ZppncNgsjJu6QrTqJBC5zK",
 };
 
 export const quotes: { title: string; author?: string }[] = [
