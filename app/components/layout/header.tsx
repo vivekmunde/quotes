@@ -2,10 +2,7 @@ import React from "react";
 import Title from "./title";
 
 const Header: React.FC<
-  { children: React.ReactNode } & React.DetailedHTMLProps<
-    React.HTMLAttributes<HTMLDivElement>,
-    HTMLDivElement
-  >
+  React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
 > & { Title: typeof Title } = ({ children, className, ...props }) => {
   return (
     <div

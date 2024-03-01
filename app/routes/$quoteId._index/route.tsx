@@ -2,7 +2,7 @@ import type { LoaderFunctionArgs } from "@remix-run/node";
 import { useLoaderData, useNavigation } from "@remix-run/react";
 import If from "~/components/if";
 import RouteContent from "./route-content";
-import data from "./route-data";
+import data from "./route-data.server";
 import RouteError from "./route-error";
 import RouteLoading from "./route-loading";
 

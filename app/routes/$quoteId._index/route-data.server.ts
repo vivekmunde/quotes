@@ -1,7 +1,7 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { defer } from "@remix-run/node";
+import getRandomQuote from "~/data/get-random-quote.server";
 import { db } from "~/utils/server/db.server";
-import getRandomQuote from "../_index/route-data";
 
 const getQuote = async (quoteId: string) => {
   const quote = await db.quotes.findUnique({

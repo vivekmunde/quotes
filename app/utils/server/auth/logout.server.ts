@@ -7,7 +7,7 @@ export default async function logout(request: Request) {
   const redirectTo = new URL(request.url).pathname;
   const searchParams = new URLSearchParams([["redirectTo", redirectTo]]);
 
-  return redirect(`/login?${searchParams}`, {
+  return redirect(`/auth/login?${searchParams}`, {
     headers: {
       "Set-Cookie": cookie,
     },

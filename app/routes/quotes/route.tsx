@@ -1,18 +1,11 @@
 import { LoaderFunctionArgs } from "@remix-run/node";
-import { Outlet } from "@remix-run/react";
-import Layout from "~/components/layout";
 import authorizedAccess from "~/utils/server/auth/authorized-access.server";
-import Header from "./header";
+import RouteContent from "./route-content";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   return authorizedAccess<null>(request, () => null);
 };
 
 export default function QuotesLayoutRoute() {
-  return (
-    <Layout.Screen>
-      <Header />
-      <Outlet />
-    </Layout.Screen>
-  );
+  return <RouteContent />;
 }

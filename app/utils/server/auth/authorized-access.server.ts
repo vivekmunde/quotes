@@ -14,7 +14,7 @@ export default async function authorizedAccess<T>(
     destroyUserSession(request);
 
     const searchParams = new URLSearchParams([["redirectTo", redirectTo]]);
-    throw redirect(`/login?${searchParams}`);
+    throw redirect(`/auth/login?${searchParams}`);
   }
 
   return fn();
