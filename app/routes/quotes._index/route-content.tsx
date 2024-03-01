@@ -1,5 +1,5 @@
 import Layout from "~/components/layout";
-import QuotesTable from "./components/quotes-table";
+import QuotesList from "./components/quotes-list";
 import SearchForm from "./components/search-form";
 import { TData } from "./types";
 
@@ -21,7 +21,7 @@ const RouteContent: React.FC<{
             </header>
           </Layout.Header>
           <Layout.Body>
-            <QuotesTable quotes={data} />
+            <QuotesList quotes={data} startIndex={1} />
           </Layout.Body>
         </Layout>
       </section>

@@ -7,7 +7,11 @@ const RouteContent: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    navigate(`/${quoteId}`);
+    if ((quoteId ?? "").length < 36) {
+      navigate("/");
+    } else {
+      navigate(`/${quoteId}`);
+    }
   }, []);
 
   return <RouteSkeleton />;

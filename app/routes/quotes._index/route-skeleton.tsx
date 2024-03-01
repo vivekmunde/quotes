@@ -1,7 +1,6 @@
 import React from "react";
 import Layout from "~/components/layout";
 import { Skeleton } from "~/components/ui/skeleton";
-import { Table, TableBody, TableCell, TableRow } from "~/components/ui/table";
 
 const RouteLoading: React.FC = () => {
   return (
@@ -17,17 +16,15 @@ const RouteLoading: React.FC = () => {
             </header>
           </Layout.Header>
           <Layout.Body>
-            <Table>
-              <TableBody className="border-0">
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((it) => (
-                  <TableRow className="border-0" key={it}>
-                    <TableCell className="pl-0 pr-0">
-                      <Skeleton className="h-7" />
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+            <div className="flex flex-col gap-4">
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((it) => {
+                return (
+                  <div key={it}>
+                    <Skeleton style={{ height: "2rem" }} />
+                  </div>
+                );
+              })}
+            </div>
           </Layout.Body>
         </Layout>
       </section>
