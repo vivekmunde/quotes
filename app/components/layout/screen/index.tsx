@@ -19,7 +19,7 @@ const Screen: React.FC<
       }`}
       {...props}
     >
-      <div className="flex flex-col h-screen col-[span_24] md:col-[3_/_span_20] lg:col-[5_/_span_16] xl:col-[6_/_span_14]">
+      <div className="flex flex-col h-screen col-[span_24] md:col-[3_/_span_20] lg:col-[4_/_span_18] xl:col-[5_/_span_16]">
         {children}
       </div>
     </div>

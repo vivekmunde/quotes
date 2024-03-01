@@ -3,10 +3,9 @@ import Layout from "~/components/layout";
 
 const RouteContent: React.FC = () => {
   return (
-    <Layout.Screen>
-      <Layout.Screen.Header />
+    <Layout>
       <Outlet />
-    </Layout.Screen>
+    </Layout>
   );
 };
 
