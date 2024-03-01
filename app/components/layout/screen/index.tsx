@@ -14,14 +14,14 @@ const Screen: React.FC<
 } = ({ children, className, ...props }) => {
   return (
     <div
-      className={`px-4 grid sm:grid-cols-[1fr_22fr_1fr] md:grid-cols-[2fr_20fr_2fr] lg:grid-cols-[4fr_16fr_4fr] xl:grid-cols-[5fr_14fr_5fr] ${
+      className={`px-4 grid grid-flow-col grid-cols-[repeat(24,1fr)] ${
         className ?? ""
       }`}
       {...props}
     >
-      <div />
-      <div className="flex flex-col h-screen">{children}</div>
-      <div />
+      <div className="flex flex-col h-screen col-[span_24] md:col-[3_/_span_20] lg:col-[5_/_span_16] xl:col-[6_/_span_14]">
+        {children}
+      </div>
     </div>
   );
 };
