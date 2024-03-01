@@ -14,15 +14,15 @@ const RouteContent: React.FC<{
 }> = ({ quote, nextQuotePromise }) => {
   return (
     <React.Fragment>
-      <Layout.Body className="flex flex-col justify-center">
+      <Layout.Screen.Body className="flex flex-col justify-center">
         <div className="md:mb-[5vh]">
           <Quote author={quote.author} title={quote.title} />
         </div>
-      </Layout.Body>
+      </Layout.Screen.Body>
       <Suspense>
         <Await resolve={nextQuotePromise}>
           {(nextQuote) => (
-            <Layout.Footer>
+            <Layout.Screen.Footer>
               <div className="flex flex-row justify-end">
                 <Link to={`/${nextQuote?.id}`}>
                   <Button size="icon">
@@ -30,7 +30,7 @@ const RouteContent: React.FC<{
                   </Button>
                 </Link>
               </div>
-            </Layout.Footer>
+            </Layout.Screen.Footer>
           )}
         </Await>
       </Suspense>

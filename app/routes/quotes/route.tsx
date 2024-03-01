@@ -10,9 +10,9 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 
 export default function QuotesLayoutRoute() {
   return (
-    <Layout>
+    <Layout.Screen>
       <Header />
       <Outlet />
-    </Layout>
+    </Layout.Screen>
   );
 }

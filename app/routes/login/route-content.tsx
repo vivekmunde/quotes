@@ -10,9 +10,9 @@ const RouteContent: React.FC<
   }
 > = ({ fields, errors, quote }) => {
   return (
-    <Layout>
-      <Layout.Header />
-      <Layout.Body className="flex flex-col justify-center md:pb-[15vh]">
+    <Layout.Screen>
+      <Layout.Screen.Header />
+      <Layout.Screen.Body className="flex flex-col justify-center md:pb-[15vh]">
         <div className="mb-[10vh] md:mb-[5vh] flex flex-row border rounded">
           <div className="flex-1 flex flex-col justify-center px-6 py-12">
             <H2>Login</H2>
@@ -24,8 +24,8 @@ const RouteContent: React.FC<
             <Quote quote={quote} />
           </div>
         </div>
-      </Layout.Body>
-    </Layout>
+      </Layout.Screen.Body>
+    </Layout.Screen>
   );
 };
 

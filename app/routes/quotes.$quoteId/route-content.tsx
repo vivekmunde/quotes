@@ -6,11 +6,11 @@ const RouteContent: React.FC<{
   quote: { author: TMayBe<string>; title: string };
 }> = ({ quote }) => {
   return (
-    <Layout.Body className="flex flex-col justify-center">
+    <Layout.Screen.Body className="flex flex-col justify-center">
       <div className="mb-[5vh] md:mb-[10vh]">
         <Quote author={quote.author} title={quote.title} />
       </div>
-    </Layout.Body>
+    </Layout.Screen.Body>
   );
 };
 

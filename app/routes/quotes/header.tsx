@@ -6,7 +6,7 @@ import { Button } from "~/components/ui/button";
 
 const Header: React.FC = () => {
   return (
-    <Layout.Header>
+    <Layout.Screen.Header>
       <div className="flex flex-row">
         <Link to="/quotes/new">
           <Button size="sm" variant="ghost">
@@ -19,7 +19,7 @@ const Header: React.FC = () => {
           </Button>
         </Link>
       </div>
-    </Layout.Header>
+    </Layout.Screen.Header>
   );
 };
 

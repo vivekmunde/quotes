@@ -5,13 +5,13 @@ import { Button } from "~/components/ui/button";
 
 const Header: React.FC = () => {
   return (
-    <Layout.Header>
+    <Layout.Screen.Header>
       <Link to="/search">
         <Button size="sm" variant="ghost">
           <Search className="h-4 w-4" />
         </Button>
       </Link>
-    </Layout.Header>
+    </Layout.Screen.Header>
   );
 };
 

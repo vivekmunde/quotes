@@ -1,25 +1,23 @@
 import React from "react";
 import Body from "./body";
-import Container from "./container";
 import Footer from "./footer";
 import Header from "./header";
-import Title from "./title";
-export type { TBodyProps } from "./body";
+import Screen from "./screen";
 
-class Layout extends React.Component<{ children: React.ReactNode }> {
-  static Header: typeof Header;
-  static Body: typeof Body;
-  static Footer: typeof Footer;
-  static Title: typeof Title;
-
-  render() {
-    return <Container>{this.props.children}</Container>;
-  }
-}
+const Layout: React.FC<
+  React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+> & {
+  Header: typeof Header;
+  Body: typeof Body;
+  Footer: typeof Footer;
+  Screen: typeof Screen;
+} = ({ children, ...props }) => {
+  return <div {...props}>{children}</div>;
+};
 
 Layout.Header = Header;
 Layout.Body = Body;
 Layout.Footer = Footer;
-Layout.Title = Title;
+Layout.Screen = Screen;
 
 export default Layout;

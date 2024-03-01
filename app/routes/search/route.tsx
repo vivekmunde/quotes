@@ -3,11 +3,11 @@ import RouteContent from "./route-content";
 
 export default function SearchQuotesRoute() {
   return (
-    <Layout>
-      <Layout.Header />
-      <Layout.Body>
+    <Layout.Screen>
+      <Layout.Screen.Header />
+      <Layout.Screen.Body>
         <RouteContent />
-      </Layout.Body>
-    </Layout>
+      </Layout.Screen.Body>
+    </Layout.Screen>
   );
 }

@@ -27,7 +27,7 @@ export default function IndexRoute() {
   const navigation = useNavigation();
 
   return (
-    <Layout>
+    <Layout.Screen>
       <If condition={navigation.state !== "loading"}>
         <If.True>
           <RouteLoading />
@@ -36,6 +36,6 @@ export default function IndexRoute() {
           <Outlet />
         </If.False>
       </If>
-    </Layout>
+    </Layout.Screen>
   );
 }

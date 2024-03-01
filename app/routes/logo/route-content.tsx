@@ -3,11 +3,11 @@ import Logo from "~/components/logo";
 
 const RouteContent: React.FC = () => {
   return (
-    <Layout>
-      <Layout.Body className="flex items-center justify-center _bg-[rgba(102,102,102)]">
+    <Layout.Screen>
+      <Layout.Screen.Body className="flex items-center justify-center _bg-[rgba(102,102,102)]">
         <Logo />
-      </Layout.Body>
-    </Layout>
+      </Layout.Screen.Body>
+    </Layout.Screen>
   );
 };
 

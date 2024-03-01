@@ -3,9 +3,9 @@ import SearchForm from "./search-form";
 
 const RouteContent: React.FC = () => {
   return (
-    <Layout.Body>
+    <Layout.Screen.Body>
       <SearchForm />
-    </Layout.Body>
+    </Layout.Screen.Body>
   );
 };
 

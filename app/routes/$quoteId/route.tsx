@@ -9,9 +9,9 @@ export function ErrorBoundary() {
 
 export default function QuoteLayoutRoute() {
   return (
-    <Layout>
+    <Layout.Screen>
       <Header />
       <Outlet />
-    </Layout>
+    </Layout.Screen>
   );
 }

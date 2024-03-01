@@ -12,7 +12,7 @@ import {
 
 const RouteLoading: React.FC = () => {
   return (
-    <Layout.Body>
+    <Layout.Screen.Body>
       <section>
         <header>
           <Skeleton className="h-6 w-[250px] mb-6" />
@@ -42,7 +42,7 @@ const RouteLoading: React.FC = () => {
           </TableBody>
         </Table>
       </section>
-    </Layout.Body>
+    </Layout.Screen.Body>
   );
 };
 

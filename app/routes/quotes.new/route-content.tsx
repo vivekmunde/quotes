@@ -3,16 +3,22 @@ import QuoteForm, { TFormProps } from "~/components/quote-form";
 
 const RouteContent: React.FC<TFormProps> = (props) => {
   return (
-    <Layout.Body>
+    <Layout.Screen.Body>
       <section>
-        <header>
-          <Layout.Title>Create new quote</Layout.Title>
-        </header>
-        <form method="post">
-          <QuoteForm {...props} />
-        </form>
+        <Layout>
+          <Layout.Header>
+            <header>
+              <Layout.Header.Title>Create new quote</Layout.Header.Title>
+            </header>
+          </Layout.Header>
+          <Layout.Body>
+            <form method="post">
+              <QuoteForm {...props} />
+            </form>
+          </Layout.Body>
+        </Layout>
       </section>
-    </Layout.Body>
+    </Layout.Screen.Body>
   );
 };
 
