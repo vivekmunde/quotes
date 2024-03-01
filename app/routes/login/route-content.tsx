@@ -1,17 +1,18 @@
-import Page from "~/components/layout/page";
+import Layout from "~/components/layout";
 import H2 from "~/components/ui/typography/h2";
+import { TMayBe } from "~/types";
 import LoginForm, { TFormProps } from "./login-form";
 import Quote from "./quote";
 
 const RouteContent: React.FC<
   TFormProps & {
-    quote: { title: string; author?: string | undefined | null };
+    quote: { title: string; author?: TMayBe<string> };
   }
 > = ({ fields, errors, quote }) => {
   return (
-    <Page>
-      <Page.Header />
-      <Page.Body className="flex flex-col justify-center md:pb-[15vh]">
+    <Layout>
+      <Layout.Header />
+      <Layout.Body className="flex flex-col justify-center md:pb-[15vh]">
         <div className="mb-[10vh] md:mb-[5vh] flex flex-row border rounded">
           <div className="flex-1 flex flex-col justify-center px-6 py-12">
             <H2>Login</H2>
@@ -23,8 +24,8 @@ const RouteContent: React.FC<
             <Quote quote={quote} />
           </div>
         </div>
-      </Page.Body>
-    </Page>
+      </Layout.Body>
+    </Layout>
   );
 };
 

@@ -1,25 +1,28 @@
 import { Await, Link } from "@remix-run/react";
 import { ChevronRight } from "lucide-react";
 import React, { Suspense } from "react";
-import Page from "~/components/layout/quote";
+import Layout from "~/components/layout";
+import Quote from "~/components/quote";
 import { Button } from "~/components/ui/button";
-import Quote from "./quote";
+import { TMayBe } from "~/types";
 
 const RouteContent: React.FC<{
-  quote: { author: string | null; title: string };
+  quote: { author: TMayBe<string>; title: string };
   nextQuotePromise: Promise<{
     id: string;
   }>;
 }> = ({ quote, nextQuotePromise }) => {
   return (
     <React.Fragment>
-      <Page.Body>
-        <Quote author={quote.author} title={quote.title} />
-      </Page.Body>
+      <Layout.Body className="flex flex-col justify-center">
+        <div className="md:mb-[5vh]">
+          <Quote author={quote.author} title={quote.title} />
+        </div>
+      </Layout.Body>
       <Suspense>
         <Await resolve={nextQuotePromise}>
           {(nextQuote) => (
-            <Page.Footer>
+            <Layout.Footer>
               <div className="flex flex-row justify-end">
                 <Link to={`/${nextQuote?.id}`}>
                   <Button size="icon">
@@ -27,7 +30,7 @@ const RouteContent: React.FC<{
                   </Button>
                 </Link>
               </div>
-            </Page.Footer>
+            </Layout.Footer>
           )}
         </Await>
       </Suspense>

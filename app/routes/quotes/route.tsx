@@ -1,6 +1,6 @@
 import { LoaderFunctionArgs } from "@remix-run/node";
 import { Outlet } from "@remix-run/react";
-import Page from "~/components/layout/page";
+import Layout from "~/components/layout";
 import authorizedAccess from "~/utils/server/auth/authorized-access.server";
 import Header from "./header";
 
@@ -10,9 +10,9 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 
 export default function QuotesLayoutRoute() {
   return (
-    <Page>
+    <Layout>
       <Header />
       <Outlet />
-    </Page>
+    </Layout>
   );
 }

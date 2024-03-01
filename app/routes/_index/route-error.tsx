@@ -1,12 +1,12 @@
 import React from "react";
-import Page from "~/components/layout/quote";
+import Layout from "~/components/layout";
 import CRouteError from "~/components/route-error";
 
 const RouteError: React.FC = () => {
   return (
-    <Page.Body>
+    <Layout.Body>
       <CRouteError />
-    </Page.Body>
+    </Layout.Body>
   );
 };
 

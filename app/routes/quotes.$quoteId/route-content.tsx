@@ -1,13 +1,16 @@
-import Page from "~/components/layout/page";
-import Quote from "./quote";
+import Layout from "~/components/layout";
+import Quote from "~/components/quote";
+import { TMayBe } from "~/types";
 
 const RouteContent: React.FC<{
-  quote: { author: string | null; title: string };
+  quote: { author: TMayBe<string>; title: string };
 }> = ({ quote }) => {
   return (
-    <Page.Body className="flex flex-col justify-center sm:pb-[5vh] md:pb-[15vh] lg:pb-[15vh]">
-      <Quote author={quote.author} title={quote.title} />
-    </Page.Body>
+    <Layout.Body className="flex flex-col justify-center">
+      <div className="mb-[5vh] md:mb-[10vh]">
+        <Quote author={quote.author} title={quote.title} />
+      </div>
+    </Layout.Body>
   );
 };
 

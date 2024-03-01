@@ -5,6 +5,7 @@ import {
   redirect,
 } from "@remix-run/node";
 import { useActionData, useLoaderData } from "@remix-run/react";
+import { TMayBe } from "~/types";
 import isLoggedIn from "~/utils/server/auth/is-logged-in.server";
 import RouteContent from "./route-content";
 import { getQuote, login } from "./route-data";
@@ -31,7 +32,7 @@ const ifNotLoggedIn = async <T,>(
 export const loader = async (args: LoaderFunctionArgs) => {
   return ifNotLoggedIn<{
     title: string;
-    author: string | null;
+    author: TMayBe<string>;
     id: string;
   }>(args, async () => {
     return await getQuote();

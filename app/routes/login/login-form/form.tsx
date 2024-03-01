@@ -8,18 +8,19 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
+import { TMayBe } from "~/types";
 
 export type TFormProps = {
   fields?: {
-    loginId: FormDataEntryValue | undefined | null;
-    password?: FormDataEntryValue | undefined | null;
+    loginId: TMayBe<FormDataEntryValue>;
+    password?: TMayBe<FormDataEntryValue>;
   };
   errors?: {
     fields?: {
-      loginId?: string | undefined | null;
-      password?: string | undefined | null;
+      loginId?: TMayBe<string>;
+      password?: TMayBe<string>;
     };
-    form?: string | undefined | null;
+    form?: TMayBe<string>;
   };
 };
 

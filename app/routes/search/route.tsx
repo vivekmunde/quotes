@@ -1,13 +1,13 @@
-import Page from "~/components/layout/page";
+import Layout from "~/components/layout";
 import RouteContent from "./route-content";
 
 export default function SearchQuotesRoute() {
   return (
-    <Page>
-      <Page.Header />
-      <Page.Body>
+    <Layout>
+      <Layout.Header />
+      <Layout.Body>
         <RouteContent />
-      </Page.Body>
-    </Page>
+      </Layout.Body>
+    </Layout>
   );
 }

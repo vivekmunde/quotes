@@ -1,18 +1,18 @@
-import Page from "~/components/layout/page";
+import Layout from "~/components/layout";
 import QuoteForm, { TFormProps } from "~/components/quote-form";
 
 const RouteContent: React.FC<TFormProps> = (props) => {
   return (
-    <Page.Body>
+    <Layout.Body>
       <section>
         <header>
-          <Page.Title>Create new quote</Page.Title>
+          <Layout.Title>Create new quote</Layout.Title>
         </header>
         <form method="post">
           <QuoteForm {...props} />
         </form>
       </section>
-    </Page.Body>
+    </Layout.Body>
   );
 };
 

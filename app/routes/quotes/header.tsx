@@ -1,12 +1,12 @@
 import { Link } from "@remix-run/react";
 import { Plus, Quote } from "lucide-react";
 import React from "react";
-import Page from "~/components/layout/page";
+import Layout from "~/components/layout";
 import { Button } from "~/components/ui/button";
 
 const Header: React.FC = () => {
   return (
-    <Page.Header>
+    <Layout.Header>
       <div className="flex flex-row">
         <Link to="/quotes/new">
           <Button size="sm" variant="ghost">
@@ -19,7 +19,7 @@ const Header: React.FC = () => {
           </Button>
         </Link>
       </div>
-    </Page.Header>
+    </Layout.Header>
   );
 };
 

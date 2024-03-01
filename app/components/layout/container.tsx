@@ -1,6 +1,6 @@
 import React from "react";
 
-const Page: React.FC<
+const Container: React.FC<
   { children: React.ReactNode } & React.DetailedHTMLProps<
     React.HTMLAttributes<HTMLDivElement>,
     HTMLDivElement
@@ -22,4 +22,4 @@ const Page: React.FC<
   );
 };
 
-export default Page;
+export default Container;

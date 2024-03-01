@@ -2,7 +2,7 @@ import type { MetaFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { Outlet, useNavigation } from "@remix-run/react";
 import If from "~/components/if";
-import Page from "~/components/layout/quote";
+import Layout from "~/components/layout";
 import RouteError from "~/components/route-error";
 import data from "./route-data";
 import RouteLoading from "./route-loading";
@@ -27,7 +27,7 @@ export default function IndexRoute() {
   const navigation = useNavigation();
 
   return (
-    <Page>
+    <Layout>
       <If condition={navigation.state !== "loading"}>
         <If.True>
           <RouteLoading />
@@ -36,6 +36,6 @@ export default function IndexRoute() {
           <Outlet />
         </If.False>
       </If>
-    </Page>
+    </Layout>
   );
 }

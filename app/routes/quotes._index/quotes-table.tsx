@@ -1,9 +1,10 @@
 import { Link } from "@remix-run/react";
 import React from "react";
 import { Table, TableBody, TableCell, TableRow } from "~/components/ui/table";
+import { TMayBe } from "~/types";
 
 const QuotesTable: React.FC<{
-  quotes: { id: string; title: string; author: string | null }[];
+  quotes: { id: string; title: string; author: TMayBe<string> }[];
 }> = ({ quotes }) => {
   return (
     <div className="border rounded">

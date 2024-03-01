@@ -1,11 +1,11 @@
-import Page from "~/components/layout/page";
+import Layout from "~/components/layout";
 import SearchForm from "./search-form";
 
 const RouteContent: React.FC = () => {
   return (
-    <Page.Body>
+    <Layout.Body>
       <SearchForm />
-    </Page.Body>
+    </Layout.Body>
   );
 };
 

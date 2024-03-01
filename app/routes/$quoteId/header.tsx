@@ -1,17 +1,17 @@
 import { Link } from "@remix-run/react";
 import { Search } from "lucide-react";
-import Page from "~/components/layout/quote";
+import Layout from "~/components/layout";
 import { Button } from "~/components/ui/button";
 
 const Header: React.FC = () => {
   return (
-    <Page.Header>
+    <Layout.Header>
       <Link to="/search">
         <Button size="sm" variant="ghost">
           <Search className="h-4 w-4" />
         </Button>
       </Link>
-    </Page.Header>
+    </Layout.Header>
   );
 };
 
