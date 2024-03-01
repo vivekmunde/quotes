@@ -1,5 +1,5 @@
 import { Link } from "@remix-run/react";
-import { Plus, Quote } from "lucide-react";
+import { LogOut, Plus, Quote } from "lucide-react";
 import React from "react";
 import Layout from "~/components/layout";
 import { Button } from "~/components/ui/button";
@@ -16,6 +16,11 @@ const Header: React.FC = () => {
         <Link to="/quotes">
           <Button size="sm" variant="ghost">
             <Quote className="h-4 w-4" />
+          </Button>
+        </Link>
+        <Link to="/auth/logout">
+          <Button size="sm" variant="ghost">
+            <LogOut className="h-4 w-4" />
           </Button>
         </Link>
       </div>

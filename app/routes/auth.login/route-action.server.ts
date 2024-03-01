@@ -39,7 +39,7 @@ async function login({ request }: ActionFunctionArgs) {
   }
 
   if (loginResponse.user?.id) {
-    return redirect(redirectTo?.toString() ?? "/", {
+    return redirect(redirectTo?.toString() ?? "/quotes", {
       headers: {
         "Set-Cookie": await createUserSession(loginResponse.user?.id),
       },
