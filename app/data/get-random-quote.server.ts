@@ -1,4 +1,4 @@
-import { db } from "~/utils/db.server";
+import { db } from "~/utils/server/db.server";
 
 const getRandomQuote = async (options?: {
   select?: { title?: boolean; author?: boolean };

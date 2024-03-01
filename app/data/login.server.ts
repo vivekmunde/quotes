@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 import { TMayBe } from "~/types";
-import { db } from "~/utils/db.server";
+import { db } from "~/utils/server/db.server";
 
 const validateLoginId = (loginId?: TMayBe<string>) => {
   if ((loginId ?? "").length === 0) {
@@ -48,8 +48,6 @@ export default async function login({
       error: "Invalid login credentials!",
     };
   }
-
-  console.log({ password, hash: user.passwordHash });
 
   const isCorrectPassword = await bcrypt.compare(password, user.passwordHash);
 

@@ -1,10 +1,11 @@
 import {
   ActionFunctionArgs,
   LoaderFunctionArgs,
+  TypedResponse,
   redirect,
 } from "@remix-run/node";
 import { useActionData, useLoaderData } from "@remix-run/react";
-import { isLoggedIn } from "~/utils/session.server";
+import isLoggedIn from "~/utils/server/auth/is-logged-in.server";
 import RouteContent from "./route-content";
 import { getQuote, login } from "./route-data";
 import RouteError from "./route-error";
@@ -13,15 +14,28 @@ export function ErrorBoundary() {
   return <RouteError />;
 }
 
-export const loader = async ({ request }: LoaderFunctionArgs) => {
-  if (isLoggedIn(request)) {
-    const { searchParams } = new URL(request.url);
+const ifNotLoggedIn = async <T,>(
+  args: LoaderFunctionArgs,
+  fn: (args: LoaderFunctionArgs) => Promise<TypedResponse<never> | T>
+): Promise<TypedResponse<never> | T> => {
+  if (!isLoggedIn(args.request)) {
+    const { searchParams } = new URL(args.request.url);
     const redirectTo = searchParams.get("redirectTo");
 
     return redirect(redirectTo ?? "/quotes");
   }
 
-  return await getQuote();
+  return fn(args);
+};
+
+export const loader = async (args: LoaderFunctionArgs) => {
+  return ifNotLoggedIn<{
+    title: string;
+    author: string | null;
+    id: string;
+  }>(args, async () => {
+    return await getQuote();
+  });
 };
 
 export const action = async (args: ActionFunctionArgs) => {

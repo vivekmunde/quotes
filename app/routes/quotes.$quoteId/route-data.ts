@@ -1,6 +1,6 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { db } from "~/utils/db.server";
+import { db } from "~/utils/server/db.server";
 
 const data = async ({ params }: LoaderFunctionArgs) => {
   const quote = await db.quotes.findUnique({

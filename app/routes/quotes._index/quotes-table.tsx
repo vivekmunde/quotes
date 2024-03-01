@@ -14,7 +14,7 @@ const QuotesTable: React.FC<{
               <TableCell className="align-top">
                 <Link to={`/quotes/${quote.id}`} className="block">
                   <span>{quote.title}</span>
-                  <span className="text-neutral-500">
+                  <span className="text-neutral-500 text-nowrap">
                     {" - "}
                     {quote.author ?? "Unknown"}
                   </span>

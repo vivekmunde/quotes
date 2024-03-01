@@ -1,8 +1,8 @@
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { validateTitle } from "~/components/quote-form";
-import { db } from "~/utils/db.server";
-import { badRequest } from "~/utils/request.server";
+import { db } from "~/utils/server/db.server";
+import { badRequest } from "~/utils/server/request.server";
 
 export type TBadRequest = {
   fields?: {

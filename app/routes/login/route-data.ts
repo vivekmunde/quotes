@@ -1,8 +1,8 @@
 import { ActionFunctionArgs, redirect } from "@remix-run/node";
 import getRandomQuote from "~/data/get-random-quote.server";
 import _login from "~/data/login.server";
-import { badRequest } from "~/utils/request.server";
-import { createUserSession } from "~/utils/session.server";
+import createUserSession from "~/utils/server/auth/create-user-session.server";
+import { badRequest } from "~/utils/server/request.server";
 
 export function getQuote() {
   return getRandomQuote({ select: { title: true, author: true } });

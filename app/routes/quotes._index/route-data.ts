@@ -1,5 +1,5 @@
 import { json } from "@remix-run/node";
-import { db } from "~/utils/db.server";
+import { db } from "~/utils/server/db.server";
 
 const data = async () => {
   const quotes = await db.quotes.findMany({
