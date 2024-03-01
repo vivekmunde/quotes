@@ -1,5 +1,8 @@
 import Layout from "~/components/layout";
 import RouteContent from "./route-content";
+import RouteError from "./route-error";
+
+export const ErrorBoundary = RouteError;
 
 export default function SearchQuotesRoute() {
   return (

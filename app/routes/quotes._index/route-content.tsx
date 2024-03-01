@@ -1,11 +1,11 @@
 import Layout from "~/components/layout";
-import { TMayBe } from "~/types";
-import QuotesTable from "./quotes-table";
-import SearchForm from "./search-form";
+import QuotesTable from "./components/quotes-table";
+import SearchForm from "./components/search-form";
+import { TData } from "./types";
 
 const RouteContent: React.FC<{
-  quotes: { id: string; title: string; author: TMayBe<string> }[];
-}> = ({ quotes }) => {
+  data: TData;
+}> = ({ data }) => {
   return (
     <Layout.Screen.Body>
       <section>
@@ -21,7 +21,7 @@ const RouteContent: React.FC<{
             </header>
           </Layout.Header>
           <Layout.Body>
-            <QuotesTable quotes={quotes} />
+            <QuotesTable quotes={data} />
           </Layout.Body>
         </Layout>
       </section>

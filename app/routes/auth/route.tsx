@@ -1,10 +1,8 @@
 import RouteContent from "./route-content";
 import RouteError from "./route-error";
 
-export function ErrorBoundary() {
-  return <RouteError />;
-}
+export const ErrorBoundary = RouteError;
 
-export default function QuoteLayoutRoute() {
+export default function Route() {
   return <RouteContent />;
 }

@@ -1,11 +1,8 @@
 import type { MetaFunction } from "@remix-run/node";
-import { redirect } from "@remix-run/node";
-import { useNavigation } from "@remix-run/react";
-import If from "~/components/if";
+import { useLoaderData } from "@remix-run/react";
 import RouteError from "~/components/route-error";
-import RouteContent from "./route-content";
-import data from "./route-data.server";
-import RouteLoading from "./route-loading";
+import routeLoader from "./route-loader.server";
+import RouteSkeleton from "./route-skeleton";
 
 export const meta: MetaFunction = () => {
   return [
@@ -14,26 +11,12 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export function ErrorBoundary() {
-  return <RouteError />;
-}
+export const ErrorBoundary = RouteError;
 
-export const loader = async () => {
-  const nextQuote = await data();
-  return redirect(`/${nextQuote.id}`);
-};
+export const loader = routeLoader;
 
-export default function IndexRoute() {
-  const navigation = useNavigation();
+export default function Route() {
+  useLoaderData<typeof loader>();
 
-  return (
-    <If condition={navigation.state !== "loading"}>
-      <If.True>
-        <RouteLoading />
-      </If.True>
-      <If.False>
-        <RouteContent />
-      </If.False>
-    </If>
-  );
+  return <RouteSkeleton />;
 }

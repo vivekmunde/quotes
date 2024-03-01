@@ -1,10 +1,11 @@
-import { Outlet } from "@remix-run/react";
 import Layout from "~/components/layout";
+import RouteSkeleton from "./route-skeleton";
+import { TData } from "./types";
 
-const RouteContent: React.FC = () => {
+const RouteContent: React.FC<{ data: TData }> = () => {
   return (
     <Layout.Screen>
-      <Outlet />
+      <RouteSkeleton />
     </Layout.Screen>
   );
 };

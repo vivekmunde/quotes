@@ -1,11 +1,11 @@
-import { LoaderFunctionArgs } from "@remix-run/node";
-import authorizedAccess from "~/utils/server/auth/authorized-access.server";
 import RouteContent from "./route-content";
+import RouteError from "./route-error";
+import routeLoader from "./route-loader.server";
 
-export const loader = async ({ request }: LoaderFunctionArgs) => {
-  return authorizedAccess<null>(request, () => null);
-};
+export const ErrorBoundary = RouteError;
 
-export default function QuotesLayoutRoute() {
+export const loader = routeLoader;
+
+export default function Route() {
   return <RouteContent />;
 }

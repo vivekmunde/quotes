@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "~/components/layout";
 import { Loading as QuoteLoading } from "~/components/quote";
 
-const Loading: React.FC = () => {
+const RouteSkeleton: React.FC = () => {
   return (
     <React.Fragment>
       <Layout.Screen.Body className="flex flex-col justify-center">
@@ -17,4 +17,4 @@ const Loading: React.FC = () => {
   );
 };
 
-export default Loading;
+export default RouteSkeleton;

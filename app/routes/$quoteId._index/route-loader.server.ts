@@ -2,6 +2,8 @@ import type { LoaderFunctionArgs } from "@remix-run/node";
 import { defer } from "@remix-run/node";
 import getRandomQuote from "~/data/get-random-quote.server";
 import { db } from "~/utils/server/db.server";
+import delayedPromise from "~/utils/server/delayed-promise.server";
+import { TData } from "./types";
 
 const getQuote = async (quoteId: string) => {
   const quote = await db.quotes.findUnique({
@@ -26,15 +28,21 @@ const getNextQuote = async (forQuoteId: string): Promise<{ id: string }> => {
   return { id: nextQuote.id };
 };
 
-const data = async ({ params }: LoaderFunctionArgs) => {
+const getData = async ({ params }: LoaderFunctionArgs): Promise<TData> => {
   if (!params.quoteId) {
     throw new Error("Quote not found!");
   }
 
-  const quote = await getQuote(params.quoteId);
-  const nextQuotePromise = getNextQuote(params.quoteId);
+  const [quote, nextQuote] = await Promise.all([
+    getQuote(params.quoteId),
+    getNextQuote(params.quoteId),
+  ]);
 
-  return defer({ quote, nextQuotePromise });
+  return { quote, nextQuote };
 };
 
-export default data;
+const loader = async (args: LoaderFunctionArgs) => {
+  return defer({ dataPromise: delayedPromise(() => getData(args)) });
+};
+
+export default loader;

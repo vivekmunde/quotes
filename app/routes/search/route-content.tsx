@@ -1,5 +1,5 @@
 import Layout from "~/components/layout";
-import SearchForm from "./search-form";
+import SearchForm from "./components/search-form";
 
 const RouteContent: React.FC = () => {
   return (

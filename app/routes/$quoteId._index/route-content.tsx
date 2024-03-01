@@ -1,17 +1,16 @@
-import { Await, Link } from "@remix-run/react";
+import { Link } from "@remix-run/react";
 import { ChevronRight } from "lucide-react";
-import React, { Suspense } from "react";
+import React from "react";
 import Layout from "~/components/layout";
 import Quote from "~/components/quote";
 import { Button } from "~/components/ui/button";
-import { TMayBe } from "~/types";
+import { TData } from "./types";
 
 const RouteContent: React.FC<{
-  quote: { author: TMayBe<string>; title: string };
-  nextQuotePromise: Promise<{
-    id: string;
-  }>;
-}> = ({ quote, nextQuotePromise }) => {
+  data: TData;
+}> = ({ data }) => {
+  const { quote, nextQuote } = data;
+
   return (
     <React.Fragment>
       <Layout.Screen.Body className="flex flex-col justify-center">
@@ -19,21 +18,15 @@ const RouteContent: React.FC<{
           <Quote author={quote.author} title={quote.title} />
         </div>
       </Layout.Screen.Body>
-      <Suspense>
-        <Await resolve={nextQuotePromise}>
-          {(nextQuote) => (
-            <Layout.Screen.Footer>
-              <div className="flex flex-row justify-end">
-                <Link to={`/${nextQuote?.id}`}>
-                  <Button size="icon">
-                    <ChevronRight />
-                  </Button>
-                </Link>
-              </div>
-            </Layout.Screen.Footer>
-          )}
-        </Await>
-      </Suspense>
+      <Layout.Screen.Footer>
+        <div className="flex flex-row justify-end">
+          <Link to={`/q/${nextQuote?.id}`}>
+            <Button size="icon">
+              <ChevronRight />
+            </Button>
+          </Link>
+        </div>
+      </Layout.Screen.Footer>
     </React.Fragment>
   );
 };

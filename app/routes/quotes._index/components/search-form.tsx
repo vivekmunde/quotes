@@ -5,7 +5,7 @@ const SearchForm: React.FC = () => {
   return (
     <form method="post">
       <div>
-        <FormItem>
+        <FormItem style={{ padding: 0 }}>
           <FormControl>
             <Input name="query" placeholder="Search quotes ..." />
           </FormControl>

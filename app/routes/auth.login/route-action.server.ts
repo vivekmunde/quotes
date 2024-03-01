@@ -1,12 +1,7 @@
 import { ActionFunctionArgs, redirect } from "@remix-run/node";
-import getRandomQuote from "~/data/get-random-quote.server";
 import _login from "~/data/login.server";
 import createUserSession from "~/utils/server/auth/create-user-session.server";
 import { badRequest } from "~/utils/server/request.server";
-
-export function getQuote() {
-  return getRandomQuote({ select: { title: true, author: true } });
-}
 
 export type TBadRequest = {
   fields?: {
@@ -18,7 +13,7 @@ export type TBadRequest = {
   };
 };
 
-export async function login({ request }: ActionFunctionArgs) {
+async function login({ request }: ActionFunctionArgs) {
   const form = await request.formData();
   const password = form.get("password");
   const loginId = form.get("loginId");
@@ -56,3 +51,9 @@ export async function login({ request }: ActionFunctionArgs) {
     errors: { form: "Invalid login credentials!" },
   });
 }
+
+const action = async (args: ActionFunctionArgs) => {
+  return login(args);
+};
+
+export default action;

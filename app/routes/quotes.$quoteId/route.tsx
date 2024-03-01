@@ -1,32 +1,22 @@
-import type { LoaderFunctionArgs } from "@remix-run/node";
-import { useLoaderData, useNavigation } from "@remix-run/react";
-import If from "~/components/if";
-import authorizedAccess from "~/utils/server/auth/authorized-access.server";
+import { Await, useLoaderData } from "@remix-run/react";
+import { Suspense } from "react";
 import RouteContent from "./route-content";
-import data from "./route-data.server";
 import RouteError from "./route-error";
-import RouteLoading from "./route-loading";
+import routeLoader from "./route-loader.server";
+import RouteSkeleton from "./route-skeleton";
 
-export function ErrorBoundary() {
-  return <RouteError />;
-}
+export const ErrorBoundary = RouteError;
 
-export const loader = async (args: LoaderFunctionArgs) => {
-  return authorizedAccess(args.request, () => data(args));
-};
+export const loader = routeLoader;
 
-export default function QuoteRoute() {
-  const navigation = useNavigation();
-  const { quote } = useLoaderData<typeof loader>();
+export default function Route() {
+  const { dataPromise } = useLoaderData<typeof loader>();
 
   return (
-    <If condition={navigation.state === "loading"}>
-      <If.True>
-        <RouteLoading />
-      </If.True>
-      <If.False>
-        <RouteContent quote={quote} />
-      </If.False>
-    </If>
+    <Suspense fallback={<RouteSkeleton />}>
+      <Await resolve={dataPromise}>
+        {(data) => <RouteContent data={data} />}
+      </Await>
+    </Suspense>
   );
 }

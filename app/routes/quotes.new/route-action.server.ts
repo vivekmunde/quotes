@@ -1,6 +1,7 @@
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { validateTitle } from "~/components/quote-form";
+import authorizedAccess from "~/utils/server/auth/authorized-access.server";
 import { db } from "~/utils/server/db.server";
 import { badRequest } from "~/utils/server/request.server";
 
@@ -17,7 +18,7 @@ export type TBadRequest = {
   };
 };
 
-export const createNewQuote = async ({ request }: ActionFunctionArgs) => {
+const createNewQuote = async ({ request }: ActionFunctionArgs) => {
   const form = await request.formData();
   const title = form.get("title");
   const author = form.get("author");
@@ -46,3 +47,9 @@ export const createNewQuote = async ({ request }: ActionFunctionArgs) => {
 
   return redirect(`/quotes/${quote.id}`);
 };
+
+const action = async (args: ActionFunctionArgs) => {
+  return authorizedAccess(args.request, () => createNewQuote(args));
+};
+
+export default action;

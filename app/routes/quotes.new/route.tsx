@@ -1,27 +1,34 @@
-import { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
-import { useActionData } from "@remix-run/react";
-import authorizedAccess from "~/utils/server/auth/authorized-access.server";
+import { Await, useActionData, useLoaderData } from "@remix-run/react";
+import { Suspense } from "react";
+import routeAction from "./route-action.server";
 import RouteContent from "./route-content";
-import { createNewQuote } from "./route-data.server";
+import RouteError from "./route-error";
+import routeLoader from "./route-loader.server";
+import RouteSkeleton from "./route-skeleton";
 
-export const action = async (args: ActionFunctionArgs) => {
-  return authorizedAccess(args.request, () => createNewQuote(args));
-};
+export const ErrorBoundary = RouteError;
 
-export const loader = async ({ request }: LoaderFunctionArgs) => {
-  return authorizedAccess<null>(request, () => null);
-};
+export const action = routeAction;
+
+export const loader = routeLoader;
 
 export default function NewQuoteRoute() {
+  const data = useLoaderData<typeof loader>();
   const actionData = useActionData<typeof action>();
 
   return (
-    <RouteContent
-      fields={{
-        title: actionData?.fields?.title?.toString(),
-        author: actionData?.fields?.author?.toString(),
-      }}
-      errors={actionData?.errors}
-    />
+    <Suspense fallback={<RouteSkeleton />}>
+      <Await resolve={data}>
+        {() => (
+          <RouteContent
+            fields={{
+              title: actionData?.fields?.title?.toString(),
+              author: actionData?.fields?.author?.toString(),
+            }}
+            errors={actionData?.errors}
+          />
+        )}
+      </Await>
+    </Suspense>
   );
 }
