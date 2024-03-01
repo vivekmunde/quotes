@@ -15,7 +15,7 @@ const RouteContent: React.FC<{
               <Layout.Header.Title className="flex-1">
                 Quotes
               </Layout.Header.Title>
-              <div className="flex-1">
+              <div className="w-[50%]">
                 <SearchForm />
               </div>
             </header>

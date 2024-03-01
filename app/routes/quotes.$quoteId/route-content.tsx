@@ -21,7 +21,7 @@ const RouteContent: React.FC<{
       <Layout.Screen.Footer>
         <div className="flex flex-row justify-between">
           <Link to="/quotes">
-            <Button size="icon" variant="secondary">
+            <Button size="icon" variant="outline">
               <ChevronLeft />
             </Button>
           </Link>

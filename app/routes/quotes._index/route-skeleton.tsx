@@ -10,7 +10,10 @@ const RouteLoading: React.FC = () => {
         <Layout>
           <Layout.Header>
             <header className="flex-1 flex flex-row justify-between gap-6">
-              <Skeleton className="h-10 w-[250px] mb-6" />
+              <Layout.Header.Title className="flex-1">
+                Quotes
+              </Layout.Header.Title>
+              <Skeleton className="h-10 w-[50%] mb-4" />
             </header>
           </Layout.Header>
           <Layout.Body>
@@ -19,7 +22,7 @@ const RouteLoading: React.FC = () => {
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((it) => (
                   <TableRow className="border-0" key={it}>
                     <TableCell className="pl-0 pr-0">
-                      <Skeleton className="h-6" />
+                      <Skeleton className="h-7" />
                     </TableCell>
                   </TableRow>
                 ))}
