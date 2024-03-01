@@ -22,7 +22,7 @@ const RouteContent: React.FC<{
         <div className="flex flex-row justify-end">
           <Link to={`/q/${nextQuote?.id}`}>
             <Button icon>
-              <ChevronRight />
+              <ChevronRight className="q h-8 w-8" />
             </Button>
           </Link>
         </div>

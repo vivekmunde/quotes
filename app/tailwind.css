@@ -1,3 +1,9 @@
+.q-button .lucide:not(.q) {
+  @apply h-4
+}
+.q-button .lucide:not(.q) {
+  @apply w-4
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -75,6 +81,3 @@
   }
 }
 
-.q-button .lucide {
-  @apply h-4 w-4
-}
