@@ -21,7 +21,7 @@ const RouteContent: React.FC<{
       <Layout.Screen.Footer>
         <div className="flex flex-row justify-end">
           <Link to={`/q/${nextQuote?.id}`}>
-            <Button size="icon">
+            <Button icon>
               <ChevronRight />
             </Button>
           </Link>

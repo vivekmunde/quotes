@@ -8,7 +8,7 @@ const Header: React.FC = () => {
     <Layout.Screen.Header>
       <Link to="/search">
         <Button size="sm" variant="ghost">
-          <Search className="h-4 w-4" />
+          <Search />
         </Button>
       </Link>
     </Layout.Screen.Header>

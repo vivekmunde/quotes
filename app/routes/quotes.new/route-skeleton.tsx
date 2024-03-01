@@ -6,7 +6,7 @@ const RouteSkeleton: React.FC = () => (
   <Layout.Screen.Body>
     <Skeleton className="h-16 mb-6" />
     <Skeleton className="h-8 mb-6" />
-    <Skeleton className="h-4 w-4" />
+    <Skeleton />
   </Layout.Screen.Body>
 );
 

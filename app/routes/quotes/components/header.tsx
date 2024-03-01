@@ -10,17 +10,17 @@ const Header: React.FC = () => {
       <div className="flex flex-row">
         <Link to="/quotes/new">
           <Button size="sm" variant="ghost">
-            <Plus className="h-4 w-4" />
+            <Plus />
           </Button>
         </Link>
         <Link to="/quotes">
           <Button size="sm" variant="ghost">
-            <Quote className="h-4 w-4" />
+            <Quote />
           </Button>
         </Link>
         <Link to="/auth/logout">
           <Button size="sm" variant="ghost">
-            <LogOut className="h-4 w-4" />
+            <LogOut />
           </Button>
         </Link>
       </div>

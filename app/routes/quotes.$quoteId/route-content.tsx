@@ -1,5 +1,5 @@
 import { Link } from "@remix-run/react";
-import { ChevronLeft, EditIcon, TrashIcon } from "lucide-react";
+import { ChevronLeft, Edit, Trash } from "lucide-react";
 import React from "react";
 import Layout from "~/components/layout";
 import Quote from "~/components/quote";
@@ -21,16 +21,16 @@ const RouteContent: React.FC<{
       <Layout.Screen.Footer>
         <div className="flex flex-row justify-between">
           <Link to="/quotes">
-            <Button size="icon" variant="outline">
+            <Button variant="outline" icon>
               <ChevronLeft />
             </Button>
           </Link>
           <div className="flex flex-row justify-end gap-2">
-            <Button size="icon">
-              <EditIcon />
+            <Button icon>
+              <Edit />
             </Button>
-            <Button variant="destructive" size="icon">
-              <TrashIcon />
+            <Button variant="destructive" icon>
+              <Trash />
             </Button>
           </div>
         </div>
