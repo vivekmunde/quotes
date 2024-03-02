@@ -45,11 +45,11 @@ const Header: React.FC = () => {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Link to="/auth/logout">
-                <Button size="sm" variant="ghost">
+              <form action="/auth/logout" method="post">
+                <Button type="submit" size="sm" variant="ghost">
                   <LogOut />
                 </Button>
-              </Link>
+              </form>
             </TooltipTrigger>
             <TooltipContent>
               <div>Logout</div>

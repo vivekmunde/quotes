@@ -3,7 +3,6 @@ import destroyUserSession from "./destroy-user-session.server";
 
 export default async function logout(request: Request) {
   const cookie = await destroyUserSession(request);
-
   const redirectTo = new URL(request.url).pathname;
   const searchParams = new URLSearchParams([["redirectTo", redirectTo]]);
 
