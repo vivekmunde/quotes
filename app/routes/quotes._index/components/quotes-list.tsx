@@ -44,10 +44,7 @@ const QuotesList: React.FC<{
                 {quote.author ?? "Unknown"}
               </span>
               <span className="inline-flex flex-row items-center gap-2">
-                <Link
-                  to={`/quotes/${quote.id}`}
-                  className="text-lg dark:font-thin"
-                >
+                <Link to={`/quotes/${quote.id}`}>
                   <Button
                     variant="ghost"
                     style={{
