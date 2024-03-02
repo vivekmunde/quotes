@@ -1,19 +1,10 @@
-import React, { useEffect } from "react";
-import useSetMode from "./use-set-mode";
+import React from "react";
+import useDefaultMode from "./use-default-mode";
 
 const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const setMode = useSetMode();
-
-  useEffect(() => {
-    const darkThemeMq = window?.matchMedia("(prefers-color-scheme: dark)");
-    if (darkThemeMq?.matches) {
-      setMode("dark");
-    } else {
-      setMode("light");
-    }
-  }, []);
+  useDefaultMode();
 
   return <React.Fragment>{children}</React.Fragment>;
 };
