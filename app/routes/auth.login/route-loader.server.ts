@@ -1,6 +1,6 @@
 import { LoaderFunctionArgs, defer, redirect } from "@remix-run/node";
-import getRandomQuote from "~/data/get-random-quote.server";
-import isLoggedIn from "~/utils/server/auth/is-logged-in.server";
+import getRandomQuote from "~/api/get-random-quote.server";
+import { isLoggedIn } from "~/utils/server/auth";
 import delayedPromise from "~/utils/server/delayed-promise.server";
 import { TData } from "./types";
 

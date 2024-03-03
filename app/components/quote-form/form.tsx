@@ -9,19 +9,12 @@ import {
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 import { Textarea } from "~/components/ui/textarea";
+import { TFormResponse } from "~/types";
 
-export type TFormProps = {
-  fields?: {
-    title: FormDataEntryValue | undefined | null;
-    author?: FormDataEntryValue | undefined | null;
-  };
-  errors?: {
-    fields?: { title?: string | undefined | null };
-    form?: string | undefined | null;
-  };
-};
-
-const QuoteForm: React.FC<TFormProps> = ({ fields, errors }) => {
+const QuoteForm: React.FC<TFormResponse<"author" | "title">> = ({
+  fields,
+  errors,
+}) => {
   return (
     <Form>
       <FormItem>
@@ -54,10 +47,10 @@ const QuoteForm: React.FC<TFormProps> = ({ fields, errors }) => {
       <FormItem>
         <Button>Create</Button>
       </FormItem>
-      <If condition={!!errors?.form}>
+      <If condition={!!errors?.message}>
         <If.True>
           <FormItem>
-            <FormMessage>{errors?.form}</FormMessage>
+            <FormMessage>{errors?.message}</FormMessage>
           </FormItem>
         </If.True>
       </If>

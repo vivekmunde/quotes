@@ -1,5 +1,5 @@
 import { redirect } from "@remix-run/node";
-import getRandomQuote from "~/data/get-random-quote.server";
+import getRandomQuote from "~/api/get-random-quote.server";
 import { TData } from "./types";
 
 const getData = async (): Promise<TData> => {

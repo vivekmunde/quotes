@@ -1,54 +1,54 @@
 import { ActionFunctionArgs, redirect } from "@remix-run/node";
-import _login from "~/data/login.server";
-import createUserSession from "~/utils/server/auth/create-user-session.server";
+import bcrypt from "bcryptjs";
+import { TFormResponse } from "~/types";
+import { createUserSession } from "~/utils/server/auth";
+import { db } from "~/utils/server/db.server";
 import { badRequest } from "~/utils/server/request.server";
-
-export type TBadRequest = {
-  fields?: {
-    loginId?: FormDataEntryValue | null;
-    password?: FormDataEntryValue | null;
-  };
-  errors?: {
-    form?: string;
-  };
-};
 
 async function login({ request }: ActionFunctionArgs) {
   const form = await request.formData();
   const password = form.get("password");
   const loginId = form.get("loginId");
   const { searchParams } = new URL(request.url);
-  const redirectTo = form.get("redirectTo") ?? searchParams.get("redirectTo");
+  const redirectTo = searchParams.get("redirectTo");
 
   if (typeof loginId !== "string" || typeof password !== "string") {
-    return badRequest<TBadRequest>({
+    return badRequest<TFormResponse<"loginId" | "password">>({
       fields: { loginId, password },
-      errors: { form: "Invalid login credentials!" },
+      errors: { message: "Invalid login credentials!" },
     });
   }
 
   const fields = { loginId, password };
+  const loginResponse: TFormResponse<"loginId" | "password"> = { fields };
+  loginResponse.errors = { message: undefined };
 
-  const loginResponse = await _login({ loginId, password });
-
-  if (loginResponse.error) {
-    return badRequest<TBadRequest>({
-      fields,
-      errors: { form: loginResponse.error },
-    });
+  if ((loginId ?? "").length === 0 || (password ?? "").length === 0) {
+    loginResponse.errors.message = "Invalid login credentials!";
+    return badRequest(loginResponse);
   }
 
-  if (loginResponse.user?.id) {
-    return redirect(redirectTo?.toString() ?? "/quotes", {
-      headers: {
-        "Set-Cookie": await createUserSession(loginResponse.user?.id),
-      },
-    });
+  const user = await db.users.findUnique({
+    where: { loginId },
+    select: { id: true, passwordHash: true },
+  });
+
+  if (!user) {
+    loginResponse.errors.message = "Invalid login credentials!";
+    return badRequest(loginResponse);
   }
 
-  return badRequest<TBadRequest>({
-    fields,
-    errors: { form: "Invalid login credentials!" },
+  const isCorrectPassword = await bcrypt.compare(password, user.passwordHash);
+
+  if (!isCorrectPassword) {
+    loginResponse.errors.message = "Invalid login credentials!";
+    return badRequest(loginResponse);
+  }
+
+  return redirect(redirectTo?.toString() ?? "/quotes", {
+    headers: {
+      "Set-Cookie": await createUserSession(user.id),
+    },
   });
 }
 

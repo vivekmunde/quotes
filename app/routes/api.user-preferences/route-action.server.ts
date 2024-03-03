@@ -1,14 +1,6 @@
 import { ActionFunctionArgs, json } from "@remix-run/node";
+import { TFormResponse } from "~/types";
 import { setUserPreferences as _setUserPreferences } from "~/utils/server/user-preferences";
-
-export type TResponse = {
-  fields?: {
-    theme?: FormDataEntryValue | null;
-  };
-  errors?: {
-    message?: string;
-  };
-};
 
 async function setUserPreferences({ request }: ActionFunctionArgs) {
   const form = await request.formData();
@@ -23,7 +15,7 @@ async function setUserPreferences({ request }: ActionFunctionArgs) {
 
   const preferences = await _setUserPreferences({ theme: themeToSet });
 
-  return json(
+  return json<TFormResponse<"theme">>(
     { fields, errors: { message: undefined } },
     {
       headers: {

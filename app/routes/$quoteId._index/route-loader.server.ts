@@ -1,6 +1,6 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { defer } from "@remix-run/node";
-import getRandomQuote from "~/data/get-random-quote.server";
+import getRandomQuote from "~/api/get-random-quote.server";
 import { db } from "~/utils/server/db.server";
 import delayedPromise from "~/utils/server/delayed-promise.server";
 import { TData } from "./types";

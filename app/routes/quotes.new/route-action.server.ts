@@ -1,7 +1,7 @@
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { validateTitle } from "~/components/quote-form";
-import authorizedAccess from "~/utils/server/auth/authorized-access.server";
+import { authorizedAccess } from "~/utils/server/auth";
 import { db } from "~/utils/server/db.server";
 import { badRequest } from "~/utils/server/request.server";
 

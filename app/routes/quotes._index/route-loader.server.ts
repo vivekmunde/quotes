@@ -1,5 +1,5 @@
 import { LoaderFunctionArgs, defer } from "@remix-run/node";
-import authorizedAccess from "~/utils/server/auth/authorized-access.server";
+import { authorizedAccess } from "~/utils/server/auth";
 import { db } from "~/utils/server/db.server";
 import delayedPromise from "~/utils/server/delayed-promise.server";
 import { TData } from "./types";

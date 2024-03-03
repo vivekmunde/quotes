@@ -8,23 +8,12 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
-import { TMayBe } from "~/types";
+import { TFormResponse } from "~/types";
 
-export type TFormProps = {
-  fields?: {
-    loginId: TMayBe<FormDataEntryValue>;
-    password?: TMayBe<FormDataEntryValue>;
-  };
-  errors?: {
-    fields?: {
-      loginId?: TMayBe<string>;
-      password?: TMayBe<string>;
-    };
-    form?: TMayBe<string>;
-  };
-};
-
-const LoginForm: React.FC<TFormProps> = ({ fields, errors }) => {
+const LoginForm: React.FC<TFormResponse<"loginId" | "password">> = ({
+  fields,
+  errors,
+}) => {
   return (
     <Form>
       <div>
@@ -71,10 +60,10 @@ const LoginForm: React.FC<TFormProps> = ({ fields, errors }) => {
       <FormItem>
         <Button>Login</Button>
       </FormItem>
-      <If condition={!!errors?.form}>
+      <If condition={!!errors?.message}>
         <If.True>
           <FormItem>
-            <FormMessage>{errors?.form}</FormMessage>
+            <FormMessage>{errors?.message}</FormMessage>
           </FormItem>
         </If.True>
       </If>
