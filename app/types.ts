@@ -13,4 +13,4 @@ export type TResponseError = {
   status: number;
 };
 
-export type TRouteType = "Default" | "Deferred";
+export type TRouteLoaderType = "Default" | "Deferred";

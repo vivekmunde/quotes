@@ -6,9 +6,9 @@ const withDecideRouteType = <TProps,>(
   DeferredRoute: (props: TProps & JSX.IntrinsicAttributes) => React.ReactNode
 ): ((props: TProps & JSX.IntrinsicAttributes) => React.ReactNode) => {
   const DecideRouteType = (props: TProps & JSX.IntrinsicAttributes) => {
-    const { routeType } = useContext(RootContext);
+    const { routeLoaderType } = useContext(RootContext);
 
-    return routeType === "Deferred" ? (
+    return routeLoaderType === "Deferred" ? (
       <DeferredRoute {...props} />
     ) : (
       <DefaultRoute {...props} />

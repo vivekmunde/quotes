@@ -1,16 +1,18 @@
 import React, { createContext } from "react";
-import { TRouteType } from "~/types";
+import { TRouteLoaderType } from "~/types";
 
-export const RootContext = createContext<{ routeType: TRouteType }>({
-  routeType: "Default",
-});
+export const RootContext = createContext<{ routeLoaderType: TRouteLoaderType }>(
+  {
+    routeLoaderType: "Default",
+  }
+);
 
 const RootProvider: React.FC<{
   children: React.ReactNode;
-  routeType: TRouteType;
-}> = ({ children, routeType }) => {
+  routeLoaderType: TRouteLoaderType;
+}> = ({ children, routeLoaderType }) => {
   return (
-    <RootContext.Provider value={{ routeType }}>
+    <RootContext.Provider value={{ routeLoaderType }}>
       {children}
     </RootContext.Provider>
   );

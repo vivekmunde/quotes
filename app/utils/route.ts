@@ -40,7 +40,7 @@ export const decideLoaderType = <T>(
   >
 ) => {
   return (args: LoaderFunctionArgs) =>
-    Number(process.env.DEFER_CRUD_DELAY ?? 0) > 0
+    Number(process.env.DEFER_LOADER_DELAY ?? 0) > 0
       ? deferredLoader(args)
       : defaultLoader(args);
 };
