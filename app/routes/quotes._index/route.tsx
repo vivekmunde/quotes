@@ -1,6 +1,6 @@
 import { Await, useLoaderData } from "@remix-run/react";
 import { Suspense } from "react";
-import RouteError from "~/components/route-error";
+import RouteError from "~/components/route-error/default-route-error";
 import RouteContent from "./route-content";
 import routeLoader from "./route-loader.server";
 import RouteSkeleton from "./route-skeleton";

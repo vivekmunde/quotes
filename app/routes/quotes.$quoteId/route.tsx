@@ -1,22 +1,19 @@
-import { Await, useLoaderData } from "@remix-run/react";
-import { Suspense } from "react";
-import RouteContent from "./route-content";
-import RouteError from "./route-error";
-import routeLoader from "./route-loader.server";
-import RouteSkeleton from "./route-skeleton";
+import withDecideRouteType from "~/components/route/with-decide-route-type";
+import { decideLoaderType } from "~/utils/route";
+import RouteDefault, {
+  ErrorBoundary as DefaultErrorBoundary,
+  loader as defaultLoader,
+} from "./route-default";
+import RouteDeferred, {
+  ErrorBoundary as DeferredErrorBoundary,
+  loader as deferredLoader,
+} from "./route-deferred";
 
-export const ErrorBoundary = RouteError;
+export const ErrorBoundary = withDecideRouteType(
+  DefaultErrorBoundary,
+  DeferredErrorBoundary
+);
 
-export const loader = routeLoader;
+export const loader = decideLoaderType(defaultLoader, deferredLoader);
 
-export default function Route() {
-  const { dataPromise } = useLoaderData<typeof loader>();
-
-  return (
-    <Suspense fallback={<RouteSkeleton />}>
-      <Await resolve={dataPromise}>
-        {(data) => <RouteContent data={data} />}
-      </Await>
-    </Suspense>
-  );
-}
+export default withDecideRouteType(RouteDefault, RouteDeferred);

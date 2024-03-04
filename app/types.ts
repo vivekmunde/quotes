@@ -7,3 +7,10 @@ export type TFormResponse<TFields extends string> = {
     message?: TMayBe<string>;
   }>;
 };
+
+export type TResponseError = {
+  message: string;
+  status: number;
+};
+
+export type TRouteType = "Default" | "Deferred";

@@ -1,7 +1,5 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
-import { defer } from "@remix-run/node";
 import { db } from "~/utils/server/db.server";
-import delayedPromise from "~/utils/server/delayed-promise.server";
 import { TData } from "./types";
 
 const getQuote = async (quoteId: string) => {
@@ -11,15 +9,25 @@ const getQuote = async (quoteId: string) => {
   });
 
   if (!quote) {
-    throw new Error("Quote not found!");
+    throw new Error(
+      JSON.stringify({
+        statusText: "QUOTE_NOT_FOUND",
+        status: 404,
+      })
+    );
   }
 
   return quote;
 };
 
-const getData = async ({ params }: LoaderFunctionArgs): Promise<TData> => {
+const getData = async ({ params }: LoaderFunctionArgs) => {
   if (!params.quoteId) {
-    throw new Error("Quote not found!");
+    throw new Error(
+      JSON.stringify({
+        statusText: "QUOTE_NOT_FOUND",
+        status: 404,
+      })
+    );
   }
 
   const quote = await getQuote(params.quoteId);
@@ -27,8 +35,6 @@ const getData = async ({ params }: LoaderFunctionArgs): Promise<TData> => {
   return { quote };
 };
 
-const loader = async (args: LoaderFunctionArgs) => {
-  return defer({ dataPromise: delayedPromise(() => getData(args)) });
-};
-
-export default loader;
+export default async function loader(args: LoaderFunctionArgs): Promise<TData> {
+  return await getData(args);
+}

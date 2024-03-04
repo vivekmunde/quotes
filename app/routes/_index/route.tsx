@@ -1,6 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import RouteError from "~/components/route-error";
+import RouteError from "~/components/route-error/default-route-error";
 import routeLoader from "./route-loader.server";
 import RouteSkeleton from "./route-skeleton";
 

@@ -11,6 +11,8 @@ import {
 } from "@remix-run/react";
 import ThemeProvider from "~/components/theme-provider";
 import styles from "~/tailwind.css";
+import RootProvider from "./components/RootProvider";
+import { TRouteType } from "./types";
 import { getUserPreferences } from "./utils/server/user-preferences";
 
 export const links: LinksFunction = () => [
@@ -19,13 +21,14 @@ export const links: LinksFunction = () => [
 ];
 
 export const loader = async (args: LoaderFunctionArgs) => {
+  const routeType: TRouteType = process.env.DEFER_CRUD ? "Deferred" : "Default";
   const preferences = await getUserPreferences(args.request);
 
-  return { preferences };
+  return { preferences, routeType };
 };
 
 export default function App() {
-  const { preferences } = useLoaderData<typeof loader>();
+  const { preferences, routeType } = useLoaderData<typeof loader>();
 
   return (
     <html lang="en" className={preferences.theme ?? ""}>
@@ -36,9 +39,11 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <ThemeProvider>
-          <Outlet />
-        </ThemeProvider>
+        <RootProvider routeType={routeType}>
+          <ThemeProvider>
+            <Outlet />
+          </ThemeProvider>
+        </RootProvider>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
