@@ -2,7 +2,7 @@ import type { LoaderFunctionArgs } from "@remix-run/node";
 import { defer } from "@remix-run/node";
 import getRandomQuote from "~/api/get-random-quote.server";
 import { db } from "~/utils/server/db.server";
-import delayedPromise from "~/utils/server/delayed-promise.server";
+import deferredResponse from "~/utils/server/delayed-promise.server";
 import { TData } from "./types";
 
 const getQuote = async (quoteId: string) => {
@@ -42,7 +42,7 @@ const getData = async ({ params }: LoaderFunctionArgs): Promise<TData> => {
 };
 
 const loader = async (args: LoaderFunctionArgs) => {
-  return defer({ dataPromise: delayedPromise(() => getData(args)) });
+  return defer({ dataPromise: deferredResponse(() => getData(args)) });
 };
 
 export default loader;

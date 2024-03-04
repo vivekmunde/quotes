@@ -1,5 +1,5 @@
 import { LoaderFunctionArgs, TypedDeferredData, defer } from "@remix-run/node";
-import delayedPromise from "./server/delayed-promise.server";
+import deferredResponse from "./server/delayed-promise.server";
 
 export const defaultLoader = <T>(
   loader: (args: LoaderFunctionArgs) => Promise<T>
@@ -28,7 +28,7 @@ export const deferredLoader = <T>(
   loader: (args: LoaderFunctionArgs) => Promise<T>
 ) => {
   return async (args: LoaderFunctionArgs) =>
-    defer({ dataPromise: delayedPromise<T>(() => loader(args)) });
+    defer({ dataPromise: deferredResponse<T>(() => loader(args)) });
 };
 
 export const decideLoaderType = <T>(
@@ -40,5 +40,7 @@ export const decideLoaderType = <T>(
   >
 ) => {
   return (args: LoaderFunctionArgs) =>
-    process.env.DEFER_CRUD ? deferredLoader(args) : defaultLoader(args);
+    Number(process.env.DEFER_CRUD_DELAY ?? 0) > 0
+      ? deferredLoader(args)
+      : defaultLoader(args);
 };

@@ -1,13 +1,13 @@
-export default async function delayedPromise<T>(fn: () => Promise<T>) {
-  const isDevMode = process.env.NODE_ENV === "development";
+export default async function deferredResponse<T>(fn: () => Promise<T>) {
+  const deferBy = Number(process.env.DEFER_CRUD_DELAY ?? 0);
 
-  if (isDevMode) {
+  if (deferBy > 0) {
     return new Promise<T>((resolve) => {
       const t = setTimeout(async () => {
         clearTimeout(t);
 
         return resolve(fn());
-      }, Number(process.env.ROUTE_LOADER_DELAY ?? 1000));
+      }, deferBy);
     });
   }
 

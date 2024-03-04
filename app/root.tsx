@@ -21,7 +21,8 @@ export const links: LinksFunction = () => [
 ];
 
 export const loader = async (args: LoaderFunctionArgs) => {
-  const routeType: TRouteType = process.env.DEFER_CRUD ? "Deferred" : "Default";
+  const routeType: TRouteType =
+    Number(process.env.DEFER_CRUD_DELAY ?? 0) > 0 ? "Deferred" : "Default";
   const preferences = await getUserPreferences(args.request);
 
   return { preferences, routeType };

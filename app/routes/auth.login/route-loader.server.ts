@@ -1,7 +1,7 @@
 import { LoaderFunctionArgs, defer, redirect } from "@remix-run/node";
 import getRandomQuote from "~/api/get-random-quote.server";
 import { isLoggedIn } from "~/utils/server/auth";
-import delayedPromise from "~/utils/server/delayed-promise.server";
+import deferredResponse from "~/utils/server/delayed-promise.server";
 import { TData } from "./types";
 
 const getData = async (): Promise<TData> => {
@@ -16,7 +16,7 @@ const loader = async (args: LoaderFunctionArgs) => {
 
     return redirect(redirectTo ?? "/quotes");
   } else {
-    return defer({ dataPromise: delayedPromise(() => getData()) });
+    return defer({ dataPromise: deferredResponse(() => getData()) });
   }
 };
 
