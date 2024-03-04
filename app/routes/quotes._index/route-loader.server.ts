@@ -1,7 +1,6 @@
-import { LoaderFunctionArgs, defer } from "@remix-run/node";
+import { LoaderFunctionArgs } from "@remix-run/node";
 import { authorizedAccess } from "~/utils/server/auth";
 import { db } from "~/utils/server/db.server";
-import deferredResponse from "~/utils/server/delayed-promise.server";
 import { TData } from "./types";
 
 const getData = async (): Promise<TData> => {
@@ -15,9 +14,7 @@ const getData = async (): Promise<TData> => {
 };
 
 const loader = async (args: LoaderFunctionArgs) => {
-  return authorizedAccess(args.request, () =>
-    defer({ dataPromise: deferredResponse(() => getData()) })
-  );
+  return authorizedAccess(args.request, async () => await getData());
 };
 
 export default loader;

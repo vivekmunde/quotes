@@ -1,5 +1,5 @@
 import { useLoaderData } from "@remix-run/react";
-import RouteError from "~/components/route-error/default-route-error";
+import RouteError from "~/components/route-error";
 import routeAction from "./route-action.server";
 import routeLoader from "./route-loader.server";
 import RouteSkeleton from "./route-skeleton";

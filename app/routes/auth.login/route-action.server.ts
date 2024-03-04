@@ -10,7 +10,7 @@ async function login({ request }: ActionFunctionArgs) {
   const password = form.get("password");
   const loginId = form.get("loginId");
   const { searchParams } = new URL(request.url);
-  const redirectTo = searchParams.get("redirectTo");
+  const redirectTo = searchParams.get("redirectTo") ?? "";
 
   if (typeof loginId !== "string" || typeof password !== "string") {
     return badRequest<TFormResponse<"loginId" | "password">>({
@@ -45,7 +45,7 @@ async function login({ request }: ActionFunctionArgs) {
     return badRequest(loginResponse);
   }
 
-  return redirect(redirectTo?.toString() ?? "/quotes", {
+  return redirect(redirectTo.length > 0 ? redirectTo : "/quotes", {
     headers: {
       "Set-Cookie": await createUserSession(user.id),
     },

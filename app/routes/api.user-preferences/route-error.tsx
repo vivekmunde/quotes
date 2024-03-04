@@ -1,4 +1,4 @@
-import CRouteError from "~/components/route-error/default-route-error";
+import CRouteError from "~/components/route-error";
 
 const RouteError = CRouteError;
 

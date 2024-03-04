@@ -1,35 +1,29 @@
-import { Await, useActionData, useLoaderData } from "@remix-run/react";
-import { Suspense } from "react";
+import { useActionData } from "@remix-run/react";
+import withDecideRouteType from "~/components/route/with-decide-route-type";
+import { decideLoaderType } from "~/utils/route";
 import routeAction from "./route-action.server";
-import RouteContent from "./route-content";
+import RouteDefault, { loader as defaultLoader } from "./route-default";
+import RouteDeferred, { loader as deferredLoader } from "./route-deferred";
 import RouteError from "./route-error";
-import routeLoader from "./route-loader.server";
-import RouteSkeleton from "./route-skeleton";
 
 export const ErrorBoundary = RouteError;
 
-export const loader = routeLoader;
+export const loader = decideLoaderType(defaultLoader, deferredLoader);
 
 export const action = routeAction;
 
-export default function LoginRoute() {
-  const { dataPromise } = useLoaderData<typeof loader>();
+const RouteAsPerLoaderType = withDecideRouteType(RouteDefault, RouteDeferred);
+
+export default function Route() {
   const actionData = useActionData<typeof action>();
 
   return (
-    <Suspense fallback={<RouteSkeleton />}>
-      <Await resolve={dataPromise}>
-        {(data) => (
-          <RouteContent
-            data={{ title: data.title, author: data.author }}
-            fields={{
-              loginId: actionData?.fields?.loginId?.toString(),
-              password: actionData?.fields?.password?.toString(),
-            }}
-            errors={actionData?.errors}
-          />
-        )}
-      </Await>
-    </Suspense>
+    <RouteAsPerLoaderType
+      fields={{
+        loginId: actionData?.fields?.loginId?.toString(),
+        password: actionData?.fields?.password?.toString(),
+      }}
+      errors={actionData?.errors}
+    />
   );
 }

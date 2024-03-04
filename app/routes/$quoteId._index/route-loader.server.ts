@@ -1,8 +1,6 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
-import { defer } from "@remix-run/node";
 import getRandomQuote from "~/api/get-random-quote.server";
 import { db } from "~/utils/server/db.server";
-import deferredResponse from "~/utils/server/delayed-promise.server";
 import { TData } from "./types";
 
 const getQuote = async (quoteId: string) => {
@@ -12,7 +10,9 @@ const getQuote = async (quoteId: string) => {
   });
 
   if (!quote) {
-    throw new Error("Quote not found!");
+    throw new Error(
+      JSON.stringify({ status: 404, statusText: "QUOTE_NOT_FOUND" })
+    );
   }
 
   return quote;
@@ -30,7 +30,9 @@ const getNextQuote = async (forQuoteId: string): Promise<{ id: string }> => {
 
 const getData = async ({ params }: LoaderFunctionArgs): Promise<TData> => {
   if (!params.quoteId) {
-    throw new Error("Quote not found!");
+    throw new Error(
+      JSON.stringify({ status: 404, statusText: "QUOTE_NOT_FOUND" })
+    );
   }
 
   const [quote, nextQuote] = await Promise.all([
@@ -41,8 +43,6 @@ const getData = async ({ params }: LoaderFunctionArgs): Promise<TData> => {
   return { quote, nextQuote };
 };
 
-const loader = async (args: LoaderFunctionArgs) => {
-  return defer({ dataPromise: deferredResponse(() => getData(args)) });
-};
-
-export default loader;
+export default async function loader(args: LoaderFunctionArgs): Promise<TData> {
+  return await getData(args);
+}

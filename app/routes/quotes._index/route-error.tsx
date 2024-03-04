@@ -1,3 +1,3 @@
-import RouteError from "~/components/route-error/default-route-error";
+import RouteError from "~/components/route-error";
 
 export default RouteError;

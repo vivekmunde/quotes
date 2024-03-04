@@ -3,8 +3,8 @@ import { ChevronLeft } from "lucide-react";
 import React from "react";
 import If from "~/components/if";
 import Layout from "~/components/layout";
+import CommonRouteError from "~/components/route-error";
 import RouteError404 from "~/components/route-error/404";
-import DefaultRouteError from "~/components/route-error/default-route-error";
 import { Button } from "~/components/ui/button";
 import {
   Tooltip,
@@ -30,7 +30,7 @@ const RouteError: React.FC<{ error?: any }> = ({ error }) => {
             />
           </If.True>
           <If.False>
-            <DefaultRouteError />
+            <CommonRouteError />
           </If.False>
         </If>
       </Layout.Screen.Body>
