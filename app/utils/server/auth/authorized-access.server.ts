@@ -1,5 +1,5 @@
-import { redirect } from "@remix-run/node";
-import destroyUserSession from "./destroy-user-session.server";
+import logout from "~/utils/server/auth/logout.server";
+import { db } from "../db.server";
 import getUserSession from "./get-user-session.server";
 
 export default async function authorizedAccess<T>(
@@ -8,13 +8,18 @@ export default async function authorizedAccess<T>(
 ): Promise<T> {
   const session = await getUserSession(request);
   const userId = session.get("userId");
-  const redirectTo = new URL(request.url).pathname;
 
-  if (!userId || typeof userId !== "string") {
-    destroyUserSession(request);
+  if (typeof userId !== "string" || !userId) {
+    logout(request);
+  }
 
-    const searchParams = new URLSearchParams([["redirectTo", redirectTo]]);
-    throw redirect(`/auth/login?${searchParams}`);
+  const user = await db.quotes.findUnique({
+    where: { id: userId },
+    select: { id: true },
+  });
+
+  if (!user?.id) {
+    logout(request);
   }
 
   return fn();
