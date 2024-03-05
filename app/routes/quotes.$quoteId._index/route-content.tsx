@@ -70,9 +70,11 @@ const RouteContent: React.FC<{
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Button variant="destructive" icon>
-                    <Trash />
-                  </Button>
+                  <Link prefetch="intent" to={`/quotes/${quote.id}/delete`}>
+                    <Button variant="destructive" icon>
+                      <Trash />
+                    </Button>
+                  </Link>
                 </TooltipTrigger>
                 <TooltipContent>
                   <div>Delete</div>

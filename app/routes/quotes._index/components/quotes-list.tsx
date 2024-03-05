@@ -74,17 +74,19 @@ const QuotesList: React.FC<{
                     <Edit className="q h-3 w-3" />
                   </Button>
                 </Link>
-                <Button
-                  variant="ghost"
-                  style={{
-                    height: "auto",
-                    width: "auto",
-                    padding: 0,
-                    margin: 0,
-                  }}
-                >
-                  <Trash className="q h-3 w-3 text-destructive" />
-                </Button>
+                <Link prefetch="intent" to={`/quotes/${quote.id}/delete`}>
+                  <Button
+                    variant="ghost"
+                    style={{
+                      height: "auto",
+                      width: "auto",
+                      padding: 0,
+                      margin: 0,
+                    }}
+                  >
+                    <Trash className="q h-3 w-3 text-destructive" />
+                  </Button>
+                </Link>
               </span>
             </span>
           </div>
