@@ -1,9 +1,10 @@
+import { Form } from "@remix-run/react";
 import { FormControl, FormItem } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 
 const SearchForm: React.FC = () => {
   return (
-    <form method="post">
+    <Form method="post">
       <div>
         <FormItem>
           <FormControl>
@@ -15,7 +16,7 @@ const SearchForm: React.FC = () => {
           </FormControl>
         </FormItem>
       </div>
-    </form>
+    </Form>
   );
 };
 

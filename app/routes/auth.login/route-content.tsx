@@ -1,4 +1,4 @@
-import { Link } from "@remix-run/react";
+import { Form, Link } from "@remix-run/react";
 import React from "react";
 import Layout from "~/components/layout";
 import ToggleMode from "~/components/toggle-mode";
@@ -35,9 +35,9 @@ const RouteContent: React.FC<{
           <Layout.Body className="px-6 lg:px-10 xl:px-12 py-2 lg:py-4 flex-1 flex flex-col justify-center">
             <div className="flex-1 flex flex-col justify-center lg:w-[25vw]">
               <H2>Login</H2>
-              <form method="post">
+              <Form method="post">
                 <LoginForm fields={fields} errors={errors} />
-              </form>
+              </Form>
             </div>
           </Layout.Body>
         </Layout>

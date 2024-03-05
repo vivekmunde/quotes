@@ -1,3 +1,4 @@
+import { Form } from "@remix-run/react";
 import Layout from "~/components/layout";
 import QuoteForm from "~/components/quote-form";
 import { TFormResponse, TMayBe } from "~/types";
@@ -15,7 +16,7 @@ const RouteContent: React.FC<{
             </header>
           </Layout.Header>
           <Layout.Body>
-            <form method="post">
+            <Form method="post">
               <QuoteForm
                 fields={
                   actionResponse?.fields ?? {
@@ -25,7 +26,7 @@ const RouteContent: React.FC<{
                 }
                 errors={actionResponse?.errors}
               />
-            </form>
+            </Form>
           </Layout.Body>
         </Layout>
       </section>

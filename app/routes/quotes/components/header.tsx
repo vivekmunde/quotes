@@ -1,4 +1,4 @@
-import { Link } from "@remix-run/react";
+import { Form, Link } from "@remix-run/react";
 import { LogOut, Plus, Quote } from "lucide-react";
 import React from "react";
 import Layout from "~/components/layout";
@@ -45,11 +45,11 @@ const Header: React.FC = () => {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <form action="/auth/logout" method="post">
+              <Form action="/auth/logout" method="post">
                 <Button type="submit" size="sm" variant="ghost">
                   <LogOut />
                 </Button>
-              </form>
+              </Form>
             </TooltipTrigger>
             <TooltipContent>
               <div>Logout</div>
