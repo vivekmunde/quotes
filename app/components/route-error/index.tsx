@@ -16,7 +16,7 @@ const RouteError: React.FC<{ error?: any }> = ({ error }) => {
   return (
     <If condition={routeErrorStatus === 404}>
       <If.True>
-        <RouteError404 title="Not found!" message={message} />
+        <RouteError404 message={message} />
       </If.True>
       <If.False>
         <GenericRouteError message={message} />
