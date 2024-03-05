@@ -36,8 +36,8 @@ const RouteContent: React.FC<{
             </div>
             <P className="mb-8">
               You are about to delete the above quote. Once a quote is deleted
-              then it cannnot be restored back. Are you sure you want to delete
-              the quote?
+              then it cannnot be restored back. <br />
+              Are you sure you want to delete the quote?
             </P>
             <Form method="post">
               <DeleteQuoteForm

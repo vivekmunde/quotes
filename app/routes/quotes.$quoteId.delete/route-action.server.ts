@@ -12,15 +12,19 @@ async function deleteQuote({ request }: ActionFunctionArgs) {
   const quoteId = form.get("quoteId");
   const password = form.get("password");
 
-  if (
-    typeof quoteId !== "string" ||
-    !quoteId ||
-    typeof password !== "string" ||
-    !password
-  ) {
+  if (typeof quoteId !== "string" || !quoteId) {
     return badRequest<TFormResponse<"id">>({
       fields: { id: quoteId },
-      errors: { message: "Invalid data!" },
+      errors: {
+        message: "The quote you are trying to delete was not recieved!",
+      },
+    });
+  }
+
+  if (typeof password !== "string" || !password) {
+    return badRequest<TFormResponse<"id">>({
+      fields: { id: quoteId },
+      errors: { message: "Please enter your password!" },
     });
   }
 
@@ -31,7 +35,10 @@ async function deleteQuote({ request }: ActionFunctionArgs) {
   ) {
     return badRequest<TFormResponse<"quoteId" | "password">>({
       fields,
-      errors: { fields: { password: "Invalid credentails!" } },
+      errors: {
+        message:
+          "Could not authenticate! You may not have entered correct password.",
+      },
     });
   }
 

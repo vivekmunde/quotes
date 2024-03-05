@@ -1,4 +1,6 @@
+import { AlertCircle } from "lucide-react";
 import If from "~/components/if";
+import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
 import { Button } from "~/components/ui/button";
 import {
   Form,
@@ -60,11 +62,13 @@ const LoginForm: React.FC<TFormResponse<"loginId" | "password">> = ({
       <FormItem>
         <Button>Login</Button>
       </FormItem>
-      <If condition={!!errors?.message}>
+      <If condition={(errors?.message ?? "").length > 0}>
         <If.True>
-          <FormItem>
-            <FormMessage>{errors?.message}</FormMessage>
-          </FormItem>
+          <Alert variant="destructive">
+            <AlertCircle className="h-4 w-4" />
+            <AlertTitle>Error</AlertTitle>
+            <AlertDescription>{errors?.message}</AlertDescription>
+          </Alert>
         </If.True>
       </If>
     </Form>

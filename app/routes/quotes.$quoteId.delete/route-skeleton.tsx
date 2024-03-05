@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "~/components/layout";
-import { Skeleton } from "~/components/quote-form";
+import { Skeleton } from "~/components/ui/skeleton";
 
 const RouteSkeleton: React.FC = () => (
   <Layout.Screen.Body>
@@ -8,11 +8,15 @@ const RouteSkeleton: React.FC = () => (
       <Layout>
         <Layout.Header>
           <header>
-            <Layout.Header.Title>Update quote</Layout.Header.Title>
+            <Layout.Header.Title>Delete quote</Layout.Header.Title>
           </header>
         </Layout.Header>
         <Layout.Body>
-          <Skeleton />
+          <Skeleton className="h-32 mb-6" />
+          <Skeleton className="h-6 mb-2" />
+          <Skeleton className="h-6 mb-8" />
+          <Skeleton className="h-24 mb-6" />
+          <Skeleton className="h-12 w-24" />
         </Layout.Body>
       </Layout>
     </section>
