@@ -1,29 +1,8 @@
 import { Link } from "@remix-run/react";
-import { Edit, Trash, View } from "lucide-react";
 import React from "react";
-import { Button } from "~/components/ui/button";
 import { TMayBe } from "~/types";
-
-const QuoteIndex: React.FC<{ index: number }> = ({ index }) => {
-  const width = Math.max(index.toString().length * 8 + 6, 20);
-
-  return (
-    <div className="flex flex-col">
-      <div className="flex flex-row items-centerstart">
-        <div className="h-[6px] w-[4px] rounded-tl bg-neutral-300 dark:bg-neutral-600" />
-        <div className="h-[2px] w-[4px] bg-neutral-300 dark:bg-neutral-600" />
-      </div>
-      <div className="flex flex-row">
-        <div
-          style={{ width: `${width}px` }}
-          className="py-1 text-xs flex justify-center items-center rounded-tr rounded-bl rounded-br bg-neutral-300 dark:bg-neutral-600 text-neutral-950 dark:text-neutral-200 border-t border-transparent"
-        >
-          {index}
-        </div>
-      </div>
-    </div>
-  );
-};
+import QuoteActions from "./quotes-actions";
+import QuoteIndex from "./quotes-index";
 
 const QuotesList: React.FC<{
   quotes: { id: string; title: string; author: TMayBe<string> }[];
@@ -47,47 +26,7 @@ const QuotesList: React.FC<{
                 {"- "}
                 {quote.author ?? "Unknown"}
               </span>
-              <span className="inline-flex flex-row items-center gap-2">
-                <Link prefetch="intent" to={`/quotes/${quote.id}`}>
-                  <Button
-                    variant="ghost"
-                    style={{
-                      height: "auto",
-                      width: "auto",
-                      padding: 0,
-                      margin: 0,
-                    }}
-                  >
-                    <View className="q h-3 w-3" />
-                  </Button>
-                </Link>
-                <Link prefetch="intent" to={`/quotes/${quote.id}/edit`}>
-                  <Button
-                    variant="ghost"
-                    style={{
-                      height: "auto",
-                      width: "auto",
-                      padding: 0,
-                      margin: 0,
-                    }}
-                  >
-                    <Edit className="q h-3 w-3" />
-                  </Button>
-                </Link>
-                <Link prefetch="intent" to={`/quotes/${quote.id}/delete`}>
-                  <Button
-                    variant="ghost"
-                    style={{
-                      height: "auto",
-                      width: "auto",
-                      padding: 0,
-                      margin: 0,
-                    }}
-                  >
-                    <Trash className="q h-3 w-3 text-destructive" />
-                  </Button>
-                </Link>
-              </span>
+              <QuoteActions quote={quote} />
             </span>
           </div>
         </div>
