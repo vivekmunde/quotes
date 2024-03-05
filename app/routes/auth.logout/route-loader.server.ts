@@ -1,5 +1,5 @@
 import { LoaderFunctionArgs } from "@remix-run/node";
-import logout from "./api/logout.server";
+import logout from "~/utils/server/auth/logout.server";
 
 const loader = async (args: LoaderFunctionArgs) => {
   return logout(args.request);
