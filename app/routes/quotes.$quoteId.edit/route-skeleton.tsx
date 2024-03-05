@@ -8,7 +8,7 @@ const RouteSkeleton: React.FC = () => (
       <Layout>
         <Layout.Header>
           <header>
-            <Layout.Header.Title>Create new quote</Layout.Header.Title>
+            <Layout.Header.Title>Update quote</Layout.Header.Title>
           </header>
         </Layout.Header>
         <Layout.Body>

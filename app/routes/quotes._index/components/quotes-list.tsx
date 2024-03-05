@@ -61,17 +61,19 @@ const QuotesList: React.FC<{
                     <View className="q h-3 w-3" />
                   </Button>
                 </Link>
-                <Button
-                  variant="ghost"
-                  style={{
-                    height: "auto",
-                    width: "auto",
-                    padding: 0,
-                    margin: 0,
-                  }}
-                >
-                  <Edit className="q h-3 w-3" />
-                </Button>
+                <Link prefetch="intent" to={`/quotes/${quote.id}/edit`}>
+                  <Button
+                    variant="ghost"
+                    style={{
+                      height: "auto",
+                      width: "auto",
+                      padding: 0,
+                      margin: 0,
+                    }}
+                  >
+                    <Edit className="q h-3 w-3" />
+                  </Button>
+                </Link>
                 <Button
                   variant="ghost"
                   style={{

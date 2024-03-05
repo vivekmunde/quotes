@@ -11,10 +11,12 @@ import { Input } from "~/components/ui/input";
 import { Textarea } from "~/components/ui/textarea";
 import { TFormResponse } from "~/types";
 
-const QuoteForm: React.FC<TFormResponse<"author" | "title">> = ({
-  fields,
-  errors,
-}) => {
+const QuoteForm: React.FC<
+  TFormResponse<"author" | "title"> & {
+    intent?: "create" | "update";
+    onCancel?: () => void;
+  }
+> = ({ intent, fields, errors, onCancel }) => {
   return (
     <Form>
       <FormItem>
@@ -45,7 +47,29 @@ const QuoteForm: React.FC<TFormResponse<"author" | "title">> = ({
         </FormControl>
       </FormItem>
       <FormItem>
-        <Button>Create</Button>
+        <div className="flex flex-row gap-2">
+          <Button>
+            <If condition={intent === "create"}>
+              <If.True>Create</If.True>
+              <If.False>
+                <If condition={intent === "update"}>
+                  <If.True>Update</If.True>
+                  <If.False>Save</If.False>
+                </If>
+              </If.False>
+            </If>
+          </Button>
+          <Button
+            variant="outline"
+            onClick={() => {
+              if (onCancel) {
+                onCancel();
+              }
+            }}
+          >
+            Cancel
+          </Button>
+        </div>
       </FormItem>
       <If condition={!!errors?.message}>
         <If.True>

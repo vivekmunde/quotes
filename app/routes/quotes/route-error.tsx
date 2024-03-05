@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "~/components/layout";
-import CRouteError from "~/components/route-error";
+import CommonRouteError from "~/components/route-error";
 import Header from "./components/header";
 
 const RouteError: React.FC = () => {
@@ -8,7 +8,7 @@ const RouteError: React.FC = () => {
     <Layout.Screen>
       <Header />
       <Layout.Screen.Body>
-        <CRouteError />
+        <CommonRouteError />
       </Layout.Screen.Body>
     </Layout.Screen>
   );

@@ -1,4 +1,5 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
+import { authorizedAccess } from "~/utils/server/auth";
 import { db } from "~/utils/server/db.server";
 import { TData } from "./types";
 
@@ -36,5 +37,5 @@ const getData = async ({ params }: LoaderFunctionArgs) => {
 };
 
 export default async function loader(args: LoaderFunctionArgs): Promise<TData> {
-  return await getData(args);
+  return await authorizedAccess(args.request, () => getData(args));
 }
