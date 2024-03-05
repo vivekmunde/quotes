@@ -6,7 +6,7 @@ import { Button } from "~/components/ui/button";
 const Header: React.FC = () => {
   return (
     <Layout.Screen.Header>
-      <Link to="/search">
+      <Link prefetch="render" to="/search">
         <Button size="sm" variant="ghost">
           <Search />
         </Button>

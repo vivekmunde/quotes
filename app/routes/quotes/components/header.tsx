@@ -17,7 +17,7 @@ const Header: React.FC = () => {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Link to="/quotes/new">
+              <Link prefetch="render" to="/quotes/new">
                 <Button size="sm" variant="ghost">
                   <Plus />
                 </Button>
@@ -31,7 +31,7 @@ const Header: React.FC = () => {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Link to="/quotes">
+              <Link prefetch="intent" to="/quotes">
                 <Button size="sm" variant="ghost">
                   <Quote />
                 </Button>

@@ -35,7 +35,11 @@ const QuotesList: React.FC<{
         <div key={quote.id} className="flex flex-row items-start gap-4">
           <QuoteIndex index={startIndex - 1 + (index + 1)} />
           <div className="flex-1">
-            <Link to={`/quotes/${quote.id}`} className="text-lg dark:font-thin">
+            <Link
+              prefetch="intent"
+              to={`/quotes/${quote.id}`}
+              className="text-lg dark:font-thin"
+            >
               {quote.title}
             </Link>{" "}
             <span className="inline-flex flex-row flex-wrap items-center gap-2 text-nowrap">
@@ -44,7 +48,7 @@ const QuotesList: React.FC<{
                 {quote.author ?? "Unknown"}
               </span>
               <span className="inline-flex flex-row items-center gap-2">
-                <Link to={`/quotes/${quote.id}`}>
+                <Link prefetch="intent" to={`/quotes/${quote.id}`}>
                   <Button
                     variant="ghost"
                     style={{

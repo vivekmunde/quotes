@@ -20,7 +20,7 @@ const RouteContent: React.FC<{
       </Layout.Screen.Body>
       <Layout.Screen.Footer>
         <div className="flex flex-row justify-end">
-          <Link to={`/q/${nextQuote?.id}`}>
+          <Link prefetch="render" to={`/${nextQuote?.id}`}>
             <Button icon>
               <ChevronRight className="q h-8 w-8" />
             </Button>

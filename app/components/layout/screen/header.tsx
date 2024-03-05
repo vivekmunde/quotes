@@ -8,7 +8,7 @@ const Header: React.FC<
 > = ({ children, ref, ...props }) => {
   return (
     <LayoutHeader ref={ref} {...props}>
-      <Link to="/q/@next" className="py-2">
+      <Link prefetch="render" to="/q/@next" className="py-2">
         <img alt="quotes" src="/quotes-q-logo.png" className="h-5" />
       </Link>
       <div className="flex flex-row items-center">

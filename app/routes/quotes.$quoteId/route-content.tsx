@@ -29,7 +29,7 @@ const RouteContent: React.FC<{
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <Link to="/quotes">
+                <Link prefetch="intent" to="/quotes">
                   <Button variant="outline" icon>
                     <ChevronLeft />
                   </Button>
