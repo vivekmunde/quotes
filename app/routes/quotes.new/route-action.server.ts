@@ -1,22 +1,10 @@
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { validateTitle } from "~/components/quote-form";
+import { TFormResponse } from "~/types";
 import { authorizedAccess } from "~/utils/server/auth";
 import { db } from "~/utils/server/db.server";
 import { badRequest } from "~/utils/server/request.server";
-
-export type TBadRequest = {
-  fields?: {
-    title?: FormDataEntryValue | null;
-    author?: FormDataEntryValue | null;
-  };
-  errors?: {
-    fields?: {
-      title?: string;
-    };
-    form?: string;
-  };
-};
 
 const createNewQuote = async ({ request }: ActionFunctionArgs) => {
   const form = await request.formData();
@@ -24,9 +12,9 @@ const createNewQuote = async ({ request }: ActionFunctionArgs) => {
   const author = form.get("author");
 
   if (typeof title !== "string" || typeof author !== "string") {
-    return badRequest<TBadRequest>({
+    return badRequest<TFormResponse<"author" | "title">>({
       fields: { title, author },
-      errors: { form: "Invalid data!" },
+      errors: { message: "Invalid data!" },
     });
   }
 
@@ -37,7 +25,7 @@ const createNewQuote = async ({ request }: ActionFunctionArgs) => {
   };
 
   if (Object.values(fieldErrors).some(Boolean)) {
-    return badRequest<TBadRequest>({
+    return badRequest<TFormResponse<"author" | "title">>({
       fields,
       errors: { fields: fieldErrors },
     });
@@ -49,7 +37,7 @@ const createNewQuote = async ({ request }: ActionFunctionArgs) => {
 };
 
 const action = async (args: ActionFunctionArgs) => {
-  return authorizedAccess(args.request, () => createNewQuote(args));
+  return authorizedAccess(args.request, async () => await createNewQuote(args));
 };
 
 export default action;

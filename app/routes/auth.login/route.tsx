@@ -1,5 +1,5 @@
-import { useActionData } from "@remix-run/react";
 import withDecideRouteType from "~/components/route/with-decide-route-type";
+import withRouteAction from "~/components/route/with-route-action";
 import { decideLoaderType } from "~/utils/route";
 import routeAction from "./route-action.server";
 import RouteDefault, { loader as defaultLoader } from "./route-default";
@@ -12,18 +12,7 @@ export const loader = decideLoaderType(defaultLoader, deferredLoader);
 
 export const action = routeAction;
 
-const RouteAsPerLoaderType = withDecideRouteType(RouteDefault, RouteDeferred);
-
-export default function Route() {
-  const actionData = useActionData<typeof action>();
-
-  return (
-    <RouteAsPerLoaderType
-      fields={{
-        loginId: actionData?.fields?.loginId?.toString(),
-        password: actionData?.fields?.password?.toString(),
-      }}
-      errors={actionData?.errors}
-    />
-  );
-}
+export default withRouteAction(
+  withDecideRouteType(RouteDefault, RouteDeferred),
+  action
+);

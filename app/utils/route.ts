@@ -28,14 +28,14 @@ export const deferredLoader = <T>(
   loader: (args: LoaderFunctionArgs) => Promise<T>
 ) => {
   return async (args: LoaderFunctionArgs) =>
-    defer({ dataPromise: deferredResponse<T>(() => loader(args)) });
+    defer({ deferredLoaderResponse: deferredResponse<T>(() => loader(args)) });
 };
 
 export const decideLoaderType = <T>(
   defaultLoader: (args: LoaderFunctionArgs) => Promise<T>,
   deferredLoader: (args: LoaderFunctionArgs) => Promise<
     TypedDeferredData<{
-      dataPromise: Promise<T>;
+      deferredLoaderResponse: Promise<T>;
     }>
   >
 ) => {

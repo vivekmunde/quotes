@@ -3,15 +3,21 @@ import React from "react";
 import Layout from "~/components/layout";
 import ToggleMode from "~/components/toggle-mode";
 import H2 from "~/components/ui/typography/h2";
-import LoginForm, { TFormProps } from "./components/login-form";
+import { TFormResponse, TMayBe } from "~/types";
+import LoginForm from "./components/login-form";
 import Quote from "./components/quote";
 import { TData } from "./types";
 
-const RouteContent: React.FC<
-  TFormProps & {
-    data: TData;
-  }
-> = ({ fields, errors, data }) => {
+const RouteContent: React.FC<{
+  actionResponse?: TMayBe<TFormResponse<"loginId" | "password">>;
+  data: TData;
+}> = ({ actionResponse, data }) => {
+  const fields = {
+    loginId: actionResponse?.fields?.loginId?.toString(),
+    password: actionResponse?.fields?.password?.toString(),
+  };
+  const errors = actionResponse?.errors;
+
   return (
     <React.Fragment>
       <div className="grid md:grid-cols-2 h-screen">

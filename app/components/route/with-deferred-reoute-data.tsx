@@ -9,17 +9,17 @@ function withDeferredRouteData<TProps, TData>(
   RouteError: React.FC<{ error?: any }>,
   loader: (args: LoaderFunctionArgs) => Promise<
     TypedDeferredData<{
-      dataPromise: Promise<TData>;
+      deferredLoaderResponse: Promise<TData>;
     }>
   >
 ): React.FC<TProps & { data: TData }> {
   const RouteDeferred: React.FC<TProps & { data: TData }> = (props) => {
-    const { dataPromise } = useLoaderData<typeof loader>();
+    const { deferredLoaderResponse } = useLoaderData<typeof loader>();
 
     return (
       <DeferredRouteErrorBoundary Fallback={RouteError}>
         <Suspense fallback={<RouteSkeleton />}>
-          <Await resolve={dataPromise}>
+          <Await resolve={deferredLoaderResponse}>
             {(data) => <Route {...props} data={data as TData} />}
           </Await>
         </Suspense>

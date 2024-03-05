@@ -1,7 +1,10 @@
 import Layout from "~/components/layout";
-import QuoteForm, { TFormProps } from "~/components/quote-form";
+import QuoteForm from "~/components/quote-form";
+import { TFormResponse, TMayBe } from "~/types";
 
-const RouteContent: React.FC<TFormProps> = (props) => {
+const RouteContent: React.FC<{
+  actionResponse?: TMayBe<TFormResponse<"author" | "title">>;
+}> = ({ actionResponse }) => {
   return (
     <Layout.Screen.Body>
       <section>
@@ -13,7 +16,15 @@ const RouteContent: React.FC<TFormProps> = (props) => {
           </Layout.Header>
           <Layout.Body>
             <form method="post">
-              <QuoteForm {...props} />
+              <QuoteForm
+                fields={
+                  actionResponse?.fields ?? {
+                    author: undefined,
+                    title: undefined,
+                  }
+                }
+                errors={actionResponse?.errors}
+              />
             </form>
           </Layout.Body>
         </Layout>
