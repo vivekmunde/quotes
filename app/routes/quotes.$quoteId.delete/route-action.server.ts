@@ -13,8 +13,8 @@ async function deleteQuote({ request }: ActionFunctionArgs) {
   const password = form.get("password");
 
   if (typeof quoteId !== "string" || !quoteId) {
-    return badRequest<TFormResponse<"id">>({
-      fields: { id: quoteId },
+    return badRequest<TFormResponse<"quoteId">>({
+      fields: { quoteId },
       errors: {
         message: "The quote you are trying to delete was not recieved!",
       },
@@ -22,8 +22,8 @@ async function deleteQuote({ request }: ActionFunctionArgs) {
   }
 
   if (typeof password !== "string" || !password) {
-    return badRequest<TFormResponse<"id">>({
-      fields: { id: quoteId },
+    return badRequest<TFormResponse<"quoteId">>({
+      fields: { quoteId },
       errors: { message: "Please enter your password!" },
     });
   }
