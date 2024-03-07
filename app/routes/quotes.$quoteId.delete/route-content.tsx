@@ -1,4 +1,4 @@
-import { Form, useNavigate } from "@remix-run/react";
+import { useFetcher, useNavigate } from "@remix-run/react";
 import React from "react";
 import If from "~/components/if";
 import Layout from "~/components/layout";
@@ -10,10 +10,15 @@ import DeleteQuoteForm from "./components/delete-quote-form";
 import { TData } from "./types";
 
 const RouteContent: React.FC<{
-  actionResponse?: TMayBe<TFormResponse<"quoteId" | "password">>;
   data?: TMayBe<TData>;
-}> = ({ actionResponse, data }) => {
+}> = ({ data }) => {
   const navigate = useNavigate();
+  const fetcher = useFetcher<TFormResponse<"quoteId" | "password">>();
+  const fields = {
+    quoteId: fetcher.formData?.get("quoteId") ?? data?.quote?.id,
+    password: fetcher.formData?.get("password"),
+  };
+  const errors = fetcher.data?.errors;
 
   return (
     <Layout.Screen.Body>
@@ -43,20 +48,21 @@ const RouteContent: React.FC<{
                   deleted then it cannnot be restored back. <br />
                   Are you sure you want to delete the quote?
                 </P>
-                <Form method="post">
+                <fetcher.Form method="post">
                   <DeleteQuoteForm
                     fields={
-                      actionResponse?.fields ?? {
+                      fields ?? {
                         quoteId: data?.quote?.id,
                         password: "",
                       }
                     }
-                    errors={actionResponse?.errors}
+                    errors={errors}
                     onCancel={() => {
                       navigate(-1);
                     }}
+                    deleting={fetcher.state === "submitting"}
                   />
-                </Form>
+                </fetcher.Form>
               </React.Fragment>
             ) : (
               <RouteError404 />

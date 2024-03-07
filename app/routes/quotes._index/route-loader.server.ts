@@ -1,6 +1,7 @@
-import { LoaderFunctionArgs } from "@remix-run/node";
+import { LoaderFunctionArgs, json } from "@remix-run/node";
 import { authorizedAccess } from "~/utils/server/auth";
 import { db } from "~/utils/server/db.server";
+import { badRequest } from "~/utils/server/request.server";
 
 const getData = async ({ request }: LoaderFunctionArgs) => {
   const { searchParams } = new URL(request.url);
@@ -12,21 +13,11 @@ const getData = async ({ request }: LoaderFunctionArgs) => {
   const _pageSize = Number(pageSize);
 
   if (typeof _pageNumber !== "number" || Number.isNaN(_pageNumber)) {
-    throw new Error(
-      JSON.stringify({
-        message: "Page should be a number!",
-        status: 400,
-      })
-    );
+    throw badRequest("Page should be a number!");
   }
 
   if (typeof _pageSize !== "number" || Number.isNaN(_pageSize)) {
-    throw new Error(
-      JSON.stringify({
-        message: "Page size should be a number!",
-        status: 400,
-      })
-    );
+    throw badRequest("Page size should be a number!");
   }
 
   const wordsToSearch = q.split(" ");
@@ -59,7 +50,12 @@ const getData = async ({ request }: LoaderFunctionArgs) => {
     orderBy: { updatedAt: "desc" },
   });
 
-  return { data: quotes, total, pageNumber: _pageNumber, pageSize: _pageSize };
+  return json({
+    data: quotes,
+    total,
+    pageNumber: _pageNumber,
+    pageSize: _pageSize,
+  });
 };
 
 const loader = async (args: LoaderFunctionArgs) => {

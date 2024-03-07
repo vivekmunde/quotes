@@ -16,9 +16,10 @@ import { TFormResponse } from "~/types";
 const QuoteForm: React.FC<
   TFormResponse<"author" | "title"> & {
     intent?: "create" | "update";
+    submitting?: boolean;
     onCancel?: () => void;
   }
-> = ({ intent, fields, errors, onCancel }) => {
+> = ({ intent, fields, errors, submitting, onCancel }) => {
   return (
     <Form>
       <FormItem>
@@ -50,7 +51,7 @@ const QuoteForm: React.FC<
       </FormItem>
       <FormItem>
         <div className="flex flex-row gap-2">
-          <Button>
+          <Button type="submit" loading={submitting}>
             <If condition={intent === "create"}>
               <If.True>Create</If.True>
               <If.False>
@@ -62,6 +63,7 @@ const QuoteForm: React.FC<
             </If>
           </Button>
           <Button
+            type="button"
             variant="outline"
             onClick={() => {
               if (onCancel) {

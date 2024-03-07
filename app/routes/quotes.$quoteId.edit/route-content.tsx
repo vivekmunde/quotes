@@ -1,4 +1,4 @@
-import { Form, useNavigate } from "@remix-run/react";
+import { useFetcher, useNavigate } from "@remix-run/react";
 import Layout from "~/components/layout";
 import QuoteForm from "~/components/quote-form";
 import RouteError404 from "~/components/route-error/404";
@@ -7,10 +7,15 @@ import { TFormResponse, TMayBe } from "~/types";
 import { TData } from "./types";
 
 const RouteContent: React.FC<{
-  actionResponse?: TMayBe<TFormResponse<"author" | "title">>;
   data?: TMayBe<TData>;
-}> = ({ actionResponse, data }) => {
+}> = ({ data }) => {
   const navigate = useNavigate();
+  const fetcher = useFetcher<TFormResponse<"author" | "title">>();
+  const fields = {
+    author: fetcher.formData?.get("author") ?? data?.quote?.author,
+    title: fetcher.formData?.get("title") ?? data?.quote?.title,
+  };
+  const errors = fetcher.data?.errors;
 
   return (
     <Layout.Screen.Body>
@@ -23,22 +28,18 @@ const RouteContent: React.FC<{
           </Layout.Header>
           <Layout.Body>
             {data?.quote ? (
-              <Form method="post">
+              <fetcher.Form method="post">
                 <Input name="id" type="hidden" value={data.quote.id} />
                 <QuoteForm
                   intent="update"
-                  fields={
-                    actionResponse?.fields ?? {
-                      author: data.quote.author,
-                      title: data.quote.title,
-                    }
-                  }
-                  errors={actionResponse?.errors}
+                  fields={fields}
+                  errors={errors}
                   onCancel={() => {
                     navigate(-1);
                   }}
+                  submitting={fetcher.state === "submitting"}
                 />
-              </Form>
+              </fetcher.Form>
             ) : (
               <RouteError404 />
             )}

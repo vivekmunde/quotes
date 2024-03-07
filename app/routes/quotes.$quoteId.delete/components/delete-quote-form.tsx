@@ -14,9 +14,10 @@ import { TFormResponse } from "~/types";
 
 const DeleteQuoteForm: React.FC<
   TFormResponse<"quoteId" | "password"> & {
+    deleting: boolean;
     onCancel?: () => void;
   }
-> = ({ fields, errors, onCancel }) => {
+> = ({ fields, errors, deleting, onCancel }) => {
   return (
     <Form>
       <Input
@@ -46,8 +47,11 @@ const DeleteQuoteForm: React.FC<
       </FormItem>
       <FormItem>
         <div className="flex flex-row gap-2">
-          <Button variant="destructive">Yes! Delete</Button>
+          <Button type="submit" variant="destructive" loading={deleting}>
+            Yes! Delete
+          </Button>
           <Button
+            type="button"
             variant="outline"
             onClick={() => {
               if (onCancel) {
@@ -59,7 +63,7 @@ const DeleteQuoteForm: React.FC<
           </Button>
         </div>
       </FormItem>
-      <If condition={(errors?.message ?? "").length > 0}>
+      <If condition={!deleting && (errors?.message ?? "").length > 0}>
         <If.True>
           <Alert variant="destructive">
             <AlertCircle className="h-4 w-4" />

@@ -1,30 +1,22 @@
-import { LoaderFunctionArgs, redirect } from "@remix-run/node";
-import withDecideRouteType from "~/components/route/with-decide-route-type";
-import withRouteAction from "~/components/route/with-route-action";
-import { decideLoaderType } from "~/utils/route";
-import { isLoggedIn } from "~/utils/server/auth";
+import { useLoaderData } from "@remix-run/react";
 import routeAction from "./route-action.server";
-import RouteDefault, { loader as defaultLoader } from "./route-default";
-import RouteDeferred, { loader as deferredLoader } from "./route-deferred";
+import RouteContent from "./route-content";
 import RouteError from "./route-error";
+import routeLoader from "./route-loader.server";
+import { TData } from "./types";
 
 export const ErrorBoundary = RouteError;
 
-export const loader = async (args: LoaderFunctionArgs) => {
-  const _isLoggedIn = await isLoggedIn(args.request);
-  if (_isLoggedIn) {
-    const { searchParams } = new URL(args.request.url);
-    const redirectTo = searchParams.get("redirectTo") ?? "";
-
-    return redirect(redirectTo.length > 0 ? redirectTo : "/quotes");
-  } else {
-    return decideLoaderType(defaultLoader, deferredLoader)(args);
-  }
-};
+export const loader = routeLoader;
 
 export const action = routeAction;
 
-export default withRouteAction(
-  withDecideRouteType(RouteDefault, RouteDeferred),
-  action
-);
+export function shouldRevalidate() {
+  return false;
+}
+
+export default function Route() {
+  const data = useLoaderData<typeof loader>();
+
+  return <RouteContent data={data as TData} />;
+}

@@ -1,22 +1,23 @@
-import { Form, Link } from "@remix-run/react";
+import { Link, useFetcher, useNavigation } from "@remix-run/react";
 import React from "react";
 import Layout from "~/components/layout";
 import ToggleMode from "~/components/toggle-mode";
 import H2 from "~/components/ui/typography/h2";
-import { TFormResponse, TMayBe } from "~/types";
+import { TFormResponse } from "~/types";
 import LoginForm from "./components/login-form";
 import Quote from "./components/quote";
 import { TData } from "./types";
 
 const RouteContent: React.FC<{
-  actionResponse?: TMayBe<TFormResponse<"loginId" | "password">>;
   data: TData;
-}> = ({ actionResponse, data }) => {
+}> = ({ data }) => {
+  const navigation = useNavigation();
+  const fetcher = useFetcher<TFormResponse<"loginId" | "password">>();
   const fields = {
-    loginId: actionResponse?.fields?.loginId?.toString(),
-    password: actionResponse?.fields?.password?.toString(),
+    loginId: fetcher.formData?.get("loginId"),
+    password: fetcher.formData?.get("password"),
   };
-  const errors = actionResponse?.errors;
+  const errors = fetcher.data?.errors;
 
   return (
     <React.Fragment>
@@ -35,9 +36,16 @@ const RouteContent: React.FC<{
           <Layout.Body className="px-6 lg:px-10 xl:px-12 py-2 lg:py-4 flex-1 flex flex-col justify-center">
             <div className="flex-1 flex flex-col justify-center lg:w-[25vw]">
               <H2>Login</H2>
-              <Form method="post">
-                <LoginForm fields={fields} errors={errors} />
-              </Form>
+              <fetcher.Form method="post">
+                <LoginForm
+                  fields={fields}
+                  errors={errors}
+                  submitting={
+                    fetcher.state === "submitting" ||
+                    navigation.state === "loading"
+                  }
+                />
+              </fetcher.Form>
             </div>
           </Layout.Body>
         </Layout>

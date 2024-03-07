@@ -6,6 +6,8 @@ import { TData } from "./types";
 const RouteContent: React.FC<{
   data: TData;
 }> = ({ data }) => {
+  const quotes = data?.data ?? [];
+
   return (
     <Layout.Screen.Body>
       <section>
@@ -21,7 +23,7 @@ const RouteContent: React.FC<{
             </header>
           </Layout.Header>
           <Layout.Body>
-            {data?.data && <QuotesList quotes={data.data} startIndex={1} />}
+            <QuotesList quotes={quotes} startIndex={1} />
           </Layout.Body>
         </Layout>
       </section>

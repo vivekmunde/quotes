@@ -1,8 +1,9 @@
 import { Slot } from "@radix-ui/react-slot";
-import { cva, type VariantProps } from "class-variance-authority";
-import * as React from "react";
-
 import { cn } from "app/lib/utils";
+import { cva, type VariantProps } from "class-variance-authority";
+import { Loader } from "lucide-react";
+import * as React from "react";
+import If from "~/components/if";
 
 const buttonVariants = cva(
   "q-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
@@ -37,17 +38,39 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
+  loading?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, icon, asChild = false, ...props }, ref) => {
+  (
+    {
+      className,
+      variant,
+      size,
+      icon,
+      asChild = false,
+      children,
+      loading,
+      ...props
+    },
+    ref
+  ) => {
     const Comp = asChild ? Slot : "button";
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, icon, className }))}
         ref={ref}
         {...props}
-      />
+      >
+        {children}
+        <If condition={!!loading}>
+          <If.True>
+            <span className="ml-2">
+              <Loader className="h-4 w-4 animate-spin" />
+            </span>
+          </If.True>
+        </If>
+      </Comp>
     );
   }
 );

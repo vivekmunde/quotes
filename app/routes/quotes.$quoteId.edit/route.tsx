@@ -1,18 +1,18 @@
-import withDecideRouteType from "~/components/route/with-decide-route-type";
-import withRouteAction from "~/components/route/with-route-action";
-import { decideLoaderType } from "~/utils/route";
+import { useLoaderData } from "@remix-run/react";
 import routeAction from "./route-action.server";
-import routeDefault, { loader as defaultLoader } from "./route-default";
-import routeDeferred, { loader as deferredLoader } from "./route-deferred";
+import RouteContent from "./route-content";
 import RouteError from "./route-error";
+import routeLoader from "./route-loader.server";
+import { TData } from "./types";
 
 export const ErrorBoundary = RouteError;
 
 export const action = routeAction;
 
-export const loader = decideLoaderType(defaultLoader, deferredLoader);
+export const loader = routeLoader;
 
-export default withRouteAction(
-  withDecideRouteType(routeDefault, routeDeferred),
-  action
-);
+export default function Route() {
+  const data = useLoaderData<typeof loader>();
+
+  return <RouteContent data={data as TData} />;
+}

@@ -1,4 +1,3 @@
-import withRouteAction from "~/components/route/with-route-action";
 import routeAction from "./route-action.server";
 import RouteContent from "./route-content";
 import RouteError from "./route-error";
@@ -10,4 +9,6 @@ export const action = routeAction;
 
 export const loader = routeLoader;
 
-export default withRouteAction(RouteContent, action);
+export default function Route() {
+  return <RouteContent />;
+}

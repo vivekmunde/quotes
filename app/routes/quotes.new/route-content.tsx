@@ -1,12 +1,16 @@
-import { Form, useNavigate } from "@remix-run/react";
+import { useFetcher, useNavigate } from "@remix-run/react";
 import Layout from "~/components/layout";
 import QuoteForm from "~/components/quote-form";
-import { TFormResponse, TMayBe } from "~/types";
+import { TFormResponse } from "~/types";
 
-const RouteContent: React.FC<{
-  actionResponse?: TMayBe<TFormResponse<"author" | "title">>;
-}> = ({ actionResponse }) => {
+const RouteContent: React.FC<{}> = () => {
   const navigate = useNavigate();
+  const fetcher = useFetcher<TFormResponse<"author" | "title">>();
+  const fields = {
+    author: fetcher.formData?.get("author"),
+    title: fetcher.formData?.get("title"),
+  };
+  const errors = fetcher.data?.errors;
 
   return (
     <Layout.Screen.Body>
@@ -18,21 +22,17 @@ const RouteContent: React.FC<{
             </header>
           </Layout.Header>
           <Layout.Body>
-            <Form method="post">
+            <fetcher.Form method="post">
               <QuoteForm
                 intent="create"
-                fields={
-                  actionResponse?.fields ?? {
-                    author: undefined,
-                    title: undefined,
-                  }
-                }
-                errors={actionResponse?.errors}
+                fields={fields}
+                errors={errors}
                 onCancel={() => {
                   navigate(-1);
                 }}
+                submitting={fetcher.state === "submitting"}
               />
-            </Form>
+            </fetcher.Form>
           </Layout.Body>
         </Layout>
       </section>

@@ -22,3 +22,9 @@ export type TResponseError = {
 };
 
 export type TRouteLoaderType = "Default" | "Deferred";
+
+export type TError = {
+  status?: TMayBe<number>;
+  statusText?: TMayBe<string>;
+  message?: TMayBe<string>;
+};
