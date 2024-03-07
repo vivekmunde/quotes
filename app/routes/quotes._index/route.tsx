@@ -1,4 +1,5 @@
 import { useLoaderData } from "@remix-run/react";
+import RouteContainer from "~/components/route-container";
 import RouteContent from "./route-content";
 import RouteError from "./route-error";
 import routeLoader from "./route-loader.server";
@@ -11,5 +12,9 @@ export const loader = routeLoader;
 export default function Route() {
   const data = useLoaderData<typeof loader>();
 
-  return <RouteContent data={data as TData} />;
+  return (
+    <RouteContainer>
+      <RouteContent data={data as TData} />
+    </RouteContainer>
+  );
 }

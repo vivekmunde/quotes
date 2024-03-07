@@ -1,4 +1,5 @@
 import { useLoaderData } from "@remix-run/react";
+import RouteContainer from "~/components/route-container";
 import routeAction from "./route-action.server";
 import RouteContent from "./route-content";
 import RouteError from "./route-error";
@@ -18,5 +19,9 @@ export function shouldRevalidate() {
 export default function Route() {
   const data = useLoaderData<typeof loader>();
 
-  return <RouteContent data={data as TData} />;
+  return (
+    <RouteContainer>
+      <RouteContent data={data as TData} />
+    </RouteContainer>
+  );
 }
