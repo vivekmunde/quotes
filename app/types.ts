@@ -8,6 +8,14 @@ export type TFormResponse<TFields extends string> = {
   }>;
 };
 
+export type TGetResponse<TData> = {
+  data?: TData;
+  total?: TMayBe<number>;
+  pageNumber?: TMayBe<number>;
+  pageSize?: TMayBe<number>;
+  error?: TMayBe<string>;
+};
+
 export type TResponseError = {
   message: string;
   status: number;
