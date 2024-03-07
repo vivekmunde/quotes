@@ -4,6 +4,7 @@ import React from "react";
 import If from "~/components/if";
 import Layout from "~/components/layout";
 import Quote from "~/components/quote";
+import RouteError404 from "~/components/route-error/404";
 import { Button } from "~/components/ui/button";
 import {
   Tooltip,
@@ -19,9 +20,9 @@ const RouteContent: React.FC<{
   const [searchParams] = useSearchParams();
   const backTo = searchParams.get("backTo") ?? "";
 
-  const { quote } = data;
+  const { quote } = data ?? {};
 
-  return (
+  return quote ? (
     <React.Fragment>
       <Layout.Screen.Body className="flex flex-col justify-center">
         <div className="md:mb-[5vh]">
@@ -85,6 +86,8 @@ const RouteContent: React.FC<{
         </div>
       </Layout.Screen.Footer>
     </React.Fragment>
+  ) : (
+    <RouteError404 />
   );
 };
 

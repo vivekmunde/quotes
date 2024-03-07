@@ -3,19 +3,20 @@ import { ChevronRight } from "lucide-react";
 import React from "react";
 import Layout from "~/components/layout";
 import Quote from "~/components/quote";
+import RouteError404 from "~/components/route-error/404";
 import { Button } from "~/components/ui/button";
 import { TData } from "./types";
 
 const RouteContent: React.FC<{
   data: TData;
 }> = ({ data }) => {
-  const { quote, nextQuote } = data;
+  const { quote, nextQuote } = data ?? {};
 
-  return (
+  return quote ? (
     <React.Fragment>
       <Layout.Screen.Body className="flex flex-col justify-center">
         <div className="md:mb-[5vh]">
-          <Quote author={quote.author} title={quote.title} />
+          <Quote author={quote?.author} title={quote.title} />
         </div>
       </Layout.Screen.Body>
       <Layout.Screen.Footer>
@@ -28,6 +29,8 @@ const RouteContent: React.FC<{
         </div>
       </Layout.Screen.Footer>
     </React.Fragment>
+  ) : (
+    <RouteError404 />
   );
 };
 

@@ -21,7 +21,7 @@ const RouteContent: React.FC<{
             </header>
           </Layout.Header>
           <Layout.Body>
-            <QuotesList quotes={data} startIndex={1} />
+            {data && <QuotesList quotes={data} startIndex={1} />}
           </Layout.Body>
         </Layout>
       </section>

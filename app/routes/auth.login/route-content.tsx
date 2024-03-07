@@ -43,7 +43,7 @@ const RouteContent: React.FC<{
         </Layout>
         <Layout className="hidden md:flex flex-col justify-center bg-muted text-muted-foreground p-6 lg:px-10 xl:px-12">
           <Layout.Body className="flex flex-col justify-center">
-            <Quote quote={data} />
+            {data && <Quote quote={data} />}
           </Layout.Body>
         </Layout>
       </div>

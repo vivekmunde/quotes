@@ -1,3 +1,5 @@
-export type TData = {
-  quote: { id: string; title: string; author: string | null };
-};
+import { TMayBe } from "~/types";
+
+export type TData = TMayBe<{
+  quote?: TMayBe<{ id: string; title: string; author: TMayBe<string> }>;
+}>;
