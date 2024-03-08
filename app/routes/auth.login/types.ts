@@ -1,6 +1,5 @@
-import { TMayBe } from "~/types";
+import { TMayBe, TRecordResponse } from "~/types";
 
-export type TData = TMayBe<{
-  title: string;
-  author: TMayBe<string>;
-}>;
+export type TQuote = { title: string; author?: TMayBe<string> };
+
+export type TData = TRecordResponse<TQuote>;

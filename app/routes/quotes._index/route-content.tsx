@@ -1,13 +1,14 @@
 import Layout from "~/components/layout";
 import QuotesList from "./components/quotes-list";
 import SearchForm from "./components/search-form";
-import { TData } from "./types";
+import { TQuote } from "./types";
 
 const RouteContent: React.FC<{
-  data: TData;
-}> = ({ data }) => {
-  const quotes = data?.data ?? [];
-
+  items: TQuote[];
+  total: number;
+  page: number;
+  size: number;
+}> = ({ items }) => {
   return (
     <Layout.Screen.Body>
       <section>
@@ -23,7 +24,7 @@ const RouteContent: React.FC<{
             </header>
           </Layout.Header>
           <Layout.Body>
-            <QuotesList quotes={quotes} startIndex={1} />
+            <QuotesList quotes={items} startIndex={1} />
           </Layout.Body>
         </Layout>
       </section>

@@ -12,15 +12,14 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "~/components/ui/tooltip";
-import { TData } from "./types";
+import { TMayBe } from "~/types";
+import { TQuote } from "./types";
 
 const RouteContent: React.FC<{
-  data: TData;
-}> = ({ data }) => {
+  quote: TMayBe<TQuote>;
+}> = ({ quote }) => {
   const [searchParams] = useSearchParams();
   const backTo = searchParams.get("backTo") ?? "";
-
-  const { quote } = data ?? {};
 
   return quote ? (
     <React.Fragment>

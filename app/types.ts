@@ -8,23 +8,30 @@ export type TFormResponse<TFields extends string> = {
   }>;
 };
 
-export type TGetResponse<TData> = {
-  data?: TData;
-  total?: TMayBe<number>;
-  pageNumber?: TMayBe<number>;
-  pageSize?: TMayBe<number>;
+export type TRecordResponse<TRecord> = {
+  item?: TMayBe<TRecord>;
   error?: TMayBe<string>;
 };
 
-export type TResponseError = {
-  message: string;
-  status: number;
+export type TDeferredRecordResponse<TRecord> = {
+  item?: TMayBe<Promise<TMayBe<TRecord>>>;
+  error?: TMayBe<string>;
+};
+
+export type TRecordsResponse<TRecord> = {
+  items?: TMayBe<TRecord[]>;
+  total?: TMayBe<number>;
+  page?: TMayBe<number>;
+  size?: TMayBe<number>;
+  error?: TMayBe<string>;
+};
+
+export type TDeferredRecordsResponse<TRecord> = {
+  items?: TMayBe<Promise<TMayBe<TRecord[]>>>;
+  total?: TMayBe<Promise<number>>;
+  page?: TMayBe<number>;
+  size?: TMayBe<number>;
+  error?: TMayBe<string>;
 };
 
 export type TRouteLoaderType = "Default" | "Deferred";
-
-export type TError = {
-  status?: TMayBe<number>;
-  statusText?: TMayBe<string>;
-  message?: TMayBe<string>;
-};

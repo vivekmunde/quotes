@@ -2,6 +2,7 @@ import { json, type LoaderFunctionArgs } from "@remix-run/node";
 import { authorizedAccess } from "~/utils/server/auth";
 import { db } from "~/utils/server/db.server";
 import { response404, response500 } from "~/utils/server/response.server";
+import { TData } from "./types";
 
 const quoteNotFoundMessage =
   "Quote you are looking for either has been removed or never did exist!";
@@ -21,18 +22,20 @@ const getQuote = async (quoteId: string) => {
 
 const getData = async ({ params }: LoaderFunctionArgs) => {
   if (!params.quoteId) {
-    throw response404(quoteNotFoundMessage);
+    throw response404({ item: undefined, error: quoteNotFoundMessage });
   }
 
   try {
     const quote = await getQuote(params.quoteId);
 
-    return json({ quote });
+    const response: TData = { item: quote };
+
+    return json(response);
   } catch (error: any) {
     if (error?.message === "404") {
-      throw response404(quoteNotFoundMessage);
+      throw response404({ item: undefined, error: quoteNotFoundMessage });
     }
-    return response500();
+    return response500({ item: undefined });
   }
 };
 

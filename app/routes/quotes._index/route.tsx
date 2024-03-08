@@ -1,20 +1,39 @@
-import { useLoaderData } from "@remix-run/react";
+import { Await, useLoaderData } from "@remix-run/react";
+import { Suspense } from "react";
 import RouteContainer from "~/components/route-container";
 import RouteContent from "./route-content";
 import RouteError from "./route-error";
 import routeLoader from "./route-loader.server";
-import { TData } from "./types";
+import RouteSkeleton from "./route-skeleton";
+import { TQuote } from "./types";
 
 export const ErrorBoundary = RouteError;
 
 export const loader = routeLoader;
 
 export default function Route() {
-  const data = useLoaderData<typeof loader>();
+  const response = useLoaderData<typeof loader>();
 
   return (
     <RouteContainer>
-      <RouteContent data={data as TData} />
+      <Suspense fallback={<RouteSkeleton />}>
+        <Await resolve={response.total}>
+          {(total) => (
+            <Suspense fallback={<RouteSkeleton />}>
+              <Await resolve={response.items}>
+                {(items) => (
+                  <RouteContent
+                    items={(items ?? []) as TQuote[]}
+                    total={total ?? 0}
+                    page={response.page ?? 0}
+                    size={response.size ?? 10}
+                  />
+                )}
+              </Await>
+            </Suspense>
+          )}
+        </Await>
+      </Suspense>
     </RouteContainer>
   );
 }

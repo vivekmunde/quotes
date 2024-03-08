@@ -4,16 +4,16 @@ import QuoteForm from "~/components/quote-form";
 import RouteError404 from "~/components/route-error/404";
 import { Input } from "~/components/ui/input";
 import { TFormResponse, TMayBe } from "~/types";
-import { TData } from "./types";
+import { TQuote } from "./types";
 
 const RouteContent: React.FC<{
-  data?: TMayBe<TData>;
-}> = ({ data }) => {
+  quote?: TMayBe<TQuote>;
+}> = ({ quote }) => {
   const navigate = useNavigate();
   const fetcher = useFetcher<TFormResponse<"author" | "title">>();
   const fields = {
-    author: fetcher.formData?.get("author") ?? data?.quote?.author,
-    title: fetcher.formData?.get("title") ?? data?.quote?.title,
+    author: fetcher.formData?.get("author") ?? quote?.author,
+    title: fetcher.formData?.get("title") ?? quote?.title,
   };
   const errors = fetcher.data?.errors;
 
@@ -27,9 +27,9 @@ const RouteContent: React.FC<{
             </header>
           </Layout.Header>
           <Layout.Body>
-            {data?.quote ? (
+            {quote ? (
               <fetcher.Form method="post">
-                <Input name="id" type="hidden" value={data.quote.id} />
+                <Input name="id" type="hidden" value={quote.id} />
                 <QuoteForm
                   intent="update"
                   fields={fields}

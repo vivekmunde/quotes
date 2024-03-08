@@ -1,9 +1,10 @@
 import { useLoaderData } from "@remix-run/react";
 import RouteContainer from "~/components/route-container";
+import { TMayBe } from "~/types";
 import RouteContent from "./route-content";
 import RouteError from "./route-error";
 import routeLoader from "./route-loader.server";
-import { TData } from "./types";
+import { TQuote } from "./types";
 
 export const ErrorBoundary = RouteError;
 
@@ -14,7 +15,7 @@ export default function Route() {
 
   return (
     <RouteContainer>
-      <RouteContent data={data as TData} />
+      <RouteContent quote={data.item as TMayBe<TQuote>} />
     </RouteContainer>
   );
 }

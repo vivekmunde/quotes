@@ -6,12 +6,20 @@ import GenericRouteError from "./generic-route-error";
 
 const RouteError: React.FC<{ error?: any }> = ({ error }) => {
   const routeError = useRouteError();
+
   const routeErrorStatus = isRouteErrorResponse(routeError)
     ? routeError?.status
     : error?.status;
-  const message = isRouteErrorResponse(routeError)
-    ? routeError?.data?.toString()
-    : error?.message;
+
+  let message = error?.message;
+
+  if (isRouteErrorResponse(routeError)) {
+    try {
+      message = routeError.data?.error;
+    } catch (err: any) {
+      message = routeError.data?.toString();
+    }
+  }
 
   return (
     <If condition={routeErrorStatus === 404}>

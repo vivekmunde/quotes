@@ -4,7 +4,6 @@ import routeAction from "./route-action.server";
 import RouteContent from "./route-content";
 import RouteError from "./route-error";
 import routeLoader from "./route-loader.server";
-import { TData } from "./types";
 
 export const ErrorBoundary = RouteError;
 
@@ -17,7 +16,7 @@ export default function Route() {
 
   return (
     <RouteContainer>
-      <RouteContent data={data as TData} />
+      <RouteContent quote={data.item} />
     </RouteContainer>
   );
 }

@@ -3,14 +3,14 @@ import React from "react";
 import Layout from "~/components/layout";
 import ToggleMode from "~/components/toggle-mode";
 import H2 from "~/components/ui/typography/h2";
-import { TFormResponse } from "~/types";
+import { TFormResponse, TMayBe } from "~/types";
 import LoginForm from "./components/login-form";
 import Quote from "./components/quote";
-import { TData } from "./types";
+import { TQuote } from "./types";
 
 const RouteContent: React.FC<{
-  data: TData;
-}> = ({ data }) => {
+  quote?: TMayBe<TQuote>;
+}> = ({ quote }) => {
   const navigation = useNavigation();
   const fetcher = useFetcher<TFormResponse<"loginId" | "password">>();
   const fields = {
@@ -51,7 +51,7 @@ const RouteContent: React.FC<{
         </Layout>
         <Layout className="hidden md:flex flex-col justify-center bg-muted text-muted-foreground p-6 lg:px-10 xl:px-12">
           <Layout.Body className="flex flex-col justify-center">
-            {data && <Quote quote={data} />}
+            {quote && <Quote quote={quote} />}
           </Layout.Body>
         </Layout>
       </div>

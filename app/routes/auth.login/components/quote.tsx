@@ -1,9 +1,9 @@
 import If from "~/components/if";
 import H2 from "~/components/ui/typography/h2";
-import { TMayBe } from "~/types";
+import { TQuote } from "../types";
 
 const Quote: React.FC<{
-  quote: { title: string; author: TMayBe<string> };
+  quote: TQuote;
 }> = ({ quote }) => {
   return (
     <section className="pb-4">

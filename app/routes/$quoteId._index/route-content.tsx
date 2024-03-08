@@ -1,17 +1,18 @@
 import { Link } from "@remix-run/react";
 import { ChevronRight } from "lucide-react";
 import React from "react";
+import If from "~/components/if";
 import Layout from "~/components/layout";
 import Quote from "~/components/quote";
 import RouteError404 from "~/components/route-error/404";
 import { Button } from "~/components/ui/button";
-import { TData } from "./types";
+import { TMayBe } from "~/types";
+import { TNextQuote, TQuote } from "./types";
 
 const RouteContent: React.FC<{
-  data: TData;
-}> = ({ data }) => {
-  const { quote, nextQuote } = data ?? {};
-
+  quote: TMayBe<TQuote>;
+  nextQuote: TMayBe<TNextQuote>;
+}> = ({ quote, nextQuote }) => {
   return quote ? (
     <React.Fragment>
       <Layout.Screen.Body className="flex flex-col justify-center">
@@ -20,13 +21,17 @@ const RouteContent: React.FC<{
         </div>
       </Layout.Screen.Body>
       <Layout.Screen.Footer>
-        <div className="flex flex-row justify-end">
-          <Link prefetch="render" to={`/${nextQuote?.id}`}>
-            <Button icon>
-              <ChevronRight className="q h-8 w-8" />
-            </Button>
-          </Link>
-        </div>
+        <If condition={!!nextQuote?.id}>
+          <If.True>
+            <div className="flex flex-row justify-end">
+              <Link prefetch="render" to={`/${nextQuote?.id}`}>
+                <Button icon>
+                  <ChevronRight className="q h-8 w-8" />
+                </Button>
+              </Link>
+            </div>
+          </If.True>
+        </If>
       </Layout.Screen.Footer>
     </React.Fragment>
   ) : (

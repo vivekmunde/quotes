@@ -7,15 +7,15 @@ import H4 from "~/components/ui/typography/h4";
 import P from "~/components/ui/typography/p";
 import { TFormResponse, TMayBe } from "~/types";
 import DeleteQuoteForm from "./components/delete-quote-form";
-import { TData } from "./types";
+import { TQuote } from "./types";
 
 const RouteContent: React.FC<{
-  data?: TMayBe<TData>;
-}> = ({ data }) => {
+  quote?: TMayBe<TQuote>;
+}> = ({ quote }) => {
   const navigate = useNavigate();
   const fetcher = useFetcher<TFormResponse<"quoteId" | "password">>();
   const fields = {
-    quoteId: fetcher.formData?.get("quoteId") ?? data?.quote?.id,
+    quoteId: fetcher.formData?.get("quoteId") ?? quote?.id,
     password: fetcher.formData?.get("password"),
   };
   const errors = fetcher.data?.errors;
@@ -30,15 +30,15 @@ const RouteContent: React.FC<{
             </header>
           </Layout.Header>
           <Layout.Body>
-            {data?.quote ? (
+            {quote ? (
               <React.Fragment>
                 <div className="border rounded p-6 bg-neutral-100 dark:bg-neutral-900">
-                  <H4>{data?.quote?.title}</H4>
-                  <If condition={(data?.quote?.author ?? "").length > 0}>
+                  <H4>{quote?.title}</H4>
+                  <If condition={(quote?.author ?? "").length > 0}>
                     <If.True>
                       <div className="text-neutral-500">
                         {" - "}
-                        {data?.quote?.author}
+                        {quote?.author}
                       </div>
                     </If.True>
                   </If>
@@ -52,7 +52,7 @@ const RouteContent: React.FC<{
                   <DeleteQuoteForm
                     fields={
                       fields ?? {
-                        quoteId: data?.quote?.id,
+                        quoteId: quote?.id,
                         password: "",
                       }
                     }

@@ -1,11 +1,9 @@
-import { TGetResponse, TMayBe } from "~/types";
+import { TDeferredRecordsResponse, TMayBe } from "~/types";
 
-export type TData = TMayBe<
-  TGetResponse<
-    {
-      title: string;
-      id: string;
-      author: string | null;
-    }[]
-  >
->;
+export type TQuote = {
+  title: string;
+  id: string;
+  author: TMayBe<string>;
+};
+
+export type TData = TDeferredRecordsResponse<TQuote>;

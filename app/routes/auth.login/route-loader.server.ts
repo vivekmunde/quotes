@@ -1,9 +1,9 @@
-import { LoaderFunctionArgs, redirect } from "@remix-run/node";
+import { LoaderFunctionArgs, json, redirect } from "@remix-run/node";
 import getRandomQuote from "~/api/get-random-quote.server";
 import { isLoggedIn } from "~/utils/server/auth";
 import { TData } from "./types";
 
-const getData = async (): Promise<TData> => {
+const getData = async () => {
   return getRandomQuote({ select: { title: true, author: true } });
 };
 
@@ -15,7 +15,11 @@ const loader = async (args: LoaderFunctionArgs) => {
 
     return redirect(redirectTo.length > 0 ? redirectTo : "/quotes");
   } else {
-    return await getData();
+    const quote = await getData();
+
+    const response: TData = { item: quote };
+
+    return json(response);
   }
 };
 
