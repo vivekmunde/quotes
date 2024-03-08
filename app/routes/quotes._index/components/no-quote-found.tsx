@@ -24,8 +24,7 @@ const NoQuoteFound: React.FC = () => {
           </span>
         </div>
         <div>
-          We could not find any matching quotes. Please change the search
-          criteria.
+          We could not find any matching quotes. Keep searching amazing quotes.
         </div>
         <div>OR</div>
         <div>
