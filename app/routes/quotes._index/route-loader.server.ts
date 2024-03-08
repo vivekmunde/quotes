@@ -2,7 +2,6 @@ import { LoaderFunctionArgs, defer } from "@remix-run/node";
 import { TDeferredRecordsResponse } from "~/types";
 import { authorizedAccess } from "~/utils/server/auth";
 import { db } from "~/utils/server/db.server";
-import deferredResponse from "~/utils/server/delayed-promise.server";
 import { badRequest } from "~/utils/server/request.server";
 import { TQuote } from "./types";
 
@@ -56,8 +55,8 @@ const getData = async ({ request }: LoaderFunctionArgs) => {
     });
 
   const response: TDeferredRecordsResponse<TQuote> = {
-    items: deferredResponse(getQuotes),
-    total: deferredResponse(getTotal),
+    items: getQuotes(),
+    total: getTotal(),
     page: _pageNumber,
     size: _pageSize,
   };
