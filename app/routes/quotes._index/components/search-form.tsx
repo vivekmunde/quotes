@@ -1,6 +1,6 @@
 import { Form, useNavigation } from "@remix-run/react";
 import { Loader, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import If from "~/components/if";
 import { Button } from "~/components/ui/button";
 import { FormControl, FormItem } from "~/components/ui/form";
@@ -16,6 +16,12 @@ const SearchForm: React.FC = () => {
   const searchParamQuery = useGetSearchParam()("q");
   const [value, setValue] = useState(searchParamQuery);
   const isLoading = useIsLoading()();
+
+  useEffect(() => {
+    if (searchParamQuery !== value) {
+      setValue(searchParamQuery);
+    }
+  }, [searchParamQuery]);
 
   return (
     <div className="relative flex flex-row items-center">

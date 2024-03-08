@@ -1,6 +1,6 @@
-import { MessageCircle } from "lucide-react";
 import If from "~/components/if";
 import Layout from "~/components/layout";
+import NoQuoteFound from "./components/no-quote-found";
 import Pagination from "./components/pagination";
 import QuotesList from "./components/quotes-list";
 import SearchForm from "./components/search-form";
@@ -35,20 +35,7 @@ const RouteContent: React.FC<{
                 <QuotesList quotes={items} startIndex={page * size + 1} />
               </If.True>
               <If.False>
-                <div className="flex flex-col items-center gap-2 pt-[10vh] px-4 pb-4">
-                  <MessageCircle className="h-16 w-16" />
-                  <div className="text-xl"></div>
-                  <div className="text-xl">
-                    No quote found for the given search criteria.
-                  </div>
-                  <div>
-                    Success is not final; failure is not fatal: It is the
-                    courage to continue that counts.{" "}
-                    <span className="text-neutral-500">
-                      - Winston S. Churchill
-                    </span>
-                  </div>
-                </div>
+                <NoQuoteFound />
               </If.False>
             </If>
           </Layout.Body>

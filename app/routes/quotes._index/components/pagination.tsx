@@ -16,7 +16,7 @@ const Pagination: React.FC<{
   const isNavigatingToPage = useNavigatingToPage();
   const pagination = getPagination({ page, size, total });
 
-  return (
+  return pagination.end > 0 ? (
     <div className="flex flex-row gap-1">
       <div className="p-2 bg-neutral-100 dark:bg-neutral-900 rounded text-sm flex flex-row items-center">
         {pagination.start}
@@ -68,7 +68,7 @@ const Pagination: React.FC<{
         </Form>
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export default Pagination;
