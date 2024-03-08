@@ -31,7 +31,6 @@ const SearchForm: React.FC = () => {
         <FormItem style={{ padding: 0 }}>
           <FormControl>
             <Input
-              className="border-2 dark:border"
               name="q"
               placeholder="Search quotes ..."
               value={value}

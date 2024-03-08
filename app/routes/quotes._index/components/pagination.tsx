@@ -18,15 +18,15 @@ const Pagination: React.FC<{
 
   return pagination.end > 0 ? (
     <div className="flex flex-row gap-1">
-      <div className="p-2 bg-neutral-100 dark:bg-neutral-900 rounded text-sm flex flex-row items-center">
+      <div className="p-2 bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded text-sm flex flex-row items-center">
         {pagination.start}
         {" - "}
         {pagination.end}
         {" of "}
         {total}
       </div>
-      <div className="flex flex-row">
-        <Form method="get" className="flex flex-row">
+      <div className="flex flex-row border rounded">
+        <Form method="get" className="flex flex-row border-r">
           <Intent intent="page" />
           <Param param="q" />
           <Param param="size" />
@@ -40,14 +40,14 @@ const Pagination: React.FC<{
             type="submit"
             disabled={!pagination.hasPrevious}
             icon
-            variant="outline"
+            variant="ghost"
             className="rounded-r-none"
             loading={isIntentPagination && isNavigatingToPage(page - 1)}
           >
             <ChevronLeft />
           </Button>
         </Form>
-        <Form method="get" className="flex flex-row -ml-[1px]">
+        <Form method="get" className="flex flex-row">
           <Intent intent="page" />
           <Param param="q" />
           <Param param="size" />
@@ -59,7 +59,7 @@ const Pagination: React.FC<{
             type="submit"
             disabled={!pagination.hasNext}
             icon
-            variant="outline"
+            variant="ghost"
             className="rounded-l-none"
             loading={isIntentPagination && isNavigatingToPage(page + 1)}
           >
