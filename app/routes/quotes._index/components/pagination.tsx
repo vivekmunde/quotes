@@ -2,6 +2,7 @@ import { Form } from "@remix-run/react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import React from "react";
 import { Button } from "~/components/ui/button";
+import getPagination from "../../../utils/get-pagination";
 import { Intent, Param } from "./search-param-hidden-inputs";
 import useIsIntent from "./use-is-intent";
 import useNavigatingToPage from "./use-navigating-to-page";
@@ -13,16 +14,14 @@ const Pagination: React.FC<{
 }> = ({ total, page, size }) => {
   const isIntentPagination = useIsIntent()("page");
   const isNavigatingToPage = useNavigatingToPage();
-  const totalPages = Math.floor(total / size) + (total % size > 0 ? 1 : 0);
-  const hasNext = page + 1 < totalPages;
-  const hasPrevious = page > 0;
+  const pagination = getPagination({ page, size, total });
 
   return (
     <div className="flex flex-row gap-1">
       <div className="p-2 bg-neutral-100 dark:bg-neutral-900 rounded text-sm flex flex-row items-center">
-        {page * 1 * size + 1}
+        {pagination.start}
         {" - "}
-        {Math.min(page * 1 * size + size, total)}
+        {pagination.end}
         {" of "}
         {total}
       </div>
@@ -31,10 +30,15 @@ const Pagination: React.FC<{
           <Intent intent="page" />
           <Param param="q" />
           <Param param="size" />
-          <Param param="page" value={hasPrevious ? page - 1 : page} />
+          <Param
+            param="page"
+            value={
+              pagination.hasPrevious ? pagination.page - 1 : pagination.page
+            }
+          />
           <Button
             type="submit"
-            disabled={!hasPrevious}
+            disabled={!pagination.hasPrevious}
             icon
             variant="outline"
             className="rounded-r-none"
@@ -47,10 +51,13 @@ const Pagination: React.FC<{
           <Intent intent="page" />
           <Param param="q" />
           <Param param="size" />
-          <Param param="page" value={hasNext ? page + 1 : page} />
+          <Param
+            param="page"
+            value={pagination.hasNext ? pagination.page + 1 : pagination.page}
+          />
           <Button
             type="submit"
-            disabled={!hasNext}
+            disabled={!pagination.hasNext}
             icon
             variant="outline"
             className="rounded-l-none"

@@ -1,9 +1,84 @@
 import { LoaderFunctionArgs, defer } from "@remix-run/node";
-import { TDeferredRecordsResponse } from "~/types";
+import { TDeferredRecordsResponse, TMayBe } from "~/types";
 import { authorizedAccess } from "~/utils/server/auth";
 import { db } from "~/utils/server/db.server";
 import { badRequest } from "~/utils/server/request.server";
 import { TQuote } from "./types";
+
+const getTotal = async ({ searchWords }: { searchWords: string[] }) =>
+  await db.quotes.count({
+    where:
+      searchWords.length > 0
+        ? {
+            OR: [
+              ...searchWords.map((it) => ({ author: { contains: it } })),
+              ...searchWords.map((it) => ({ title: { contains: it } })),
+            ],
+          }
+        : undefined,
+  });
+
+const getQuotes = async ({
+  page,
+  size,
+  searchWords,
+}: {
+  page: number;
+  size: number;
+  searchWords: string[];
+}) =>
+  await db.quotes.findMany({
+    where:
+      searchWords.length > 0
+        ? {
+            OR: [
+              ...searchWords.map((it) => ({ author: { contains: it } })),
+              ...searchWords.map((it) => ({ title: { contains: it } })),
+            ],
+          }
+        : undefined,
+    skip: page * size,
+    take: size,
+    select: { id: true, title: true, author: true },
+    orderBy: { updatedAt: "desc" },
+  });
+
+const getSafePaginatedQuotes = async ({
+  page,
+  size,
+  searchWords,
+}: {
+  page: number;
+  size: number;
+  searchWords: string[];
+}) => {
+  return new Promise<{
+    total: number;
+    items: { id: string; title: string; author: TMayBe<string> }[];
+    page: number;
+  }>(async (resolve) => {
+    let _pageNumber = page;
+
+    let [total, items] = await Promise.all([
+      getTotal({ searchWords }),
+      getQuotes({ page, size, searchWords }),
+    ]);
+
+    if (total > 0 && page * size >= total) {
+      _pageNumber = Math.floor(total / size) + (total % size > 0 ? 1 : 0) - 1;
+
+      items = await getQuotes({
+        page: _pageNumber,
+        size,
+        searchWords,
+      });
+    } else {
+      _pageNumber = 0;
+    }
+
+    return resolve({ total, items, page: _pageNumber });
+  });
+};
 
 const getData = async ({ request }: LoaderFunctionArgs) => {
   const { searchParams } = new URL(request.url);
@@ -22,41 +97,17 @@ const getData = async ({ request }: LoaderFunctionArgs) => {
     throw badRequest("Page size should be a number!");
   }
 
-  const wordsToSearch = q.split(" ");
+  const searchWords = q.split(" ");
 
-  const getTotal = async () =>
-    db.quotes.count({
-      where:
-        wordsToSearch.length > 0
-          ? {
-              OR: [
-                ...wordsToSearch.map((it) => ({ author: { contains: it } })),
-                ...wordsToSearch.map((it) => ({ title: { contains: it } })),
-              ],
-            }
-          : undefined,
-    });
-
-  const getQuotes = async () =>
-    db.quotes.findMany({
-      where:
-        wordsToSearch.length > 0
-          ? {
-              OR: [
-                ...wordsToSearch.map((it) => ({ author: { contains: it } })),
-                ...wordsToSearch.map((it) => ({ title: { contains: it } })),
-              ],
-            }
-          : undefined,
-      skip: _pageNumber * _pageSize,
-      take: _pageSize,
-      select: { id: true, title: true, author: true },
-      orderBy: { updatedAt: "desc" },
-    });
+  const paginated = getSafePaginatedQuotes({
+    page: _pageNumber,
+    size: _pageSize,
+    searchWords,
+  });
 
   const response: TDeferredRecordsResponse<TQuote> = {
-    items: getQuotes(),
-    total: getTotal(),
+    items: paginated.then(({ items }) => items),
+    total: paginated.then(({ total }) => total),
     page: _pageNumber,
     size: _pageSize,
   };
