@@ -1,4 +1,4 @@
-import { Form, useNavigation } from "@remix-run/react";
+import { Form } from "@remix-run/react";
 import { Loader, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import If from "~/components/if";
@@ -11,7 +11,6 @@ import useIsIntent from "./use-is-intent";
 import useIsLoading from "./use-is-loading";
 
 const SearchForm: React.FC = () => {
-  const navigation = useNavigation();
   const isIntentSearch = useIsIntent()("q");
   const searchParamQuery = useGetSearchParam()("q");
   const [value, setValue] = useState(searchParamQuery);

@@ -2,8 +2,13 @@ import { Form } from "@remix-run/react";
 import { MessageCircle } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import { Intent, Param } from "./search-param-hidden-inputs";
+import useIsIntent from "./use-is-intent";
+import useIsLoading from "./use-is-loading";
 
 const NoQuoteFound: React.FC = () => {
+  const isIntentSearch = useIsIntent()("q");
+  const isLoading = useIsLoading()();
+
   return (
     <div className="flex flex-row items-center justify-center">
       <div
@@ -29,7 +34,11 @@ const NoQuoteFound: React.FC = () => {
             <Param param="q" value="" />
             <Param param="page" value="0" />
             <Param param="size" />
-            <Button type="submit" variant="outline">
+            <Button
+              type="submit"
+              variant="outline"
+              loading={isIntentSearch && isLoading}
+            >
               Clear Search
             </Button>
           </Form>
