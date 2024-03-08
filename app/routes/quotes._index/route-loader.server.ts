@@ -11,8 +11,8 @@ const getData = async ({ request }: LoaderFunctionArgs) => {
   const pageNumber = searchParams.get("page") ?? "0";
   const pageSize = searchParams.get("size") ?? "10";
 
-  const _pageNumber = Number(pageNumber);
-  const _pageSize = Number(pageSize);
+  const _pageNumber = Math.max(Number(pageNumber), 0);
+  const _pageSize = Number(pageSize) > 0 ? Number(pageSize) : 10;
 
   if (typeof _pageNumber !== "number" || Number.isNaN(_pageNumber)) {
     throw badRequest("Page should be a number!");
