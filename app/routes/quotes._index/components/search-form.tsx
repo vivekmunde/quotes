@@ -1,23 +1,28 @@
-import { Form, useNavigation, useSearchParams } from "@remix-run/react";
+import { Form, useNavigation } from "@remix-run/react";
 import { Loader, X } from "lucide-react";
 import { useState } from "react";
 import If from "~/components/if";
 import { Button } from "~/components/ui/button";
 import { FormControl, FormItem } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
+import { Intent, Param } from "./search-param-hidden-inputs";
+import useGetSearchParam from "./use-get-search-param";
+import useIsIntent from "./use-is-intent";
+import useIsLoading from "./use-is-loading";
 
-const SearchForm: React.FC<{ size: number }> = ({ size }) => {
+const SearchForm: React.FC = () => {
   const navigation = useNavigation();
-  const [searchParams] = useSearchParams();
-  const searchParamQ = searchParams.get("q")?.toString() ?? "";
-  const [value, setValue] = useState(searchParamQ);
+  const isIntentSearch = useIsIntent()("q");
+  const searchParamQuery = useGetSearchParam()("q");
+  const [value, setValue] = useState(searchParamQuery);
+  const isLoading = useIsLoading()();
 
   return (
     <div className="relative flex flex-row items-center">
       <Form className="flex-1" method="get">
-        <Input name="intent" value="search" type="hidden" />
-        <Input name="page" value="0" type="hidden" />
-        <Input name="size" value={size} type="hidden" />
+        <Intent intent="q" />
+        <Param param="page" value="0" />
+        <Param param="size" />
         <FormItem style={{ padding: 0 }}>
           <FormControl>
             <Input
@@ -32,25 +37,19 @@ const SearchForm: React.FC<{ size: number }> = ({ size }) => {
           </FormControl>
         </FormItem>
       </Form>
-      <If
-        condition={
-          navigation.state === "loading" &&
-          navigation.formData?.get("intent") === "search"
-        }
-      >
+      <If condition={isLoading && isIntentSearch}>
         <If.True>
           <div className="w-10 absolute right-0 flex flex-row justify-center">
             <Loader className="h-4 w-4 animate-spin" />
           </div>
         </If.True>
         <If.False>
-          <If condition={searchParamQ.length > 0}>
+          <If condition={searchParamQuery.length > 0}>
             <If.True>
               <Form className="absolute right-0" method="get">
-                <Input name="intent" value="search" type="hidden" />
-                <Input name="q" value="" type="hidden" />
-                <Input name="page" value="0" type="hidden" />
-                <Input name="size" value={size} type="hidden" />
+                <Intent intent="q" />
+                <Param param="page" value="0" />
+                <Param param="size" />
                 <Button
                   className="rounded-l-none p-0 w-10"
                   icon

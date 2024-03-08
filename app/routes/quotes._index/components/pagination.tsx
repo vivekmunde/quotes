@@ -1,23 +1,21 @@
-import { Form, useNavigation, useSearchParams } from "@remix-run/react";
+import { Form } from "@remix-run/react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import React from "react";
 import { Button } from "~/components/ui/button";
-import { Input } from "~/components/ui/input";
+import { Intent, Param } from "./search-param-hidden-inputs";
+import useIsIntent from "./use-is-intent";
+import useNavigatingToPage from "./use-navigating-to-page";
 
 const Pagination: React.FC<{
   total: number;
   page: number;
   size: number;
 }> = ({ total, page, size }) => {
-  const navigation = useNavigation();
-  const [searchParams] = useSearchParams();
-  const searchParamQuery = searchParams.get("q")?.toString() ?? "";
+  const isIntentPagination = useIsIntent()("page");
+  const isNavigatingToPage = useNavigatingToPage();
   const totalPages = Math.floor(total / size) + (total % size > 0 ? 1 : 0);
   const hasNext = page + 1 < totalPages;
   const hasPrevious = page > 0;
-
-  const isPaginationIntent = navigation.formData?.get("intent") === "page";
-  const navigatingToPage = Number(navigation.formData?.get("page") ?? -1);
 
   return (
     <div className="flex flex-row gap-1">
@@ -30,37 +28,33 @@ const Pagination: React.FC<{
       </div>
       <div className="flex flex-row">
         <Form method="get" className="flex flex-row">
-          <Input name="intent" value="page" type="hidden" />
-          <Input
-            name="page"
-            value={hasPrevious ? page - 1 : page}
-            type="hidden"
-          />
-          <Input name="size" value={size} type="hidden" />
-          <Input name="q" value={searchParamQuery} type="hidden" />
+          <Intent intent="page" />
+          <Param param="q" />
+          <Param param="size" />
+          <Param param="page" value={hasPrevious ? page - 1 : page} />
           <Button
             type="submit"
             disabled={!hasPrevious}
             icon
             variant="outline"
             className="rounded-r-none"
-            loading={isPaginationIntent && navigatingToPage === page - 1}
+            loading={isIntentPagination && isNavigatingToPage(page - 1)}
           >
             <ChevronLeft />
           </Button>
         </Form>
         <Form method="get" className="flex flex-row -ml-[1px]">
-          <Input name="intent" value="page" type="hidden" />
-          <Input name="page" value={hasNext ? page + 1 : page} type="hidden" />
-          <Input name="size" value={size} type="hidden" />
-          <Input name="q" value={searchParamQuery} type="hidden" />
+          <Intent intent="page" />
+          <Param param="q" />
+          <Param param="size" />
+          <Param param="page" value={hasNext ? page + 1 : page} />
           <Button
             type="submit"
             disabled={!hasNext}
             icon
             variant="outline"
             className="rounded-l-none"
-            loading={isPaginationIntent && navigatingToPage === page + 1}
+            loading={isIntentPagination && isNavigatingToPage(page + 1)}
           >
             <ChevronRight />
           </Button>
