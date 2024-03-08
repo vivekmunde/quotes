@@ -6,7 +6,7 @@ import { Button } from "~/components/ui/button";
 import { FormControl, FormItem } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 
-const SearchForm: React.FC = () => {
+const SearchForm: React.FC<{ size: number }> = ({ size }) => {
   const navigation = useNavigation();
   const [searchParams] = useSearchParams();
   const searchParamQ = searchParams.get("q")?.toString() ?? "";
@@ -16,6 +16,8 @@ const SearchForm: React.FC = () => {
     <div className="relative flex flex-row items-center">
       <Form className="flex-1" method="get">
         <Input name="intent" value="search" type="hidden" />
+        <Input name="page" value="0" type="hidden" />
+        <Input name="size" value={size} type="hidden" />
         <FormItem style={{ padding: 0 }}>
           <FormControl>
             <Input
@@ -46,7 +48,9 @@ const SearchForm: React.FC = () => {
             <If.True>
               <Form className="absolute right-0" method="get">
                 <Input name="intent" value="search" type="hidden" />
-                <Input name="q" type="hidden" />
+                <Input name="q" value="" type="hidden" />
+                <Input name="page" value="0" type="hidden" />
+                <Input name="size" value={size} type="hidden" />
                 <Button
                   className="rounded-l-none p-0 w-10"
                   icon

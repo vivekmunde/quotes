@@ -62,11 +62,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         {...props}
       >
-        {children}
+        <If condition={!!icon && !!loading}>
+          <If.False>{children}</If.False>
+        </If>
         <If condition={!!loading}>
           <If.True>
-            <span className="ml-2">
-              <Loader className="h-4 w-4 animate-spin" />
+            <span className={icon ? "" : "ml-2"}>
+              <Loader className="h-3 w-3 animate-spin" />
             </span>
           </If.True>
         </If>

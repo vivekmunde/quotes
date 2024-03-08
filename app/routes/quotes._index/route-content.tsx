@@ -1,4 +1,5 @@
 import Layout from "~/components/layout";
+import Pagination from "./components/pagination";
 import QuotesList from "./components/quotes-list";
 import SearchForm from "./components/search-form";
 import { TQuote } from "./types";
@@ -8,7 +9,7 @@ const RouteContent: React.FC<{
   total: number;
   page: number;
   size: number;
-}> = ({ items }) => {
+}> = ({ items, total, page, size }) => {
   return (
     <Layout.Screen.Body>
       <section>
@@ -18,8 +19,11 @@ const RouteContent: React.FC<{
               <Layout.Header.Title className="flex-1">
                 Quotes
               </Layout.Header.Title>
-              <div className="w-[50%]">
-                <SearchForm />
+              <div className="flex flex-row items-start gap-2 w-[60%]">
+                <div className="flex-1">
+                  <SearchForm size={size} />
+                </div>
+                <Pagination total={total} page={page} size={size} />
               </div>
             </header>
           </Layout.Header>

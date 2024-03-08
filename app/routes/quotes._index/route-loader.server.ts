@@ -8,8 +8,8 @@ import { TQuote } from "./types";
 const getData = async ({ request }: LoaderFunctionArgs) => {
   const { searchParams } = new URL(request.url);
   const q = searchParams.get("q") ?? "";
-  const pageNumber = searchParams.get("pageNumber") ?? "0";
-  const pageSize = searchParams.get("pageSize") ?? "10";
+  const pageNumber = searchParams.get("page") ?? "0";
+  const pageSize = searchParams.get("size") ?? "10";
 
   const _pageNumber = Number(pageNumber);
   const _pageSize = Number(pageSize);
