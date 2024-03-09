@@ -12,6 +12,7 @@ import {
 import { Input } from "~/components/ui/input";
 import { Textarea } from "~/components/ui/textarea";
 import { TFormResponse } from "~/types";
+import ButtonGroup from "../ui/button-group";
 
 const QuoteForm: React.FC<
   TFormResponse<"author" | "title"> & {
@@ -50,7 +51,7 @@ const QuoteForm: React.FC<
         </FormControl>
       </FormItem>
       <FormItem>
-        <div className="flex flex-row gap-2">
+        <ButtonGroup>
           <Button type="submit" loading={submitting}>
             <If condition={intent === "create"}>
               <If.True>Create</If.True>
@@ -73,7 +74,7 @@ const QuoteForm: React.FC<
           >
             Cancel
           </Button>
-        </div>
+        </ButtonGroup>
       </FormItem>
       <If condition={(errors?.message ?? "").length > 0}>
         <If.True>

@@ -6,6 +6,7 @@ import Layout from "~/components/layout";
 import Quote from "~/components/quote";
 import RouteError404 from "~/components/route-error/404";
 import { Button } from "~/components/ui/button";
+import ButtonGroup from "~/components/ui/button-group";
 import {
   Tooltip,
   TooltipContent,
@@ -52,7 +53,7 @@ const RouteContent: React.FC<{
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
-          <div className="flex flex-row justify-end gap-2">
+          <ButtonGroup className="justify-end">
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
@@ -81,7 +82,7 @@ const RouteContent: React.FC<{
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
-          </div>
+          </ButtonGroup>
         </div>
       </Layout.Screen.Footer>
     </React.Fragment>

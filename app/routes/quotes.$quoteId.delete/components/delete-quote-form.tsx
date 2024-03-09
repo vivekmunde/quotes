@@ -2,6 +2,7 @@ import { AlertCircle } from "lucide-react";
 import If from "~/components/if";
 import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
 import { Button } from "~/components/ui/button";
+import ButtonGroup from "~/components/ui/button-group";
 import {
   Form,
   FormControl,
@@ -46,7 +47,7 @@ const DeleteQuoteForm: React.FC<
         </If>
       </FormItem>
       <FormItem>
-        <div className="flex flex-row gap-2">
+        <ButtonGroup>
           <Button type="submit" variant="destructive" loading={deleting}>
             Yes! Delete
           </Button>
@@ -61,7 +62,7 @@ const DeleteQuoteForm: React.FC<
           >
             Cancel
           </Button>
-        </div>
+        </ButtonGroup>
       </FormItem>
       <If condition={!deleting && (errors?.message ?? "").length > 0}>
         <If.True>
