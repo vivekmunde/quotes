@@ -5,6 +5,7 @@ import { Button } from "~/components/ui/button";
 import {
   Form,
   FormControl,
+  FormFooter,
   FormItem,
   FormLabel,
   FormMessage,
@@ -50,7 +51,7 @@ const QuoteForm: React.FC<
           />
         </FormControl>
       </FormItem>
-      <FormItem>
+      <FormFooter>
         <ButtonGroup>
           <Button type="submit" loading={submitting}>
             <If condition={intent === "create"}>
@@ -75,7 +76,7 @@ const QuoteForm: React.FC<
             Cancel
           </Button>
         </ButtonGroup>
-      </FormItem>
+      </FormFooter>
       <If condition={(errors?.message ?? "").length > 0}>
         <If.True>
           <Alert variant="destructive">

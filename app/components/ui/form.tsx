@@ -175,10 +175,19 @@ const FormMessage = React.forwardRef<
 });
 FormMessage.displayName = "FormMessage";
 
+const FormFooter = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => {
+  return <div ref={ref} className={cn("pt-2 pb-4", className)} {...props} />;
+});
+FormFooter.displayName = "FormFooter";
+
 export {
   Form,
   FormControl,
   FormDescription,
+  FormFooter,
   FormItem,
   FormLabel,
   FormMessage,

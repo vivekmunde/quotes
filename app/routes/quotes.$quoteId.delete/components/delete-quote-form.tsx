@@ -6,6 +6,7 @@ import ButtonGroup from "~/components/ui/button-group";
 import {
   Form,
   FormControl,
+  FormFooter,
   FormItem,
   FormLabel,
   FormMessage,
@@ -46,7 +47,7 @@ const DeleteQuoteForm: React.FC<
           </If.True>
         </If>
       </FormItem>
-      <FormItem>
+      <FormFooter>
         <ButtonGroup>
           <Button type="submit" variant="destructive" loading={deleting}>
             Yes! Delete
@@ -63,7 +64,7 @@ const DeleteQuoteForm: React.FC<
             Cancel
           </Button>
         </ButtonGroup>
-      </FormItem>
+      </FormFooter>
       <If condition={!deleting && (errors?.message ?? "").length > 0}>
         <If.True>
           <Alert variant="destructive">

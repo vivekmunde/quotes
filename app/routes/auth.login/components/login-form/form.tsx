@@ -6,6 +6,7 @@ import {
   Form,
   FormControl,
   FormDescription,
+  FormFooter,
   FormItem,
   FormMessage,
 } from "~/components/ui/form";
@@ -58,9 +59,9 @@ const LoginForm: React.FC<
           </If>
         </FormItem>
       </div>
-      <FormItem>
+      <FormFooter>
         <Button loading={submitting}>Login</Button>
-      </FormItem>
+      </FormFooter>
       <If condition={submitting}>
         <If.False>
           <If condition={(errors?.message ?? "").length > 0}>
