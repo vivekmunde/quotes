@@ -47,10 +47,12 @@ const getSafePaginatedQuotes = async ({
   page,
   size,
   searchWords,
+  matchExact,
 }: {
   page: number;
   size: number;
   searchWords: string[];
+  matchExact: boolean;
 }) => {
   return new Promise<{
     total: number;
@@ -97,12 +99,15 @@ const getData = async ({ request }: LoaderFunctionArgs) => {
     throw badRequest("Page size should be a number!");
   }
 
-  const searchWords = q.split(" ");
+  const matchExact = q.startsWith("exact:");
+  const _q = (matchExact ? q.replace("exact:", "") : q).trim();
+  const searchWords = matchExact ? [_q] : _q.split(" ");
 
   const paginated = getSafePaginatedQuotes({
     page: _pageNumber,
     size: _pageSize,
     searchWords,
+    matchExact,
   });
 
   const response: TDeferredRecordsResponse<TQuote> = {
