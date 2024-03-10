@@ -3,6 +3,7 @@ import { redirect } from "@remix-run/node";
 import { validateTitle } from "~/components/quote-form";
 import { TFormResponse } from "~/types";
 import { authorizedAccess } from "~/utils/server/auth";
+import getUserId from "~/utils/server/auth/get-user-id.server";
 import { db } from "~/utils/server/db.server";
 import { badRequest } from "~/utils/server/request.server";
 
@@ -38,7 +39,7 @@ const updateQuote = async ({ request }: ActionFunctionArgs) => {
 
   const quote = await db.quotes.update({
     where: { id },
-    data: { author, title },
+    data: { author, title, updatedBy: await getUserId(request) },
   });
 
   return redirect(`/quotes/${quote.id}`);

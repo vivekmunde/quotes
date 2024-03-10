@@ -3,6 +3,7 @@ import { redirect } from "@remix-run/node";
 import { validateTitle } from "~/components/quote-form";
 import { TFormResponse } from "~/types";
 import { authorizedAccess } from "~/utils/server/auth";
+import getUserId from "~/utils/server/auth/get-user-id.server";
 import { db } from "~/utils/server/db.server";
 import { badRequest } from "~/utils/server/request.server";
 
@@ -31,7 +32,9 @@ const createNewQuote = async ({ request }: ActionFunctionArgs) => {
     });
   }
 
-  const quote = await db.quotes.create({ data: fields });
+  const quote = await db.quotes.create({
+    data: { title, author, createdBy: await getUserId(request) },
+  });
 
   return redirect(`/quotes/${quote.id}`);
 };
