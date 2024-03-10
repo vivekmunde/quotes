@@ -3,16 +3,17 @@ import { TDeferredRecordsResponse, TMayBe } from "~/types";
 import { authorizedAccess } from "~/utils/server/auth";
 import { db } from "~/utils/server/db.server";
 import { badRequest } from "~/utils/server/request.server";
-import { TQuote } from "./types";
+import { TQuery, TQuote } from "./types";
+import { getSearchWords } from "./utils";
 
-const getTotal = async ({ searchWords }: { searchWords: string[] }) =>
+const getTotal = async ({ queryWords }: { queryWords: string[] }) =>
   await db.quotes.count({
     where:
-      searchWords.length > 0
+      queryWords.length > 0
         ? {
             OR: [
-              ...searchWords.map((it) => ({ author: { contains: it } })),
-              ...searchWords.map((it) => ({ title: { contains: it } })),
+              ...queryWords.map((it) => ({ author: { contains: it } })),
+              ...queryWords.map((it) => ({ title: { contains: it } })),
             ],
           }
         : undefined,
@@ -21,19 +22,19 @@ const getTotal = async ({ searchWords }: { searchWords: string[] }) =>
 const getQuotes = async ({
   page,
   size,
-  searchWords,
+  queryWords,
 }: {
   page: number;
   size: number;
-  searchWords: string[];
+  queryWords: string[];
 }) =>
   await db.quotes.findMany({
     where:
-      searchWords.length > 0
+      queryWords.length > 0
         ? {
             OR: [
-              ...searchWords.map((it) => ({ author: { contains: it } })),
-              ...searchWords.map((it) => ({ title: { contains: it } })),
+              ...queryWords.map((it) => ({ author: { contains: it } })),
+              ...queryWords.map((it) => ({ title: { contains: it } })),
             ],
           }
         : undefined,
@@ -46,13 +47,11 @@ const getQuotes = async ({
 const getSafePaginatedQuotes = async ({
   page,
   size,
-  searchWords,
-  matchExact,
+  query,
 }: {
   page: number;
   size: number;
-  searchWords: string[];
-  matchExact: boolean;
+  query: TQuery;
 }) => {
   return new Promise<{
     total: number;
@@ -62,8 +61,8 @@ const getSafePaginatedQuotes = async ({
     let _pageNumber = page;
 
     let [total, items] = await Promise.all([
-      getTotal({ searchWords }),
-      getQuotes({ page, size, searchWords }),
+      getTotal({ queryWords: query.words }),
+      getQuotes({ page, size, queryWords: query.words }),
     ]);
 
     if (total > 0 && page * size >= total) {
@@ -72,7 +71,7 @@ const getSafePaginatedQuotes = async ({
       items = await getQuotes({
         page: _pageNumber,
         size,
-        searchWords,
+        queryWords: query.words,
       });
     } else {
       _pageNumber = 0;
@@ -99,15 +98,12 @@ const getData = async ({ request }: LoaderFunctionArgs) => {
     throw badRequest("Page size should be a number!");
   }
 
-  const matchExact = q.startsWith("exact:");
-  const _q = (matchExact ? q.replace("exact:", "") : q).trim();
-  const searchWords = matchExact ? [_q] : _q.split(" ");
+  const query = getSearchWords(q);
 
   const paginated = getSafePaginatedQuotes({
     page: _pageNumber,
     size: _pageSize,
-    searchWords,
-    matchExact,
+    query,
   });
 
   const response: TDeferredRecordsResponse<TQuote> = {

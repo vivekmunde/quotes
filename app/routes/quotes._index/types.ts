@@ -7,3 +7,8 @@ export type TQuote = {
 };
 
 export type TData = TDeferredRecordsResponse<TQuote>;
+
+export type TQuery = {
+  words: string[];
+  exact: boolean;
+};

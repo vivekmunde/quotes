@@ -1,3 +1,4 @@
+import { useSearchParams } from "@remix-run/react";
 import If from "~/components/if";
 import Layout from "~/components/layout";
 import NoQuoteFound from "./components/no-quote-found";
@@ -5,6 +6,7 @@ import Pagination from "./components/pagination";
 import QuotesList from "./components/quotes-list";
 import SearchForm from "./components/search-form";
 import { TQuote } from "./types";
+import { getSearchWords } from "./utils";
 
 const RouteContent: React.FC<{
   items: TQuote[];
@@ -12,6 +14,9 @@ const RouteContent: React.FC<{
   page: number;
   size: number;
 }> = ({ items, total, page, size }) => {
+  const [searchParams] = useSearchParams();
+  const query = getSearchWords(searchParams.get("q"));
+
   return (
     <Layout.Screen.Body>
       <section>
@@ -32,7 +37,11 @@ const RouteContent: React.FC<{
           <Layout.Body>
             <If condition={items.length > 0}>
               <If.True>
-                <QuotesList quotes={items} startIndex={page * size + 1} />
+                <QuotesList
+                  quotes={items}
+                  startIndex={page * size + 1}
+                  highlightWords={query.words}
+                />
               </If.True>
               <If.False>
                 <NoQuoteFound />
