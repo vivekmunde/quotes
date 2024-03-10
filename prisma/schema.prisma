@@ -21,11 +21,12 @@ model Users {
 }
 
 model Quotes {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  createdBy String?
-  updatedBy String?
-  title     String
-  author    String?
+  id         String   @id @default(uuid())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  createdBy  String?
+  updatedBy  String?
+  title      String
+  author     String?
+  urlSegment String?
 }

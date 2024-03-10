@@ -1,19 +1,12 @@
-import { PrismaClient } from "@prisma/client";
+import { clear, createQuotes, createUsers } from "~/utils/server/seed.server";
 import { admin, quotes } from "./seed-data";
-const db = new PrismaClient();
 
 async function seed() {
-  const adminUser = await db.users.create({
-    data: admin,
-  });
+  await clear();
 
-  await Promise.all(
-    quotes.map((quote) => {
-      return db.quotes.create({
-        data: { ...quote, createdBy: adminUser.id },
-      });
-    })
-  );
+  const adminUserId = await createUsers(admin, []);
+
+  await createQuotes(quotes, adminUserId);
 }
 
 seed();

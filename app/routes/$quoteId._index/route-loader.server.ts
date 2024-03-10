@@ -1,6 +1,7 @@
 import { json, type LoaderFunctionArgs } from "@remix-run/node";
 import getRandomQuote from "~/api/get-random-quote.server";
 import { db } from "~/utils/server/db.server";
+import { getQuoteIdFrmomUrlSegment } from "~/utils/server/quotes.server";
 import { response404, response500 } from "~/utils/server/response.server";
 import { TData } from "./types";
 
@@ -20,14 +21,16 @@ const getQuote = async (quoteId: string) => {
   return quote;
 };
 
-const getNextQuote = async (forQuoteId: string): Promise<{ id: string }> => {
+const getNextQuote = async (
+  forQuoteId: string
+): Promise<{ urlSegment: string }> => {
   const nextQuote = await getRandomQuote();
 
   if (forQuoteId === nextQuote.id) {
     return getNextQuote(forQuoteId);
   }
 
-  return { id: nextQuote.id };
+  return { urlSegment: nextQuote.urlSegment ?? nextQuote.id };
 };
 
 const getData = async ({ params }: LoaderFunctionArgs) => {
@@ -36,9 +39,11 @@ const getData = async ({ params }: LoaderFunctionArgs) => {
   }
 
   try {
+    const quoteId = getQuoteIdFrmomUrlSegment(params.quoteId);
+
     const [quote, nextQuote] = await Promise.all([
-      getQuote(params.quoteId),
-      getNextQuote(params.quoteId),
+      getQuote(quoteId),
+      getNextQuote(quoteId),
     ]);
 
     const response: TData = { item: { quote, nextQuote } };

@@ -4,7 +4,7 @@ import { TData } from "./types";
 
 const getData = async (): Promise<TData> => {
   const quote = await getRandomQuote();
-  return redirect(`/${quote.id}`);
+  return redirect(`/${quote.urlSegment}`);
 };
 
 const loader = async () => {

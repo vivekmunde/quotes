@@ -21,10 +21,10 @@ const RouteContent: React.FC<{
         </div>
       </Layout.Screen.Body>
       <Layout.Screen.Footer>
-        <If condition={!!nextQuote?.id}>
+        <If condition={!!nextQuote?.urlSegment}>
           <If.True>
             <div className="flex flex-row justify-end">
-              <Link prefetch="render" to={`/${nextQuote?.id}`}>
+              <Link prefetch="render" to={`/${nextQuote?.urlSegment}`}>
                 <Button icon>
                   <ChevronRight className="q h-8 w-8" />
                 </Button>
