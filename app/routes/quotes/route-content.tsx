@@ -4,10 +4,10 @@ import Header from "./components/header";
 
 const RouteContent: React.FC = () => {
   return (
-    <Layout.Screen>
+    <Layout.AdminScreen>
       <Header />
       <Outlet />
-    </Layout.Screen>
+    </Layout.AdminScreen>
   );
 };
 

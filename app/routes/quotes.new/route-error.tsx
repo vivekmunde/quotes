@@ -4,9 +4,9 @@ import CRouteError from "~/components/route-error";
 
 const RouteError: React.FC = () => {
   return (
-    <Layout.Screen.Body>
+    <Layout.AdminScreen.Body>
       <CRouteError />
-    </Layout.Screen.Body>
+    </Layout.AdminScreen.Body>
   );
 };
 

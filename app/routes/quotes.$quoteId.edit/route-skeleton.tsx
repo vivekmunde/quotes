@@ -3,7 +3,7 @@ import Layout from "~/components/layout";
 import { Skeleton } from "~/components/quote-form";
 
 const RouteSkeleton: React.FC = () => (
-  <Layout.Screen.Body>
+  <Layout.AdminScreen.Body>
     <section>
       <Layout>
         <Layout.Header>
@@ -16,7 +16,7 @@ const RouteSkeleton: React.FC = () => (
         </Layout.Body>
       </Layout>
     </section>
-  </Layout.Screen.Body>
+  </Layout.AdminScreen.Body>
 );
 
 export default RouteSkeleton;

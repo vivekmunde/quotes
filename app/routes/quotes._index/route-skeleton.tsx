@@ -4,7 +4,7 @@ import { Skeleton } from "~/components/ui/skeleton";
 
 const RouteLoading: React.FC = () => {
   return (
-    <Layout.Screen.Body>
+    <Layout.AdminScreen.Body>
       <section>
         <Layout>
           <Layout.Header>
@@ -28,7 +28,7 @@ const RouteLoading: React.FC = () => {
           </Layout.Body>
         </Layout>
       </section>
-    </Layout.Screen.Body>
+    </Layout.AdminScreen.Body>
   );
 };
 

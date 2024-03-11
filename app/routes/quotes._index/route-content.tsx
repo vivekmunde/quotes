@@ -18,7 +18,7 @@ const RouteContent: React.FC<{
   const query = getSearchWords(searchParams.get("q"));
 
   return (
-    <Layout.Screen.Body>
+    <Layout.AdminScreen.Body>
       <section>
         <Layout>
           <Layout.Header>
@@ -50,7 +50,7 @@ const RouteContent: React.FC<{
           </Layout.Body>
         </Layout>
       </section>
-    </Layout.Screen.Body>
+    </Layout.AdminScreen.Body>
   );
 };
 
