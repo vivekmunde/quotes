@@ -1,7 +1,16 @@
-export const admin: { loginId: string; passwordHash: string } = {
-  loginId: "admin",
-  passwordHash: "$2a$12$DH6Nnl0d7izI4KUlyWL/MOhiIiYKcG0ZppncNgsjJu6QrTqJBC5zK",
-};
+export const users: { loginId: string; passwordHash: string }[] = [
+  {
+    loginId: "admin",
+    passwordHash:
+      "$2a$12$DH6Nnl0d7izI4KUlyWL/MOhiIiYKcG0ZppncNgsjJu6QrTqJBC5zK",
+  },
+
+  {
+    loginId: "quotes",
+    passwordHash:
+      "$2a$12$DH6Nnl0d7izI4KUlyWL/MOhiIiYKcG0ZppncNgsjJu6QrTqJBC5zK",
+  },
+];
 
 export const quotes: { title: string; author?: string }[] = [
   {
