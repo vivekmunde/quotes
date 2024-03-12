@@ -1,8 +1,10 @@
 import { Link, useSearchParams } from "@remix-run/react";
 import { ChevronLeft, Edit, Trash } from "lucide-react";
-import React from "react";
+import React, { useEffect } from "react";
 import If from "~/components/if";
 import Layout from "~/components/layout";
+import useGetVariant from "~/components/layout/screen/use-get-variant";
+import useSetVariant from "~/components/layout/screen/use-set-variant";
 import Quote from "~/components/quote";
 import RouteError404 from "~/components/route-error/404";
 import { Button } from "~/components/ui/button";
@@ -21,13 +23,19 @@ const RouteContent: React.FC<{
 }> = ({ quote }) => {
   const [searchParams] = useSearchParams();
   const backTo = searchParams.get("backTo") ?? "";
+  const currentLayoutVariant = useGetVariant();
+  const setLayoutVariant = useSetVariant();
+
+  useEffect(() => {
+    setLayoutVariant("default");
+
+    return () => setLayoutVariant(currentLayoutVariant ?? "default");
+  }, []);
 
   return quote ? (
     <React.Fragment>
       <Layout.Screen.Body className="flex-1 flex flex-col justify-center">
-        <div className="md:px-8">
-          <Quote author={quote.author} title={quote.title} />
-        </div>
+        <Quote author={quote.author} title={quote.title} />
       </Layout.Screen.Body>
       <Layout.Screen.Footer className="md:px-2 md:py-2">
         <div className="flex flex-row justify-between">

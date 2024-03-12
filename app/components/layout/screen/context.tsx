@@ -1,7 +1,9 @@
 import { createContext } from "react";
+import { TContext } from "./types";
 
-export type TContext = { variant?: "default" | "box" };
-
-const Context = createContext<TContext>({ variant: "default" });
+const Context = createContext<TContext>({
+  variant: "default",
+  onSetVariant: () => undefined,
+});
 
 export default Context;
