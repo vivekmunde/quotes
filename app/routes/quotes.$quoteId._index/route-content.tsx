@@ -24,12 +24,12 @@ const RouteContent: React.FC<{
 
   return quote ? (
     <React.Fragment>
-      <Layout.AdminScreen.Body className="flex-1 flex flex-col justify-center">
+      <Layout.Screen.Body className="flex-1 flex flex-col justify-center">
         <div className="md:px-8">
           <Quote author={quote.author} title={quote.title} />
         </div>
-      </Layout.AdminScreen.Body>
-      <Layout.AdminScreen.Footer className="md:px-2 md:py-2">
+      </Layout.Screen.Body>
+      <Layout.Screen.Footer className="md:px-2 md:py-2">
         <div className="flex flex-row justify-between">
           <TooltipProvider>
             <Tooltip>
@@ -84,7 +84,7 @@ const RouteContent: React.FC<{
             </TooltipProvider>
           </ButtonGroup>
         </div>
-      </Layout.AdminScreen.Footer>
+      </Layout.Screen.Footer>
     </React.Fragment>
   ) : (
     <RouteError404 />

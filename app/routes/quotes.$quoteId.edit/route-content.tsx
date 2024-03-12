@@ -18,7 +18,7 @@ const RouteContent: React.FC<{
   const errors = fetcher.data?.errors;
 
   return (
-    <Layout.AdminScreen.Body>
+    <Layout.Screen.Body>
       <section>
         <Layout>
           <Layout.Header>
@@ -46,7 +46,7 @@ const RouteContent: React.FC<{
           </Layout.Body>
         </Layout>
       </section>
-    </Layout.AdminScreen.Body>
+    </Layout.Screen.Body>
   );
 };
 

@@ -20,7 +20,7 @@ const RouteContent: React.FC<{
 
   return (
     <React.Fragment>
-      <Layout.AdminScreen.Body>
+      <Layout.Screen.Body>
         <Layout>
           <Layout.Header>
             <header className="flex-1 md:flex flex-row justify-between gap-10">
@@ -58,13 +58,13 @@ const RouteContent: React.FC<{
             </If>
           </Layout.Body>
         </Layout>
-      </Layout.AdminScreen.Body>
-      <Layout.AdminScreen.Footer>
+      </Layout.Screen.Body>
+      <Layout.Screen.Footer>
         <div className="flex flex-row justify-between items-center gap-1">
           <Range total={total} page={page} size={size} />
           <NextPrevious total={total} page={page} size={size} />
         </div>
-      </Layout.AdminScreen.Footer>
+      </Layout.Screen.Footer>
     </React.Fragment>
   );
 };

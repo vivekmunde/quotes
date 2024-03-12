@@ -4,9 +4,9 @@ import CommonRouteError from "~/components/route-error";
 
 const RouteError: React.FC = () => {
   return (
-    <Layout.AdminScreen.Body>
+    <Layout.Screen.Body>
       <CommonRouteError />
-    </Layout.AdminScreen.Body>
+    </Layout.Screen.Body>
   );
 };
 

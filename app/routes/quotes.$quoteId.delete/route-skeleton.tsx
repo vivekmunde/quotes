@@ -3,7 +3,7 @@ import Layout from "~/components/layout";
 import { Skeleton } from "~/components/ui/skeleton";
 
 const RouteSkeleton: React.FC = () => (
-  <Layout.AdminScreen.Body>
+  <Layout.Screen.Body>
     <section>
       <Layout>
         <Layout.Header>
@@ -20,7 +20,7 @@ const RouteSkeleton: React.FC = () => (
         </Layout.Body>
       </Layout>
     </section>
-  </Layout.AdminScreen.Body>
+  </Layout.Screen.Body>
 );
 
 export default RouteSkeleton;

@@ -5,12 +5,12 @@ import Header from "./components/header";
 
 const RouteError: React.FC = () => {
   return (
-    <Layout.AdminScreen>
+    <Layout.Screen variant="box">
       <Header />
-      <Layout.AdminScreen.Body>
+      <Layout.Screen.Body>
         <CommonRouteError />
-      </Layout.AdminScreen.Body>
-    </Layout.AdminScreen>
+      </Layout.Screen.Body>
+    </Layout.Screen>
   );
 };
 

@@ -1,28 +1,40 @@
 import React from "react";
-import Footer from "../footer";
 import Title from "../title";
 import Body from "./body";
+import Context from "./context";
+import Footer from "./footer";
 import Header from "./header";
 
 const Screen: React.FC<
-  React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+  React.DetailedHTMLProps<
+    React.HTMLAttributes<HTMLDivElement>,
+    HTMLDivElement
+  > & { variant?: "default" | "box" }
 > & {
   Header: typeof Header;
   Body: typeof Body;
   Footer: typeof Footer;
   Title: typeof Title;
-} = ({ children, className, ...props }) => {
+} = ({ children, className, variant, ...props }) => {
   return (
-    <div
-      className={`px-4 grid grid-flow-col grid-cols-[repeat(24,1fr)] ${
-        className ?? ""
-      }`}
-      {...props}
-    >
-      <div className="flex flex-col h-screen col-[span_24] md:col-[3_/_span_20] lg:col-[4_/_span_18] xl:col-[5_/_span_16]">
-        {children}
+    <Context.Provider value={{ variant }}>
+      <div
+        className={[
+          "grid grid-flow-col grid-cols-[repeat(24,1fr)]",
+          variant === "box"
+            ? "md:bg-neutral-100 md:dark:bg-neutral-900 md:px-4"
+            : "px-4",
+          className,
+        ]
+          .filter(Boolean)
+          .join(" ")}
+        {...props}
+      >
+        <div className="flex flex-col min-h-screen col-[span_24] md:col-[3_/_span_20] lg:col-[4_/_span_18] xl:col-[5_/_span_16]">
+          {children}
+        </div>
       </div>
-    </div>
+    </Context.Provider>
   );
 };
 

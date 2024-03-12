@@ -12,7 +12,7 @@ import {
 
 const Header: React.FC = () => {
   return (
-    <Layout.AdminScreen.Header>
+    <Layout.Screen.Header>
       <div className="flex flex-row">
         <TooltipProvider>
           <Tooltip>
@@ -57,7 +57,7 @@ const Header: React.FC = () => {
           </Tooltip>
         </TooltipProvider>{" "}
       </div>
-    </Layout.AdminScreen.Header>
+    </Layout.Screen.Header>
   );
 };
 
