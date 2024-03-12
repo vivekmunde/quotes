@@ -6,7 +6,7 @@ const Body: React.FC<
 > = ({ children, className, ...props }) => {
   return (
     <LayoutBody
-      className={`bg-white dark:bg-black md:rounded md:shadow-md px-4 md:px-5 pt-2 pb-4 md:mb-1 ${
+      className={`flex-1 bg-white dark:bg-black md:rounded md:shadow-md px-4 md:px-5 pt-2 pb-4 md:mb-1 ${
         className ?? ""
       }`}
       {...props}

@@ -25,7 +25,9 @@ const RouteContent: React.FC<{
   return quote ? (
     <React.Fragment>
       <Layout.AdminScreen.Body className="flex-1 flex flex-col justify-center">
-        <Quote author={quote.author} title={quote.title} />
+        <div className="md:px-8">
+          <Quote author={quote.author} title={quote.title} />
+        </div>
       </Layout.AdminScreen.Body>
       <Layout.AdminScreen.Footer className="md:px-2 md:py-2">
         <div className="flex flex-row justify-between">

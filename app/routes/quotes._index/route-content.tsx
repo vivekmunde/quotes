@@ -1,8 +1,9 @@
 import { useSearchParams } from "@remix-run/react";
+import React from "react";
 import If from "~/components/if";
 import Layout from "~/components/layout";
 import NoQuoteFound from "./components/no-quote-found";
-import Pagination from "./components/pagination";
+import { NextPrevious, Range } from "./components/pagination";
 import QuotesList from "./components/quotes-list";
 import SearchForm from "./components/search-form";
 import { TQuote } from "./types";
@@ -18,8 +19,8 @@ const RouteContent: React.FC<{
   const query = getSearchWords(searchParams.get("q"));
 
   return (
-    <Layout.AdminScreen.Body>
-      <section>
+    <React.Fragment>
+      <Layout.AdminScreen.Body>
         <Layout>
           <Layout.Header>
             <header className="flex-1 md:flex flex-row justify-between gap-10">
@@ -30,11 +31,19 @@ const RouteContent: React.FC<{
                 <div className="flex-1">
                   <SearchForm />
                 </div>
-                <Pagination total={total} page={page} size={size} />
+                <div className="flex flex-row justify-between gap-1">
+                  <Range
+                    total={total}
+                    page={page}
+                    size={size}
+                    className="p-2 bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded text-sm flex flex-row items-center"
+                  />
+                  <NextPrevious total={total} page={page} size={size} />
+                </div>
               </div>
             </header>
           </Layout.Header>
-          <Layout.Body>
+          <Layout.Body className="flex-1 overflow-auto">
             <If condition={items.length > 0}>
               <If.True>
                 <QuotesList
@@ -49,8 +58,14 @@ const RouteContent: React.FC<{
             </If>
           </Layout.Body>
         </Layout>
-      </section>
-    </Layout.AdminScreen.Body>
+      </Layout.AdminScreen.Body>
+      <Layout.AdminScreen.Footer>
+        <div className="flex flex-row justify-between items-center gap-1">
+          <Range total={total} page={page} size={size} />
+          <NextPrevious total={total} page={page} size={size} />
+        </div>
+      </Layout.AdminScreen.Footer>
+    </React.Fragment>
   );
 };
 
