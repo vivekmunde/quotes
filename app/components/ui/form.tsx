@@ -12,6 +12,9 @@ import * as React from "react";
 
 import { Label } from "app/components/ui/label";
 import { cn } from "app/lib/utils";
+import { AlertCircle } from "lucide-react";
+import { TMayBe } from "~/types";
+import { Alert, AlertDescription, AlertTitle } from "./alert";
 
 const Form = React.forwardRef<
   HTMLDivElement,
@@ -183,10 +186,24 @@ const FormFooter = React.forwardRef<
 });
 FormFooter.displayName = "FormFooter";
 
+const FormError: React.FC<{ error?: TMayBe<string> }> = ({ error }) => {
+  return (error ?? "").length > 0 ? (
+    <div className="pt-4">
+      <Alert variant="destructive">
+        <AlertCircle className="h-4 w-4" />
+        <AlertTitle>Error</AlertTitle>
+        <AlertDescription>{error}</AlertDescription>
+      </Alert>
+    </div>
+  ) : null;
+};
+FormFooter.displayName = "FormError";
+
 export {
   Form,
   FormControl,
   FormDescription,
+  FormError,
   FormFooter,
   FormItem,
   FormLabel,

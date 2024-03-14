@@ -1,11 +1,10 @@
-import { AlertCircle } from "lucide-react";
 import If from "~/components/if";
-import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
 import { Button } from "~/components/ui/button";
 import ButtonGroup from "~/components/ui/button-group";
 import {
   Form,
   FormControl,
+  FormError,
   FormFooter,
   FormItem,
   FormLabel,
@@ -64,16 +63,12 @@ const DeleteQuoteForm: React.FC<
             Cancel
           </Button>
         </ButtonGroup>
+        <If condition={!deleting}>
+          <If.True>
+            <FormError error={errors?.message} />
+          </If.True>
+        </If>
       </FormFooter>
-      <If condition={!deleting && (errors?.message ?? "").length > 0}>
-        <If.True>
-          <Alert variant="destructive">
-            <AlertCircle className="h-4 w-4" />
-            <AlertTitle>Error</AlertTitle>
-            <AlertDescription>{errors?.message}</AlertDescription>
-          </Alert>
-        </If.True>
-      </If>
     </Form>
   );
 };

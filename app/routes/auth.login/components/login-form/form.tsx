@@ -1,11 +1,10 @@
-import { AlertCircle } from "lucide-react";
 import If from "~/components/if";
-import { Alert, AlertTitle } from "~/components/ui/alert";
 import { Button } from "~/components/ui/button";
 import {
   Form,
   FormControl,
   FormDescription,
+  FormError,
   FormFooter,
   FormItem,
   FormMessage,
@@ -61,19 +60,12 @@ const LoginForm: React.FC<
       </div>
       <FormFooter>
         <Button loading={submitting}>Login</Button>
+        <If condition={submitting}>
+          <If.False>
+            <FormError error={errors?.message} />
+          </If.False>
+        </If>
       </FormFooter>
-      <If condition={submitting}>
-        <If.False>
-          <If condition={(errors?.message ?? "").length > 0}>
-            <If.True>
-              <Alert variant="destructive">
-                <AlertCircle className="h-4 w-4" />
-                <AlertTitle>{errors?.message}</AlertTitle>
-              </Alert>
-            </If.True>
-          </If>
-        </If.False>
-      </If>
     </Form>
   );
 };

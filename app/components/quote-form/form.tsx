@@ -1,10 +1,9 @@
-import { AlertCircle } from "lucide-react";
 import If from "~/components/if";
-import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
 import { Button } from "~/components/ui/button";
 import {
   Form,
   FormControl,
+  FormError,
   FormFooter,
   FormItem,
   FormLabel,
@@ -76,16 +75,8 @@ const QuoteForm: React.FC<
             Cancel
           </Button>
         </ButtonGroup>
+        <FormError error={errors?.message} />
       </FormFooter>
-      <If condition={(errors?.message ?? "").length > 0}>
-        <If.True>
-          <Alert variant="destructive">
-            <AlertCircle className="h-4 w-4" />
-            <AlertTitle>Error</AlertTitle>
-            <AlertDescription>{errors?.message}</AlertDescription>
-          </Alert>
-        </If.True>
-      </If>
     </Form>
   );
 };
