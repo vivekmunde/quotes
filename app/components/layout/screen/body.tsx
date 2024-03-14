@@ -10,10 +10,9 @@ const Body: React.FC<
   return (
     <LayoutBody
       className={[
-        "flex-1",
         variant === "box"
           ? "bg-white dark:bg-black md:rounded md:shadow-md px-4 md:px-5 pt-2 pb-4 md:mb-1"
-          : "py-2",
+          : "flex-1 py-2",
         className,
       ]
         .filter(Boolean)
