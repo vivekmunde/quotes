@@ -1,4 +1,4 @@
-import { Link } from "@remix-run/react";
+import { Link, useLocation } from "@remix-run/react";
 import React from "react";
 import { TMayBe } from "~/types";
 import QuoteActions from "./quotes-actions";
@@ -75,6 +75,11 @@ const QuotesList: React.FC<{
   startIndex: number;
   highlightWords?: TMayBe<string[]>;
 }> = ({ quotes, startIndex, highlightWords }) => {
+  const location = useLocation();
+  const backToUrl = encodeURIComponent(
+    [location.pathname, location.search, location.hash].join("")
+  );
+
   return (
     <div className="flex flex-col gap-4">
       {quotes.map((quote, index) => (
@@ -83,7 +88,7 @@ const QuotesList: React.FC<{
           <div className="flex-1">
             <Link
               prefetch="intent"
-              to={`/quotes/${quote.id}`}
+              to={`/quotes/${quote.id}?backTo=${backToUrl}`}
               className="text-lg dark:font-thin"
             >
               {formatText(quote.title, highlightWords)}

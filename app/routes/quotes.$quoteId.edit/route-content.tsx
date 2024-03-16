@@ -1,4 +1,4 @@
-import { useFetcher, useNavigate } from "@remix-run/react";
+import { useFetcher, useNavigate, useSearchParams } from "@remix-run/react";
 import Layout from "~/components/layout";
 import QuoteForm from "~/components/quote-form";
 import RouteError404 from "~/components/route-error/404";
@@ -11,6 +11,7 @@ const RouteContent: React.FC<{
   quote?: TMayBe<TQuote>;
 }> = ({ quote }) => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const fetcher = useFetcher<TFormResponse<"author" | "title">>();
   const fields = {
     author: fetcher.formData?.get("author") ?? quote?.author,
@@ -40,6 +41,7 @@ const RouteContent: React.FC<{
                   intent="update"
                   fields={fields}
                   errors={errors}
+                  cancelUrl={searchParams.get("backTo")}
                   onCancel={() => {
                     navigate(-1);
                   }}

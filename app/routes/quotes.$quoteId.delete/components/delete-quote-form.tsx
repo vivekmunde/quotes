@@ -1,3 +1,4 @@
+import { Link } from "@remix-run/react";
 import If from "~/components/if";
 import { Button } from "~/components/ui/button";
 import ButtonGroup from "~/components/ui/button-group";
@@ -11,14 +12,15 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
-import { TFormResponse } from "~/types";
+import { TFormResponse, TMayBe } from "~/types";
 
 const DeleteQuoteForm: React.FC<
   TFormResponse<"quoteId" | "password"> & {
     deleting: boolean;
+    cancelUrl?: TMayBe<string>;
     onCancel?: () => void;
   }
-> = ({ fields, errors, deleting, onCancel }) => {
+> = ({ fields, errors, deleting, cancelUrl, onCancel }) => {
   return (
     <Form>
       <Input
@@ -51,17 +53,28 @@ const DeleteQuoteForm: React.FC<
           <Button type="submit" variant="destructive" loading={deleting}>
             Yes! Delete
           </Button>
-          <Button
-            type="button"
-            variant="outline"
-            onClick={() => {
-              if (onCancel) {
-                onCancel();
-              }
-            }}
-          >
-            Cancel
-          </Button>
+          <If condition={(cancelUrl ?? "").length > 0}>
+            <If.True>
+              <Link prefetch="intent" to={cancelUrl ?? "/"}>
+                <Button type="button" variant="outline">
+                  Cancel
+                </Button>
+              </Link>
+            </If.True>
+            <If.False>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => {
+                  if (onCancel) {
+                    onCancel();
+                  }
+                }}
+              >
+                Cancel
+              </Button>
+            </If.False>
+          </If>
         </ButtonGroup>
         <If condition={!deleting}>
           <If.True>

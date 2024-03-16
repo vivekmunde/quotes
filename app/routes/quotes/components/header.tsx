@@ -1,4 +1,4 @@
-import { Form, Link } from "@remix-run/react";
+import { Form, Link, useLocation } from "@remix-run/react";
 import { LogOut, Plus, Quote } from "lucide-react";
 import React from "react";
 import Layout from "~/components/layout";
@@ -12,6 +12,11 @@ import {
 import layoutStyles from "~/styles/layout";
 
 const Header: React.FC = () => {
+  const location = useLocation();
+  const backToUrl = encodeURIComponent(
+    [location.pathname, location.search, location.hash].join("")
+  );
+
   return (
     <div
       className={[
@@ -25,7 +30,10 @@ const Header: React.FC = () => {
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Link prefetch="render" to="/quotes/new">
+                  <Link
+                    prefetch="render"
+                    to={`/quotes/new?backTo=${backToUrl}`}
+                  >
                     <Button size="sm" variant="ghost">
                       <Plus />
                     </Button>
@@ -71,4 +79,4 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+export default React.memo(Header);

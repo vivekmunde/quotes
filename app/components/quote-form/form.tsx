@@ -1,3 +1,4 @@
+import { Link } from "@remix-run/react";
 import If from "~/components/if";
 import { Button } from "~/components/ui/button";
 import {
@@ -11,16 +12,17 @@ import {
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 import { Textarea } from "~/components/ui/textarea";
-import { TFormResponse } from "~/types";
+import { TFormResponse, TMayBe } from "~/types";
 import ButtonGroup from "../ui/button-group";
 
 const QuoteForm: React.FC<
   TFormResponse<"author" | "title"> & {
     intent?: "create" | "update";
     submitting?: boolean;
+    cancelUrl?: TMayBe<string>;
     onCancel?: () => void;
   }
-> = ({ intent, fields, errors, submitting, onCancel }) => {
+> = ({ intent, fields, errors, submitting, cancelUrl, onCancel }) => {
   return (
     <Form>
       <FormItem>
@@ -63,17 +65,28 @@ const QuoteForm: React.FC<
               </If.False>
             </If>
           </Button>
-          <Button
-            type="button"
-            variant="outline"
-            onClick={() => {
-              if (onCancel) {
-                onCancel();
-              }
-            }}
-          >
-            Cancel
-          </Button>
+          <If condition={(cancelUrl ?? "").length > 0}>
+            <If.True>
+              <Link prefetch="intent" to={cancelUrl ?? "/"}>
+                <Button type="button" variant="outline">
+                  Cancel
+                </Button>
+              </Link>
+            </If.True>
+            <If.False>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => {
+                  if (onCancel) {
+                    onCancel();
+                  }
+                }}
+              >
+                Cancel
+              </Button>
+            </If.False>
+          </If>
         </ButtonGroup>
         <FormError error={errors?.message} />
       </FormFooter>
