@@ -38,7 +38,7 @@ const RouteContent: React.FC<{
               <Layout.Screen.Title className="flex-1">
                 Quotes
               </Layout.Screen.Title>
-              <div className="flex flex-row items-start gap-2 sm:mb-4 md:w-[60%]">
+              <div className="flex flex-row items-start gap-2 sm:mb-4 md:mb-0 md:w-[60%]">
                 <div className="flex-1">
                   <SearchForm />
                 </div>
