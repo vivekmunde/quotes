@@ -1,4 +1,4 @@
-import { Link, useSearchParams } from "@remix-run/react";
+import { Link, useLocation, useSearchParams } from "@remix-run/react";
 import { ChevronLeft, Edit, Trash } from "lucide-react";
 import React from "react";
 import If from "~/components/if";
@@ -20,7 +20,12 @@ const RouteContent: React.FC<{
   quote: TMayBe<TQuote>;
 }> = ({ quote }) => {
   const [searchParams] = useSearchParams();
-  const backTo = searchParams.get("backTo") ?? "";
+  const backToUrl = searchParams.get("backTo") ?? "";
+
+  const location = useLocation();
+  const backToUrlForActions = encodeURIComponent(
+    [location.pathname, location.search, location.hash].join("")
+  );
 
   return quote ? (
     <React.Fragment>
@@ -51,7 +56,7 @@ const RouteContent: React.FC<{
               <TooltipTrigger asChild>
                 <Link
                   prefetch="intent"
-                  to={backTo.length > 0 ? backTo : `/quotes`}
+                  to={backToUrl.length > 0 ? backToUrl : `/quotes`}
                 >
                   <Button variant="outline" icon>
                     <ChevronLeft />
@@ -60,7 +65,7 @@ const RouteContent: React.FC<{
               </TooltipTrigger>
               <TooltipContent>
                 <div>
-                  <If condition={backTo.length > 0}>
+                  <If condition={backToUrl.length > 0}>
                     <If.True>Back</If.True>
                     <If.False>Quotes</If.False>
                   </If>
@@ -72,7 +77,10 @@ const RouteContent: React.FC<{
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Link prefetch="intent" to={`/quotes/${quote.id}/edit`}>
+                  <Link
+                    prefetch="intent"
+                    to={`/quotes/${quote.id}/edit?backTo=${backToUrlForActions}`}
+                  >
                     <Button icon>
                       <Edit />
                     </Button>
@@ -86,7 +94,10 @@ const RouteContent: React.FC<{
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Link prefetch="intent" to={`/quotes/${quote.id}/delete`}>
+                  <Link
+                    prefetch="intent"
+                    to={`/quotes/${quote.id}/delete?backTo=${backToUrlForActions}`}
+                  >
                     <Button variant="destructive" icon>
                       <Trash />
                     </Button>
