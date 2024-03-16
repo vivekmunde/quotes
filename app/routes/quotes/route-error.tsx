@@ -1,16 +1,20 @@
 import React from "react";
-import Layout from "~/components/layout";
 import CommonRouteError from "~/components/route-error";
+import layoutStyles from "~/styles/layout";
 import Header from "./components/header";
 
 const RouteError: React.FC = () => {
   return (
-    <Layout.Screen variant="box">
+    <div className={layoutStyles.layout.base}>
       <Header />
-      <Layout.Screen.Body>
-        <CommonRouteError />
-      </Layout.Screen.Body>
-    </Layout.Screen>
+      <div className={layoutStyles.container.wrapper}>
+        <div className={layoutStyles.container.content}>
+          <div className={layoutStyles.body.base}>
+            <CommonRouteError />
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

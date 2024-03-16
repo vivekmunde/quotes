@@ -1,14 +1,18 @@
 import React from "react";
-import Layout from "~/components/layout";
 import CRouteError from "~/components/route-error";
+import layoutStyles from "~/styles/layout";
 
 const RouteError: React.FC = () => {
   return (
-    <Layout.Screen>
-      <Layout.Screen.Body>
-        <CRouteError />
-      </Layout.Screen.Body>
-    </Layout.Screen>
+    <div className={layoutStyles.layout.base}>
+      <div className={layoutStyles.container.wrapper}>
+        <div className={layoutStyles.container.content}>
+          <div className={layoutStyles.body.base}>
+            <CRouteError />
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

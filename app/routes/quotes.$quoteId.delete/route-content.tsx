@@ -5,6 +5,7 @@ import Layout from "~/components/layout";
 import RouteError404 from "~/components/route-error/404";
 import H4 from "~/components/ui/typography/h4";
 import P from "~/components/ui/typography/p";
+import layoutStyles from "~/styles/layout";
 import { TFormResponse, TMayBe } from "~/types";
 import DeleteQuoteForm from "./components/delete-quote-form";
 import { TQuote } from "./types";
@@ -21,15 +22,20 @@ const RouteContent: React.FC<{
   const errors = fetcher.data?.errors;
 
   return (
-    <Layout.Screen.Body>
-      <section>
-        <Layout>
-          <Layout.Header>
-            <header>
-              <Layout.Header.Title>Delete quote</Layout.Header.Title>
-            </header>
-          </Layout.Header>
-          <Layout.Body>
+    <div className={layoutStyles.container.wrapper}>
+      <div
+        className={[
+          layoutStyles.container.content,
+          layoutStyles.body.base,
+        ].join(" ")}
+      >
+        <section>
+          <header className={layoutStyles.screen.header.base}>
+            <Layout.Screen.Title className={layoutStyles.screen.title.base}>
+              Delete quote
+            </Layout.Screen.Title>
+          </header>
+          <div>
             {quote ? (
               <React.Fragment>
                 <div className="border rounded p-6 bg-neutral-100 dark:bg-neutral-900">
@@ -67,10 +73,10 @@ const RouteContent: React.FC<{
             ) : (
               <RouteError404 />
             )}
-          </Layout.Body>
-        </Layout>
-      </section>
-    </Layout.Screen.Body>
+          </div>
+        </section>
+      </div>
+    </div>
   );
 };
 

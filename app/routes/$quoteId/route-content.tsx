@@ -1,12 +1,17 @@
 import { Outlet } from "@remix-run/react";
 import Layout from "~/components/layout";
+import layoutStyles from "~/styles/layout";
 
 const RouteContent: React.FC = () => {
   return (
-    <Layout.Screen>
-      <Layout.Screen.Header />
+    <div className={layoutStyles.layout.base}>
+      <div className={layoutStyles.container.wrapper}>
+        <div className={layoutStyles.container.content}>
+          <Layout.Header />
+        </div>
+      </div>
       <Outlet />
-    </Layout.Screen>
+    </div>
   );
 };
 

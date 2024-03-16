@@ -15,7 +15,7 @@ import RouteError from "~/components/route-error";
 import ThemeProvider from "~/components/theme-provider";
 import { Button } from "~/components/ui/button";
 import styles from "~/tailwind.css";
-import RootProvider from "./components/RootProvider";
+import RootProvider from "./components/root-provider";
 import { TRouteLoaderType } from "./types";
 import { getUserPreferences } from "./utils/server/user-preferences";
 

@@ -1,10 +1,7 @@
 import { Link, useSearchParams } from "@remix-run/react";
 import { ChevronLeft, Edit, Trash } from "lucide-react";
-import React, { useEffect } from "react";
+import React from "react";
 import If from "~/components/if";
-import Layout from "~/components/layout";
-import useGetVariant from "~/components/layout/screen/use-get-variant";
-import useSetVariant from "~/components/layout/screen/use-set-variant";
 import Quote from "~/components/quote";
 import RouteError404 from "~/components/route-error/404";
 import { Button } from "~/components/ui/button";
@@ -15,6 +12,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "~/components/ui/tooltip";
+import layoutStyles from "~/styles/layout";
 import { TMayBe } from "~/types";
 import { TQuote } from "./types";
 
@@ -23,22 +21,31 @@ const RouteContent: React.FC<{
 }> = ({ quote }) => {
   const [searchParams] = useSearchParams();
   const backTo = searchParams.get("backTo") ?? "";
-  const currentLayoutVariant = useGetVariant();
-  const setLayoutVariant = useSetVariant();
-
-  useEffect(() => {
-    setLayoutVariant("default");
-
-    return () => setLayoutVariant(currentLayoutVariant ?? "default");
-  }, []);
 
   return quote ? (
     <React.Fragment>
-      <Layout.Screen.Body className="flex-1 flex flex-col justify-center">
-        <Quote author={quote.author} title={quote.title} />
-      </Layout.Screen.Body>
-      <Layout.Screen.Footer className="md:px-2 md:py-2">
-        <div className="flex flex-row justify-between">
+      <div className="flex flex-col justify-center">
+        <div className={layoutStyles.container.wrapper}>
+          <div
+            className={[
+              layoutStyles.container.content,
+              layoutStyles.body.base,
+            ].join(" ")}
+          >
+            <div className="py-[5vh]">
+              <Quote author={quote.author} title={quote.title} />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className={layoutStyles.container.wrapper}>
+        <div
+          className={[
+            layoutStyles.container.content,
+            layoutStyles.footer.base,
+            "flex flex-row justify-between",
+          ].join(" ")}
+        >
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -92,7 +99,7 @@ const RouteContent: React.FC<{
             </TooltipProvider>
           </ButtonGroup>
         </div>
-      </Layout.Screen.Footer>
+      </div>
     </React.Fragment>
   ) : (
     <RouteError404 />

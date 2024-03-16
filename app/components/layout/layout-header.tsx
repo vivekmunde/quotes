@@ -1,20 +1,16 @@
 import { Link } from "@remix-run/react";
-import React, { useContext } from "react";
+import React from "react";
 import ToggleMode from "~/components/toggle-mode";
-import LayoutHeader from "../header";
-import Context from "./context";
+import layoutStyles from "~/styles/layout";
 
-const Header: React.FC<
+const LayoutHeader: React.FC<
   React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
 > = ({ children, className, ...props }) => {
-  const { variant } = useContext(Context);
-
   return (
-    <LayoutHeader
+    <div
       className={[
-        variant === "box"
-          ? "bg-white dark:bg-black md:rounded-b shadow-md px-4 md:px-5 py-2 mb-1"
-          : "",
+        layoutStyles.header.base,
+        "flex flex-row justify-between items-center",
         className,
       ]
         .filter(Boolean)
@@ -28,8 +24,8 @@ const Header: React.FC<
         <ToggleMode />
         {children}
       </div>
-    </LayoutHeader>
+    </div>
   );
 };
 
-export default Header;
+export default LayoutHeader;

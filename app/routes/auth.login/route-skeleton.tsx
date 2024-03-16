@@ -1,13 +1,10 @@
-import Layout from "~/components/layout";
 import Logo from "~/components/logo";
 
 const RouteSkeleton: React.FC = () => {
   return (
-    <Layout.Screen>
-      <Layout.Screen.Body className="flex items-center justify-center _bg-[rgba(102,102,102)]">
-        <Logo />
-      </Layout.Screen.Body>
-    </Layout.Screen>
+    <div className="h-screen flex flex-col justify-center">
+      <Logo />
+    </div>
   );
 };
 

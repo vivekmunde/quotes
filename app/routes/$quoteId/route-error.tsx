@@ -1,12 +1,13 @@
 import Layout from "~/components/layout";
 import CommonRouteError from "~/components/route-error";
+import layoutStyles from "~/styles/layout";
 
 const RouteContent: React.FC = () => {
   return (
-    <Layout.Screen>
-      <Layout.Screen.Header />
+    <div className={layoutStyles.layout.base}>
+      <Layout.Header />
       <CommonRouteError />
-    </Layout.Screen>
+    </div>
   );
 };
 

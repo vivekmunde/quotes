@@ -1,6 +1,7 @@
 import { useFetcher, useNavigate } from "@remix-run/react";
 import Layout from "~/components/layout";
 import QuoteForm from "~/components/quote-form";
+import layoutStyles from "~/styles/layout";
 import { TFormResponse } from "~/types";
 
 const RouteContent: React.FC<{}> = () => {
@@ -13,15 +14,20 @@ const RouteContent: React.FC<{}> = () => {
   const errors = fetcher.data?.errors;
 
   return (
-    <Layout.Screen.Body>
-      <section>
-        <Layout>
-          <Layout.Header>
-            <header>
-              <Layout.Header.Title>Create new quote</Layout.Header.Title>
-            </header>
-          </Layout.Header>
-          <Layout.Body>
+    <div className={layoutStyles.container.wrapper}>
+      <div
+        className={[
+          layoutStyles.container.content,
+          layoutStyles.body.base,
+        ].join(" ")}
+      >
+        <section>
+          <header className={layoutStyles.screen.header.base}>
+            <Layout.Screen.Title className={layoutStyles.screen.title.base}>
+              Create new quote
+            </Layout.Screen.Title>
+          </header>
+          <div>
             <fetcher.Form method="post">
               <QuoteForm
                 intent="create"
@@ -33,10 +39,10 @@ const RouteContent: React.FC<{}> = () => {
                 submitting={fetcher.state === "submitting"}
               />
             </fetcher.Form>
-          </Layout.Body>
-        </Layout>
-      </section>
-    </Layout.Screen.Body>
+          </div>
+        </section>
+      </div>
+    </div>
   );
 };
 

@@ -9,55 +9,65 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "~/components/ui/tooltip";
+import layoutStyles from "~/styles/layout";
 
 const Header: React.FC = () => {
   return (
-    <Layout.Screen.Header>
-      <div className="flex flex-row">
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Link prefetch="render" to="/quotes/new">
-                <Button size="sm" variant="ghost">
-                  <Plus />
-                </Button>
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent>
-              <div>Create New Quote</div>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Link prefetch="intent" to="/quotes">
-                <Button size="sm" variant="ghost">
-                  <Quote />
-                </Button>
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent>
-              <div>Quotes</div>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Form action="/auth/logout" method="post">
-                <Button type="submit" size="sm" variant="ghost">
-                  <LogOut />
-                </Button>
-              </Form>
-            </TooltipTrigger>
-            <TooltipContent>
-              <div>Logout</div>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>{" "}
+    <div
+      className={[
+        layoutStyles.container.wrapper,
+        layoutStyles.header.background,
+      ].join(" ")}
+    >
+      <div className={layoutStyles.container.content}>
+        <Layout.Header>
+          <div className="flex flex-row">
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Link prefetch="render" to="/quotes/new">
+                    <Button size="sm" variant="ghost">
+                      <Plus />
+                    </Button>
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <div>Create New Quote</div>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Link prefetch="intent" to="/quotes">
+                    <Button size="sm" variant="ghost">
+                      <Quote />
+                    </Button>
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <div>Quotes</div>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Form action="/auth/logout" method="post">
+                    <Button type="submit" size="sm" variant="ghost">
+                      <LogOut />
+                    </Button>
+                  </Form>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <div>Logout</div>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>{" "}
+          </div>
+        </Layout.Header>
       </div>
-    </Layout.Screen.Header>
+    </div>
   );
 };
 
