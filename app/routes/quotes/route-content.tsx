@@ -4,7 +4,12 @@ import Header from "./components/header";
 
 const RouteContent: React.FC = () => {
   return (
-    <div className={layoutStyles.layout.base}>
+    <div
+      className={[
+        layoutStyles.layout.base,
+        layoutStyles.layout.fixedHeader,
+      ].join(" ")}
+    >
       <Header />
       <Outlet />
     </div>

@@ -21,7 +21,8 @@ const Header: React.FC = () => {
     <div
       className={[
         layoutStyles.container.wrapper,
-        layoutStyles.header.background,
+        layoutStyles.header.border,
+        layoutStyles.header.fixed,
       ].join(" ")}
     >
       <div className={layoutStyles.container.content}>

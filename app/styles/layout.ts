@@ -1,5 +1,6 @@
 const layoutClassNames = {
   base: "min-h-screen grid grid-rows-[min-content_1fr_min-content]",
+  fixedHeader: "pt-14 grid-rows-[1fr_min-content]",
 };
 
 const layoutContainer = {
@@ -10,17 +11,16 @@ const layoutContainer = {
 
 const layoutHeader = {
   base: "px-4 py-2",
-
-  background:
-    "bg-neutral-100 dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800",
+  background: "bg-neutral-50 dark:bg-neutral-950",
+  border: "border-b border-neutral-200 dark:border-neutral-800",
+  fixed: "fixed bg-background z-10 h-14 top-0 left-0 right-0",
 };
 
 const layoutBody = { base: "p-4" };
 
 const layoutFooter = {
   base: "px-4 py-2",
-  background:
-    "bg-neutral-50 dark:bg-neutral-950 border-t border-neutral-200 dark:border-neutral-800",
+  border: "border-b border-neutral-200 dark:border-neutral-800",
 };
 
 const screenHeader = {
