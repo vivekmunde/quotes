@@ -1,4 +1,4 @@
-import { Form, Link, useLocation } from "@remix-run/react";
+import { Form, Link } from "@remix-run/react";
 import { LogOut, Quote } from "lucide-react";
 import React from "react";
 import Layout from "~/components/layout";
@@ -13,11 +13,6 @@ import layoutStyles from "~/styles/layout";
 import CreateQuote from "./create-quote";
 
 const Header: React.FC = () => {
-  const location = useLocation();
-  const backToUrl = encodeURIComponent(
-    [location.pathname, location.search, location.hash].join("")
-  );
-
   return (
     <div
       className={[

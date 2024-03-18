@@ -7,6 +7,7 @@ import getUserId from "~/utils/server/auth/get-user-id.server";
 import isValidOTP from "~/utils/server/auth/is-valid-otp";
 import { db } from "~/utils/server/db.server";
 import {
+  deriveNextShortId,
   getNextShortId,
   getQuoteUrlSegment,
 } from "~/utils/server/quotes.server";
@@ -54,11 +55,21 @@ const uploadQuotes = async ({ request }: ActionFunctionArgs) => {
     });
   }
 
+  let currentShortId = "";
+  let nextShortId = await getNextShortId();
+
   await Promise.all(
     quotesJSON.map(async (it) => {
+      nextShortId =
+        currentShortId.length > 0
+          ? deriveNextShortId(currentShortId)
+          : nextShortId;
+
+      currentShortId = nextShortId;
+
       const quote = await db.quotes.create({
         data: {
-          shortId: await getNextShortId(),
+          shortId: nextShortId,
           title: it.title,
           author: it.author,
           createdBy: await getUserId(request),
