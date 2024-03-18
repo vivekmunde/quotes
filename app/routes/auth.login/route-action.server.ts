@@ -32,7 +32,7 @@ async function login({ request }: ActionFunctionArgs) {
   if (
     (loginId ?? "").length === 0 ||
     (password ?? "").length === 0 ||
-    (otp ?? "").length === 0 ||
+    (process.env.NODE_ENV !== "development" && (otp ?? "").length === 0) ||
     !isValidOTP(otp)
   ) {
     loginResponse.errors.message = "Invalid login credentials!";

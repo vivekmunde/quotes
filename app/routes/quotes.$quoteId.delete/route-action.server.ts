@@ -26,8 +26,8 @@ async function deleteQuote({ request }: ActionFunctionArgs) {
   if (
     typeof password !== "string" ||
     !password ||
-    typeof otp !== "string" ||
-    !isValidOTP(otp)
+    (process.env.NODE_ENV !== "development" &&
+      (typeof otp !== "string" || !isValidOTP(otp)))
   ) {
     return badRequest<TFormResponse<"quoteId">>({
       fields: { quoteId },

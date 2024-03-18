@@ -48,7 +48,10 @@ const uploadQuotes = async ({ request }: ActionFunctionArgs) => {
     });
   }
 
-  if (typeof otp !== "string" || !isValidOTP(otp)) {
+  if (
+    process.env.NODE_ENV !== "development" &&
+    (typeof otp !== "string" || !isValidOTP(otp))
+  ) {
     return badRequest<TFormResponse<"quotes">>({
       fields,
       errors: { fields: { quotes: "Invalid quotes JSON!" } },

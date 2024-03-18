@@ -77,7 +77,7 @@ export const ErrorBoundary = () => {
 
 export const loader = async (args: LoaderFunctionArgs) => {
   const routeLoaderType: TRouteLoaderType =
-    Number(process.env.DEFER_LOADER_DELAY ?? 0) > 0 ? "Deferred" : "Default";
+    Number(process.env.LOADER_DEFER_DELAY ?? 0) > 0 ? "Deferred" : "Default";
   const preferences = await getUserPreferences(args.request);
 
   return { preferences, routeLoaderType };

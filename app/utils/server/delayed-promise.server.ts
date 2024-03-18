@@ -1,5 +1,5 @@
-export default async function deferredResponse<T>(fn: () => Promise<T>) {
-  const deferBy = Number(process.env.DEFER_LOADER_DELAY ?? 0);
+export default async function deferredLoaderResponse<T>(fn: () => Promise<T>) {
+  const deferBy = Number(process.env.LOADER_DEFER_DELAY ?? 0);
 
   if (deferBy > 0) {
     return new Promise<T>((resolve) => {
