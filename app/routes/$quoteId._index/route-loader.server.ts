@@ -11,7 +11,7 @@ const quoteNotFoundMessage =
 const getQuote = async (quoteId: string) => {
   const quote = await db.quotes.findUnique({
     where: quoteId.length === 5 ? { shortId: quoteId } : { id: quoteId },
-    select: { author: true, title: true },
+    select: { author: true, title: true, urlSegment: true },
   });
 
   if (!quote) {

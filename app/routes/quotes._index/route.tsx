@@ -4,8 +4,11 @@ import RouteContainer from "~/components/route-container";
 import RouteContent from "./route-content";
 import RouteError from "./route-error";
 import routeLoader from "./route-loader.server";
+import routeMeta from "./route-meta";
 import RouteSkeleton from "./route-skeleton";
 import { TQuote } from "./types";
+
+export const meta = routeMeta;
 
 export const ErrorBoundary = RouteError;
 

@@ -2,6 +2,9 @@ import { useLoaderData } from "@remix-run/react";
 import RouteContent from "./route-content";
 import RouteError from "./route-error";
 import routeLoader from "./route-loader.server";
+import routeMeta from "./route-meta";
+
+export const meta = routeMeta;
 
 export const ErrorBoundary = RouteError;
 

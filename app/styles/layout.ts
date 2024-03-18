@@ -1,5 +1,6 @@
 const layoutClassNames = {
-  base: "min-h-screen grid grid-rows-[min-content_1fr_min-content]",
+  base: "min-h-screen grid",
+  relativeHeader: "grid-rows-[min-content_1fr_min-content]",
   fixedHeader: "pt-14 grid-rows-[1fr_min-content]",
 };
 

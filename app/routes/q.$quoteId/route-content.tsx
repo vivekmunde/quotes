@@ -1,6 +1,9 @@
 import { useNavigate, useParams } from "@remix-run/react";
 import { useEffect } from "react";
+import routeMeta from "./route-meta";
 import RouteSkeleton from "./route-skeleton";
+
+export const meta = routeMeta;
 
 const RouteContent: React.FC = () => {
   const { quoteId } = useParams<{ quoteId: string }>();

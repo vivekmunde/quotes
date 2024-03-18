@@ -4,7 +4,12 @@ import layoutStyles from "~/styles/layout";
 
 const RouteContent: React.FC = () => {
   return (
-    <div className={layoutStyles.layout.base}>
+    <div
+      className={[
+        layoutStyles.layout.base,
+        layoutStyles.layout.relativeHeader,
+      ].join(" ")}
+    >
       <div className={layoutStyles.container.wrapper}>
         <div className={layoutStyles.container.content}>
           <Layout.Header />

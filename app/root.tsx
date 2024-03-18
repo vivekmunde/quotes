@@ -1,5 +1,9 @@
 import { cssBundleHref } from "@remix-run/css-bundle";
-import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
+import type {
+  LinksFunction,
+  LoaderFunctionArgs,
+  MetaFunction,
+} from "@remix-run/node";
 import {
   Link,
   Links,
@@ -18,6 +22,13 @@ import styles from "~/tailwind.css";
 import RootProvider from "./components/root-provider";
 import { TRouteLoaderType } from "./types";
 import { getUserPreferences } from "./utils/server/user-preferences";
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: "Quotes" },
+    { name: "Quotes", content: "Welcome to Quotes!" },
+  ];
+};
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: styles },

@@ -25,7 +25,7 @@ const RouteContent: React.FC<{}> = () => {
         <section>
           <header className={layoutStyles.screen.header.base}>
             <Layout.Screen.Title className={layoutStyles.screen.title.base}>
-              Create new quote
+              Create a quote
             </Layout.Screen.Title>
           </header>
           <div>
