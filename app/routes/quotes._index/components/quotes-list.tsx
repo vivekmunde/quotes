@@ -1,5 +1,6 @@
 import { Link, useLocation } from "@remix-run/react";
 import React from "react";
+import If from "~/components/if";
 import { TMayBe } from "~/types";
 import QuoteActions from "./quotes-actions";
 import QuoteIndex from "./quotes-index";
@@ -96,7 +97,12 @@ const QuotesList: React.FC<{
             <span className="inline-flex flex-row flex-wrap items-center gap-2 text-nowrap">
               <span className="text-neutral-500 text-nowrap mr-2">
                 {"- "}
-                {formatText(quote.author ?? "Unknown", highlightWords)}
+                <If condition={(quote.author ?? "").length > 0}>
+                  <If.True>
+                    {formatText(quote.author ?? "Unknown", highlightWords)}
+                  </If.True>
+                  <If.False>{formatText("Unknown", highlightWords)}</If.False>
+                </If>
               </span>
               <QuoteActions quote={quote} />
             </span>
