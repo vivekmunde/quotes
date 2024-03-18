@@ -13,7 +13,7 @@ const layoutContainer = {
 const layoutHeader = {
   base: "px-4 py-2",
   background: "bg-neutral-50 dark:bg-neutral-950",
-  border: "border-b border-neutral-200 dark:border-neutral-800",
+  border: "border-b",
   fixed: "fixed bg-background z-10 h-14 top-0 left-0 right-0",
 };
 
@@ -21,7 +21,7 @@ const layoutBody = { base: "p-4" };
 
 const layoutFooter = {
   base: "px-4 py-2",
-  border: "border-b border-neutral-200 dark:border-neutral-800",
+  border: "border-t",
 };
 
 const screenHeader = {
