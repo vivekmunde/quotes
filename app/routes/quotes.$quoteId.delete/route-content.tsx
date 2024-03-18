@@ -34,7 +34,7 @@ const RouteContent: React.FC<{
         <section>
           <header className={layoutStyles.screen.header.base}>
             <Layout.Screen.Title className={layoutStyles.screen.title.base}>
-              Delete quote
+              Delete Quote
             </Layout.Screen.Title>
           </header>
           <div>

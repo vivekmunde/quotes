@@ -1,5 +1,5 @@
 import { Form, Link, useLocation } from "@remix-run/react";
-import { LogOut, Plus, Quote } from "lucide-react";
+import { LogOut, Quote } from "lucide-react";
 import React from "react";
 import Layout from "~/components/layout";
 import { Button } from "~/components/ui/button";
@@ -10,6 +10,7 @@ import {
   TooltipTrigger,
 } from "~/components/ui/tooltip";
 import layoutStyles from "~/styles/layout";
+import CreateQuote from "./create-quote";
 
 const Header: React.FC = () => {
   const location = useLocation();
@@ -28,23 +29,7 @@ const Header: React.FC = () => {
       <div className={layoutStyles.container.content}>
         <Layout.Header>
           <div className="flex flex-row">
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Link
-                    prefetch="render"
-                    to={`/quotes/create?backTo=${backToUrl}`}
-                  >
-                    <Button size="sm" variant="ghost">
-                      <Plus />
-                    </Button>
-                  </Link>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <div>Create New Quote</div>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+            <CreateQuote />
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
