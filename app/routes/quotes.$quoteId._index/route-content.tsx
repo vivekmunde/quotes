@@ -79,7 +79,7 @@ const RouteContent: React.FC<{
                 <TooltipTrigger asChild>
                   <Link
                     prefetch="intent"
-                    to={`/quotes/${quote.id}/edit?backTo=${backToUrlForActions}`}
+                    to={`/quotes/${quote.id}/update?backTo=${backToUrlForActions}`}
                   >
                     <Button icon>
                       <Edit />
@@ -87,7 +87,7 @@ const RouteContent: React.FC<{
                   </Link>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <div>Edit</div>
+                  <div>Update</div>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>

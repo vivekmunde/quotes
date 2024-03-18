@@ -50,7 +50,7 @@ const QuoteActions: React.FC<{
           <TooltipTrigger asChild>
             <Link
               prefetch="intent"
-              to={`/quotes/${quote.id}/edit?backTo=${backToUrl}`}
+              to={`/quotes/${quote.id}/update?backTo=${backToUrl}`}
             >
               <Button
                 variant="ghost"
@@ -66,7 +66,7 @@ const QuoteActions: React.FC<{
             </Link>
           </TooltipTrigger>
           <TooltipContent>
-            <div>Edit</div>
+            <div>Update</div>
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>

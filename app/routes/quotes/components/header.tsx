@@ -33,7 +33,7 @@ const Header: React.FC = () => {
                 <TooltipTrigger asChild>
                   <Link
                     prefetch="render"
-                    to={`/quotes/new?backTo=${backToUrl}`}
+                    to={`/quotes/create?backTo=${backToUrl}`}
                   >
                     <Button size="sm" variant="ghost">
                       <Plus />
