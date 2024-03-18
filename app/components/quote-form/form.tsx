@@ -35,6 +35,10 @@ const QuoteForm: React.FC<
             aria-errormessage={
               errors?.fields?.title ? "title-error" : undefined
             }
+            rows={Math.max(
+              2,
+              Math.round((fields?.title?.toString() ?? "").length / 60)
+            )}
           />
         </FormControl>
         <If condition={!!errors?.fields?.title}>

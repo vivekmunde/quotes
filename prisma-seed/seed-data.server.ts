@@ -2,13 +2,13 @@ export const users: { loginId: string; passwordHash: string }[] = [
   {
     loginId: "admin",
     passwordHash:
-      "$2a$12$DH6Nnl0d7izI4KUlyWL/MOhiIiYKcG0ZppncNgsjJu6QrTqJBC5zK",
+      "$2a$10$jGt/DnIm3sblGtxszjRQ5uCY4yh6ysGVQYFz6DN6BOR0FdgV5G9z.",
   },
 
   {
     loginId: "quotes",
     passwordHash:
-      "$2a$12$DH6Nnl0d7izI4KUlyWL/MOhiIiYKcG0ZppncNgsjJu6QrTqJBC5zK",
+      "$2a$10$HTFXPG9zN6GuZIsTW2I71eCA6HLYKKaOQDtIxnlEbMFOawWQpWDNe",
   },
 ];
 

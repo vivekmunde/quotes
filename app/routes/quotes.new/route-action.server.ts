@@ -5,7 +5,10 @@ import { TFormResponse } from "~/types";
 import { authorizedAccess } from "~/utils/server/auth";
 import getUserId from "~/utils/server/auth/get-user-id.server";
 import { db } from "~/utils/server/db.server";
-import { getQuoteUrlSegment } from "~/utils/server/quotes.server";
+import {
+  getNextShortId,
+  getQuoteUrlSegment,
+} from "~/utils/server/quotes.server";
 import { badRequest } from "~/utils/server/request.server";
 
 const createNewQuote = async ({ request }: ActionFunctionArgs) => {
@@ -34,12 +37,17 @@ const createNewQuote = async ({ request }: ActionFunctionArgs) => {
   }
 
   const quote = await db.quotes.create({
-    data: { title, author, createdBy: await getUserId(request) },
+    data: {
+      shortId: await getNextShortId(),
+      title,
+      author,
+      createdBy: await getUserId(request),
+    },
   });
 
   await db.quotes.update({
     where: { id: quote.id },
-    data: { urlSegment: getQuoteUrlSegment(quote.id, title) },
+    data: { urlSegment: getQuoteUrlSegment(quote.shortId ?? quote.id, title) },
   });
 
   return redirect(`/quotes/${quote.id}`);

@@ -10,7 +10,7 @@ const quoteNotFoundMessage =
 
 const getQuote = async (quoteId: string) => {
   const quote = await db.quotes.findUnique({
-    where: { id: quoteId },
+    where: quoteId.length === 5 ? { shortId: quoteId } : { id: quoteId },
     select: { author: true, title: true },
   });
 
@@ -26,7 +26,9 @@ const getNextQuote = async (
 ): Promise<{ urlSegment: string }> => {
   const nextQuote = await getRandomQuote();
 
-  if (forQuoteId === nextQuote.id) {
+  if (
+    forQuoteId === (forQuoteId.length === 5 ? nextQuote.shortId : nextQuote.id)
+  ) {
     return getNextQuote(forQuoteId);
   }
 

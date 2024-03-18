@@ -26,6 +26,7 @@ model Quotes {
   updatedAt  DateTime @updatedAt
   createdBy  String?
   updatedBy  String?
+  shortId    String   @unique
   title      String
   author     String?
   urlSegment String?

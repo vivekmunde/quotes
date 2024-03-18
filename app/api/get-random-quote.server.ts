@@ -12,6 +12,7 @@ const getRandomQuote = async (options?: {
     take: 1,
     select: {
       id: true,
+      shortId: true,
       urlSegment: true,
       title: options?.select?.title,
       author: options?.select?.author,

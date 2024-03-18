@@ -5,15 +5,12 @@ import layoutStyles from "~/styles/layout";
 const RouteSkeleton: React.FC = () => {
   return (
     <React.Fragment>
-      <div className={layoutStyles.container.wrapper}>
-        <div className={layoutStyles.container.content}>
-          <div
-            className={[
-              layoutStyles.body.base,
-              "flex flex-col justify-center",
-            ].join(" ")}
-          >
-            <QuoteLoading />
+      <div className="flex flex-col justify-center">
+        <div className={layoutStyles.container.wrapper}>
+          <div className={layoutStyles.container.content}>
+            <div className={layoutStyles.body.base}>
+              <QuoteLoading />
+            </div>
           </div>
         </div>
       </div>

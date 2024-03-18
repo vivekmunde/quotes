@@ -1,5 +1,9 @@
 import { PrismaClient } from "@prisma/client";
-import { getQuoteUrlSegment } from "../app/utils/server/quotes.server";
+import {
+  deriveNextShortId,
+  getNextShortId,
+  getQuoteUrlSegment,
+} from "../app/utils/server/quotes.server";
 import { quotes, users } from "./seed-data.server";
 
 const db = new PrismaClient();
@@ -31,10 +35,22 @@ const createQuotes = async () => {
 
   if (admin) {
     console.log(`⏳ Creating ${quotes.length} quotes`);
+
+    let currentShortId = "";
+    let nextShortId = await getNextShortId();
+
     await Promise.all(
       quotes.map(async (quote) => {
+        nextShortId =
+          currentShortId.length > 0
+            ? deriveNextShortId(currentShortId)
+            : nextShortId;
+
+        currentShortId = nextShortId;
+
         const createdQuote = await db.quotes.create({
           data: {
+            shortId: nextShortId,
             title: quote.title,
             author: quote.author,
             createdBy: admin.id,
@@ -44,11 +60,15 @@ const createQuotes = async () => {
         await db.quotes.update({
           where: { id: createdQuote.id },
           data: {
-            urlSegment: getQuoteUrlSegment(createdQuote.id, quote.title),
+            urlSegment: getQuoteUrlSegment(
+              createdQuote.shortId ?? createdQuote.id,
+              quote.title
+            ),
           },
         });
       })
     );
+
     console.log(`✅ ${quotes.length} quotes created`);
   } else {
     console.error(`❌ Admin user not found`);
