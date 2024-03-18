@@ -11,10 +11,11 @@ const RouteContent: React.FC<{
   quote?: TMayBe<TQuote>;
 }> = ({ quote }) => {
   const navigation = useNavigation();
-  const fetcher = useFetcher<TFormResponse<"loginId" | "password">>();
+  const fetcher = useFetcher<TFormResponse<"loginId" | "password" | "otp">>();
   const fields = {
     loginId: fetcher.formData?.get("loginId"),
     password: fetcher.formData?.get("password"),
+    otp: fetcher.formData?.get("otp"),
   };
   const errors = fetcher.data?.errors;
 

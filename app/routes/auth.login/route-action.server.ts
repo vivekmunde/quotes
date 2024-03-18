@@ -2,6 +2,7 @@ import { ActionFunctionArgs, redirect } from "@remix-run/node";
 import bcrypt from "bcryptjs";
 import { TFormResponse } from "~/types";
 import { createUserSession } from "~/utils/server/auth";
+import isValidOTP from "~/utils/server/auth/is-valid-otp";
 import { db } from "~/utils/server/db.server";
 import { badRequest } from "~/utils/server/request.server";
 
@@ -9,21 +10,31 @@ async function login({ request }: ActionFunctionArgs) {
   const form = await request.formData();
   const password = form.get("password");
   const loginId = form.get("loginId");
+  const otp = form.get("otp");
   const { searchParams } = new URL(request.url);
   const redirectTo = searchParams.get("redirectTo") ?? "";
 
-  if (typeof loginId !== "string" || typeof password !== "string") {
+  if (
+    typeof loginId !== "string" ||
+    typeof password !== "string" ||
+    typeof otp !== "string"
+  ) {
     return badRequest<TFormResponse<"loginId" | "password">>({
       fields: { loginId, password },
       errors: { message: "Invalid login credentials!" },
     });
   }
 
-  const fields = { loginId, password };
-  const loginResponse: TFormResponse<"loginId" | "password"> = { fields };
+  const fields = { loginId };
+  const loginResponse: TFormResponse<"loginId"> = { fields };
   loginResponse.errors = { message: undefined };
 
-  if ((loginId ?? "").length === 0 || (password ?? "").length === 0) {
+  if (
+    (loginId ?? "").length === 0 ||
+    (password ?? "").length === 0 ||
+    (otp ?? "").length === 0 ||
+    !isValidOTP(otp)
+  ) {
     loginResponse.errors.message = "Invalid login credentials!";
     return badRequest(loginResponse);
   }

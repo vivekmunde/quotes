@@ -15,10 +15,11 @@ const RouteContent: React.FC<{
 }> = ({ quote }) => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const fetcher = useFetcher<TFormResponse<"quoteId" | "password">>();
+  const fetcher = useFetcher<TFormResponse<"quoteId" | "password" | "otp">>();
   const fields = {
     quoteId: fetcher.formData?.get("quoteId") ?? quote?.id,
     password: fetcher.formData?.get("password"),
+    otp: fetcher.formData?.get("otp"),
   };
   const errors = fetcher.data?.errors;
 

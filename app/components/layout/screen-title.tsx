@@ -11,6 +11,7 @@ const ScreenTitle: React.FC<{
       className={[layoutStyles.screen.title.base, className]
         .filter(Boolean)
         .join(" ")}
+      style={{ padding: 0, margin: 0 }}
     >
       {children}
     </H2>

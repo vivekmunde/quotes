@@ -9,8 +9,8 @@ import {
 const meta: MetaFunction = () => {
   return [
     getNoRobotTag(),
-    getTitleTag("Create a quote"),
-    getDescriptionTag("Create a quote"),
+    getTitleTag("Create quote"),
+    getDescriptionTag("Create quote"),
     getUrlTag(["quotes", "new"]),
   ];
 };

@@ -4,6 +4,7 @@ import { TFormResponse } from "~/types";
 import { authorizedAccess } from "~/utils/server/auth";
 import getUserId from "~/utils/server/auth/get-user-id.server";
 import isCorrectPassword from "~/utils/server/auth/is-correct-password";
+import isValidOTP from "~/utils/server/auth/is-valid-otp";
 import { db } from "~/utils/server/db.server";
 import { badRequest } from "~/utils/server/request.server";
 
@@ -11,6 +12,7 @@ async function deleteQuote({ request }: ActionFunctionArgs) {
   const form = await request.formData();
   const quoteId = form.get("quoteId");
   const password = form.get("password");
+  const otp = form.get("otp");
 
   if (typeof quoteId !== "string" || !quoteId) {
     return badRequest<TFormResponse<"quoteId">>({
@@ -21,10 +23,15 @@ async function deleteQuote({ request }: ActionFunctionArgs) {
     });
   }
 
-  if (typeof password !== "string" || !password) {
+  if (
+    typeof password !== "string" ||
+    !password ||
+    typeof otp !== "string" ||
+    !isValidOTP(otp)
+  ) {
     return badRequest<TFormResponse<"quoteId">>({
       fields: { quoteId },
-      errors: { message: "Please enter your password!" },
+      errors: { message: "Invalid credentials!" },
     });
   }
 
@@ -36,8 +43,7 @@ async function deleteQuote({ request }: ActionFunctionArgs) {
     return badRequest<TFormResponse<"quoteId" | "password">>({
       fields,
       errors: {
-        message:
-          "Could not authenticate! You may not have entered correct password.",
+        message: "Invalid credentials!",
       },
     });
   }

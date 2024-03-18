@@ -4,6 +4,7 @@ import { validateTitle } from "~/components/quote-form";
 import { TFormResponse } from "~/types";
 import { authorizedAccess } from "~/utils/server/auth";
 import getUserId from "~/utils/server/auth/get-user-id.server";
+import isValidOTP from "~/utils/server/auth/is-valid-otp";
 import { db } from "~/utils/server/db.server";
 import {
   getNextShortId,
@@ -15,6 +16,7 @@ const createNewQuote = async ({ request }: ActionFunctionArgs) => {
   const form = await request.formData();
   const title = form.get("title");
   const author = form.get("author");
+  const otp = form.get("otp");
 
   if (typeof title !== "string" || typeof author !== "string") {
     return badRequest<TFormResponse<"author" | "title">>({
@@ -33,6 +35,13 @@ const createNewQuote = async ({ request }: ActionFunctionArgs) => {
     return badRequest<TFormResponse<"author" | "title">>({
       fields,
       errors: { fields: fieldErrors },
+    });
+  }
+
+  if (typeof otp !== "string" || !isValidOTP(otp)) {
+    return badRequest<TFormResponse<"author" | "title">>({
+      fields,
+      errors: { message: "Invalid credentials!" },
     });
   }
 

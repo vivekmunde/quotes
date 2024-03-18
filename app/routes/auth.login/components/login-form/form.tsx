@@ -3,7 +3,6 @@ import { Button } from "~/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormError,
   FormFooter,
   FormItem,
@@ -13,7 +12,7 @@ import { Input } from "~/components/ui/input";
 import { TFormResponse } from "~/types";
 
 const LoginForm: React.FC<
-  TFormResponse<"loginId" | "password"> & { submitting: boolean }
+  TFormResponse<"loginId" | "password" | "otp"> & { submitting: boolean }
 > = ({ fields, errors, submitting }) => {
   return (
     <Form>
@@ -30,7 +29,6 @@ const LoginForm: React.FC<
               }
             />
           </FormControl>
-          <FormDescription />
           <If condition={!!errors?.fields?.loginId}>
             <If.True>
               <FormMessage>{errors?.fields?.loginId}</FormMessage>
@@ -50,10 +48,26 @@ const LoginForm: React.FC<
               }
             />
           </FormControl>
-          <FormDescription />
           <If condition={!!errors?.fields?.password}>
             <If.True>
               <FormMessage>{errors?.fields?.password}</FormMessage>
+            </If.True>
+          </If>
+        </FormItem>
+        <FormItem>
+          <FormControl>
+            <Input
+              defaultValue={fields?.otp?.toString() ?? ""}
+              name="otp"
+              placeholder="OTP"
+              type="password"
+              aria-invalid={Boolean(errors?.fields?.otp)}
+              aria-errormessage={errors?.fields?.otp ? "otp-error" : undefined}
+            />
+          </FormControl>
+          <If condition={!!errors?.fields?.otp}>
+            <If.True>
+              <FormMessage>{errors?.fields?.otp}</FormMessage>
             </If.True>
           </If>
         </FormItem>

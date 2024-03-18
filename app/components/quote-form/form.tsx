@@ -16,7 +16,7 @@ import { TFormResponse, TMayBe } from "~/types";
 import ButtonGroup from "../ui/button-group";
 
 const QuoteForm: React.FC<
-  TFormResponse<"author" | "title"> & {
+  TFormResponse<"author" | "title" | "otp"> & {
     intent?: "create" | "update";
     submitting?: boolean;
     cancelUrl?: TMayBe<string>;
@@ -26,7 +26,7 @@ const QuoteForm: React.FC<
   return (
     <Form>
       <FormItem>
-        <FormLabel>Quote</FormLabel>
+        <FormLabel>What's the quote?</FormLabel>
         <FormControl>
           <Textarea
             defaultValue={fields?.title?.toString() ?? ""}
@@ -48,13 +48,30 @@ const QuoteForm: React.FC<
         </If>
       </FormItem>
       <FormItem>
-        <FormLabel>Author</FormLabel>
+        <FormLabel>Who quoted it?</FormLabel>
         <FormControl>
           <Input
             defaultValue={fields?.author?.toString() ?? ""}
             name="author"
           />
         </FormControl>
+      </FormItem>
+      <FormItem className="mt-4 p-2 bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded mb-6">
+        <FormLabel>Please enter your OTP</FormLabel>
+        <FormControl>
+          <Input
+            defaultValue={fields?.otp?.toString() ?? ""}
+            name="otp"
+            type="password"
+            aria-invalid={Boolean(errors?.fields?.otp)}
+            aria-errormessage={errors?.fields?.otp ? "otp-error" : undefined}
+          />
+        </FormControl>
+        <If condition={!!errors?.fields?.otp}>
+          <If.True>
+            <FormMessage>{errors?.fields?.otp}</FormMessage>
+          </If.True>
+        </If>
       </FormItem>
       <FormFooter>
         <ButtonGroup>

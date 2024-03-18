@@ -7,10 +7,11 @@ import { TFormResponse } from "~/types";
 const RouteContent: React.FC<{}> = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const fetcher = useFetcher<TFormResponse<"author" | "title">>();
+  const fetcher = useFetcher<TFormResponse<"author" | "title" | "otp">>();
   const fields = {
     author: fetcher.formData?.get("author"),
     title: fetcher.formData?.get("title"),
+    otp: fetcher.formData?.get("otp"),
   };
   const errors = fetcher.data?.errors;
 
@@ -25,7 +26,7 @@ const RouteContent: React.FC<{}> = () => {
         <section>
           <header className={layoutStyles.screen.header.base}>
             <Layout.Screen.Title className={layoutStyles.screen.title.base}>
-              Create a quote
+              Create quote
             </Layout.Screen.Title>
           </header>
           <div>
