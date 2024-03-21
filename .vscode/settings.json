@@ -6,5 +6,6 @@
     "source.organizeImports": true,
     "source.sortMembers": true
   },
-  "editor.formatOnPaste": true
+  "editor.formatOnPaste": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
