@@ -67,7 +67,7 @@ const RouteContent: React.FC<{
                 </If.False>
               </If>
             </section>
-            <div className="flex flex-row justify-between items-center gap-1 pt-4">
+            <div className="flex flex-row justify-between items-center gap-1 pt-6">
               <Range
                 total={total}
                 page={page}
